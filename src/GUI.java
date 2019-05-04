@@ -1,29 +1,33 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
+import static java.lang.Math.abs;
+
 
 public class GUI extends JFrame {
 
-    static final int num_Buttons = 2;
-    static final String[] image_Buttons = new String[]{"resources/Rectangle.png","resources/Circle.png"};
-    /**
-     *
-     */
-    private static final long serialVersionUID = 4145047606482760810L;
+    //Find vector images with no background
+    //List of buttons to include, needs to be na images file
+    static final String[] image_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Circle.png"};
+    static final int num_Buttons = image_Buttons.length;
+
+    //Positions of mouse pointer
     private int x_Previous,y_Previous,x_Current,y_Current;
 
+    //Stores shapes drawn in the drawing area
     enum shape_Type{
-        Line, Rectangle, Square, Circle
+        Line, Rectangle, Circle
     }
     private ArrayList<Drawn_Shapes> drawn_Shapes = new ArrayList<>();
-
     public class Drawn_Shapes{
         shape_Type Type;
         ArrayList<Integer> coordinates;
@@ -33,6 +37,9 @@ public class GUI extends JFrame {
             this.coordinates = coordinates;
         }
     }
+
+    //Selected drawing tool, defaults to Line
+    private int selected_Tool = 0;
 
     public GUI() {
         super("Paint");
@@ -60,8 +67,11 @@ public class GUI extends JFrame {
             }
         });
         panel.addMouseMotionListener(new MouseMotionAdapter() {
-            public void mouseDragged(MouseEvent evt) {
-                //jPanel2MouseDragged(evt);
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                x_Current = e.getX();
+                y_Current = e.getY();
+                repaint();
             }
         });
         getContentPane().add(panel,"Center");
@@ -75,8 +85,21 @@ public class GUI extends JFrame {
             //Load and add image to a button
             try {
                 Image img = ImageIO.read(getClass().getResource(image_Buttons[i]));
-                Image scamled_img = img.getScaledInstance( 50, 50,  java.awt.Image.SCALE_SMOOTH ) ;
-                button.setIcon(new ImageIcon(scamled_img));
+                Image scaled_img = img.getScaledInstance( 50, 50,  java.awt.Image.SCALE_SMOOTH ) ;
+
+                //Sets whats the button will do when pressed, this case change the tool selected for drawing
+                button.setAction(new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String x =e.getActionCommand();
+                        selected_Tool = Integer.parseInt(x);
+                        System.out.println(selected_Tool);
+                    }
+                });
+
+                //These need to be after setAction
+                button.setActionCommand(Integer.toString(i));
+                button.setIcon(new ImageIcon(scaled_img));
             } catch (Exception ex) {
                 System.out.println(ex);
             }
@@ -89,6 +112,8 @@ public class GUI extends JFrame {
         //get the x and y coordinates when the click occours
         x_Previous = event.getX();
         y_Previous = event.getY();
+        x_Current = x_Previous;
+        y_Current = y_Previous;
         //System.out.println("mouse clicked");
     }
 
@@ -101,6 +126,13 @@ public class GUI extends JFrame {
         //Add shape to previously drawn of shapes
         add_Shape();
         repaint();
+
+    }
+
+    private void MouseDragged(MouseEvent event){
+        x_Current = event.getX();
+        y_Current = event.getY();
+        repaint();
     }
 
     private void add_Shape(){
@@ -111,7 +143,8 @@ public class GUI extends JFrame {
         Coords.add(x_Current);
         Coords.add(y_Current);
 
-        Drawn_Shapes shape = new Drawn_Shapes(shape_Type.Line, Coords);
+        //Creates a new element to insert into the list of drawn shapes
+        Drawn_Shapes shape = new Drawn_Shapes(shape_Type.values()[selected_Tool], Coords);
         drawn_Shapes.add(shape);
     }
 
@@ -129,13 +162,15 @@ public class GUI extends JFrame {
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
 
+            //Draws shapes currently drawn to the screen
             for (Drawn_Shapes shape:drawn_Shapes) {
                 switch (shape.Type){
                     case Line:
                         g.drawLine(shape.coordinates.get(0), shape.coordinates.get(1), shape.coordinates.get(2), shape.coordinates.get(3));
                         break;
-                    case Circle:
-                        g.drawLine(x_Previous, y_Previous, x_Current, y_Current);
+                    case Rectangle:
+                        //Is longer than Line as width and height are used not x and y coords
+                        g.drawRect(Math.min(shape.coordinates.get(0), shape.coordinates.get(2)),Math.min(shape.coordinates.get(1), shape.coordinates.get(3)),Math.abs(shape.coordinates.get(0) - shape.coordinates.get(2)),Math.abs(shape.coordinates.get(1) - shape.coordinates.get(3)));
                         break;
                     default:
                         System.out.println("Not a shape");
@@ -144,17 +179,21 @@ public class GUI extends JFrame {
                 }
             }
 
-
+            //Draw shape currently being drawn
+            switch (shape_Type.values()[selected_Tool]) {
+                case Line:
+                    g.drawLine(x_Previous,y_Previous,x_Current,y_Current);
+                    break;
+                case Rectangle:
+                    g.drawRect(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
+                    break;
+            }
         }
     }
 
     public static void main(String[] args) {
-           EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                JFrame.setDefaultLookAndFeelDecorated(false);
-                new GUI();
-            }
-        });
+        JFrame.setDefaultLookAndFeelDecorated(false);
+        new GUI();
     }
 
 }

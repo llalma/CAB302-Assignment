@@ -17,19 +17,31 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="102" column="16" selection-start-line="102" selection-start-column="16" selection-end-line="102" selection-end-column="16" />
+            <state relative-caret-position="344">
+              <caret line="166" column="35" selection-start-line="166" selection-start-column="35" selection-end-line="166" selection-end-column="35" />
               <folding>
                 <element signature="class#type#0;class#GUI#0" />
                 <element signature="class#Drawn_Shapes#0;class#GUI#0" />
                 <element signature="method#Main#0;class#Main#0" />
-                <element signature="method#drawing_area#0;class#GUI#0" />
-                <element signature="class#919:1169" />
-                <element signature="e#1361#1510#0" expanded="true" />
-                <element signature="e#1509#1510#0" expanded="true" />
+                <element signature="e#2002#2230#0" expanded="true" />
+                <element signature="e#2229#2230#0" expanded="true" />
                 <element signature="method#buttons_Create#0;class#GUI#0" />
+                <element signature="e#2870#3203#0" expanded="true" />
+                <element signature="e#3202#3203#0" expanded="true" />
                 <element signature="method#MouseClicked#0;class#GUI#0" />
+                <element signature="method#draw_Shape#0;class#GUI#0" />
+                <element signature="e#3900#3945#0" />
+                <element signature="e#5646#5688#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk-11.0.3/lib/src.zip!/java.desktop/java/awt/Graphics.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="84">
+              <caret line="433" selection-start-line="433" selection-end-line="446" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -42,6 +54,11 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>serialVersionUID</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -92,6 +109,7 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="282" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556779620632" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunDashboard">
@@ -149,7 +167,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.14604236" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.35451505" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39910814" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -178,20 +196,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.3/lib/src.zip!/java.desktop/java/awt/Graphics.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="433" selection-start-line="433" selection-end-line="446" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="102" column="16" selection-start-line="102" selection-start-column="16" selection-end-line="102" selection-end-column="16" />
+        <state relative-caret-position="344">
+          <caret line="166" column="35" selection-start-line="166" selection-start-column="35" selection-end-line="166" selection-end-column="35" />
           <folding>
             <element signature="class#type#0;class#GUI#0" />
             <element signature="class#Drawn_Shapes#0;class#GUI#0" />
             <element signature="method#Main#0;class#Main#0" />
-            <element signature="method#drawing_area#0;class#GUI#0" />
-            <element signature="class#919:1169" />
-            <element signature="e#1361#1510#0" expanded="true" />
-            <element signature="e#1509#1510#0" expanded="true" />
+            <element signature="e#2002#2230#0" expanded="true" />
+            <element signature="e#2229#2230#0" expanded="true" />
             <element signature="method#buttons_Create#0;class#GUI#0" />
+            <element signature="e#2870#3203#0" expanded="true" />
+            <element signature="e#3202#3203#0" expanded="true" />
             <element signature="method#MouseClicked#0;class#GUI#0" />
+            <element signature="method#draw_Shape#0;class#GUI#0" />
+            <element signature="e#3900#3945#0" />
+            <element signature="e#5646#5688#0" />
           </folding>
         </state>
       </provider>

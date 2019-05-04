@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,7 +19,20 @@ public class GUI extends JFrame {
     private static final long serialVersionUID = 4145047606482760810L;
     private int x_Previous,y_Previous,x_Current,y_Current;
 
-    
+    enum shape_Type{
+        Line, Rectangle, Square, Circle
+    }
+    private ArrayList<Drawn_Shapes> drawn_Shapes = new ArrayList<>();
+
+    public class Drawn_Shapes{
+        shape_Type Type;
+        ArrayList<Integer> coordinates;
+
+        Drawn_Shapes(shape_Type Type, ArrayList<Integer> coordinates){
+            this.Type = Type;
+            this.coordinates = coordinates;
+        }
+    }
 
     public GUI() {
         super("Paint");
@@ -84,8 +98,21 @@ public class GUI extends JFrame {
         y_Current = event.getY();
         //System.out.println("mouse released");
 
-        //Redraw the paint area
+        //Add shape to previously drawn of shapes
+        add_Shape();
         repaint();
+    }
+
+    private void add_Shape(){
+        //Add shape to previously drawn of shapes
+        ArrayList<Integer> Coords = new ArrayList<>();
+        Coords.add(x_Previous);
+        Coords.add(y_Previous);
+        Coords.add(x_Current);
+        Coords.add(y_Current);
+
+        Drawn_Shapes shape = new Drawn_Shapes(shape_Type.Line, Coords);
+        drawn_Shapes.add(shape);
     }
 
 
@@ -102,7 +129,22 @@ public class GUI extends JFrame {
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
 
-            g.drawLine(x_Previous,y_Previous,x_Current,y_Current);
+            for (Drawn_Shapes shape:drawn_Shapes) {
+                switch (shape.Type){
+                    case Line:
+                        g.drawLine(shape.coordinates.get(0), shape.coordinates.get(1), shape.coordinates.get(2), shape.coordinates.get(3));
+                        break;
+                    case Circle:
+                        g.drawLine(x_Previous, y_Previous, x_Current, y_Current);
+                        break;
+                    default:
+                        System.out.println("Not a shape");
+                        //put exception throw here.
+                        break;
+                }
+            }
+
+
         }
     }
 

@@ -17,15 +17,19 @@ public class GUI extends JFrame {
 
     //Find vector images with no background
     //List of buttons to include, needs to be na images file
-    static final String[] image_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Circle.png"};
-    static final int num_Buttons = image_Buttons.length;
+    static final String[] tool_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Circle.png"};
+    static final int num_Tool_Buttons = tool_Buttons.length;
+
+    static final String[] file_Buttons = new String[]{"resources/Save.png"};
+    static final int num_File_Buttons = file_Buttons.length;
+
 
     //Positions of mouse pointer
     private int x_Previous,y_Previous,x_Current,y_Current;
 
     //Stores shapes drawn in the drawing area
     enum shape_Type{
-        Line, Rectangle, Circle
+        LINE, RECTANGLE, CIRCLE
     }
     private ArrayList<Drawn_Shapes> drawn_Shapes = new ArrayList<>();
     public class Drawn_Shapes{
@@ -78,13 +82,14 @@ public class GUI extends JFrame {
     }
 
     private void buttons_Create(){
-        JPanel panel = new JPanel(new GridLayout(num_Buttons, 1));
-        for (int i = 0; i < num_Buttons; i++) {
+        //Tool Buttons, on west edge
+        JPanel panel = new JPanel(new GridLayout(num_Tool_Buttons, 1));
+        for (int i = 0; i < num_Tool_Buttons; i++) {
             JButton button = new JButton();
 
             //Load and add image to a button
             try {
-                Image img = ImageIO.read(getClass().getResource(image_Buttons[i]));
+                Image img = ImageIO.read(getClass().getResource(tool_Buttons[i]));
                 Image scaled_img = img.getScaledInstance( 50, 50,  java.awt.Image.SCALE_SMOOTH ) ;
 
                 //Sets whats the button will do when pressed, this case change the tool selected for drawing
@@ -106,6 +111,25 @@ public class GUI extends JFrame {
             panel.add(button);
         }
         getContentPane().add(panel,"West");
+
+        /* Need to make it so buttons can be a smaller size */
+        //Save buttons, new buttons ect.
+        JPanel file_panel = new JPanel(new GridLayout(1, num_File_Buttons));
+        for (int i = 0; i < num_File_Buttons; i++) {
+            JButton button = new JButton();
+            //Load and add image to a button
+            try {
+                Image img = ImageIO.read(getClass().getResource(file_Buttons[i]));
+                Image scaled_img = img.getScaledInstance( 25, 25,  java.awt.Image.SCALE_SMOOTH ) ;
+
+                button.setIcon(new ImageIcon(scaled_img));
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+            button.setPreferredSize(new Dimension(40, 40));
+            file_panel.add(button);
+        }
+        getContentPane().add(file_panel,"North");
     }
 
     private void MouseClicked(MouseEvent event){
@@ -165,10 +189,10 @@ public class GUI extends JFrame {
             //Draws shapes currently drawn to the screen
             for (Drawn_Shapes shape:drawn_Shapes) {
                 switch (shape.Type){
-                    case Line:
+                    case LINE:
                         g.drawLine(shape.coordinates.get(0), shape.coordinates.get(1), shape.coordinates.get(2), shape.coordinates.get(3));
                         break;
-                    case Rectangle:
+                    case RECTANGLE:
                         //Is longer than Line as width and height are used not x and y coords
                         g.drawRect(Math.min(shape.coordinates.get(0), shape.coordinates.get(2)),Math.min(shape.coordinates.get(1), shape.coordinates.get(3)),Math.abs(shape.coordinates.get(0) - shape.coordinates.get(2)),Math.abs(shape.coordinates.get(1) - shape.coordinates.get(3)));
                         break;
@@ -181,10 +205,10 @@ public class GUI extends JFrame {
 
             //Draw shape currently being drawn
             switch (shape_Type.values()[selected_Tool]) {
-                case Line:
+                case LINE:
                     g.drawLine(x_Previous,y_Previous,x_Current,y_Current);
                     break;
-                case Rectangle:
+                case RECTANGLE:
                     g.drawRect(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
                     break;
             }

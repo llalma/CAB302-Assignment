@@ -4,14 +4,25 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.round;
 
+//LF file formats check mine is right
+// check saving can have any number of decimals
+//display error when changing size of screen, drawing on small moving to large. maybe fix by checking if screen size changes redraw.
 
 public class GUI extends JFrame {
 
@@ -20,7 +31,7 @@ public class GUI extends JFrame {
     static final String[] tool_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Circle.png"};
     static final int num_Tool_Buttons = tool_Buttons.length;
 
-    static final String[] file_Buttons = new String[]{"resources/Save.png"};
+    static final String[] file_Buttons = new String[]{"resources/Save.png", "resources/Load.png"};
     static final int num_File_Buttons = file_Buttons.length;
 
 
@@ -34,9 +45,9 @@ public class GUI extends JFrame {
     private ArrayList<Drawn_Shapes> drawn_Shapes = new ArrayList<>();
     public class Drawn_Shapes{
         shape_Type Type;
-        ArrayList<Integer> coordinates;
+        ArrayList<Double> coordinates;
 
-        Drawn_Shapes(shape_Type Type, ArrayList<Integer> coordinates){
+        Drawn_Shapes(shape_Type Type, ArrayList<Double> coordinates){
             this.Type = Type;
             this.coordinates = coordinates;
         }
@@ -122,6 +133,26 @@ public class GUI extends JFrame {
                 Image img = ImageIO.read(getClass().getResource(file_Buttons[i]));
                 Image scaled_img = img.getScaledInstance( 25, 25,  java.awt.Image.SCALE_SMOOTH ) ;
 
+                //Sets whats the button will do when pressed, this save the file
+                if(file_Buttons[i].contains("Save")){
+                    //This is the save button, Give save functionality
+                    button.setAction(new AbstractAction() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            save_File();
+                        }
+                    });
+                }else if(file_Buttons[i].contains("Load")){
+                    //This is the load button, Give load functionality
+                    button.setAction(new AbstractAction() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            load_File();
+                        }
+                    });
+                }
+
+
                 button.setIcon(new ImageIcon(scaled_img));
             } catch (Exception ex) {
                 System.out.println(ex);
@@ -130,6 +161,49 @@ public class GUI extends JFrame {
             file_panel.add(button);
         }
         getContentPane().add(file_panel,"North");
+    }
+
+    private void save_File(){
+        //Saves the file to the path specified by the user
+        //Only shows directories to select
+        JFileChooser chooser= new JFileChooser(System.getProperty("user.dir"));
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        //Show GUI and return the path when the choice is confirmed
+        int choice = chooser.showDialog(null,"Select");
+        if (choice != JFileChooser.APPROVE_OPTION) return;
+        File directory_Path = chooser.getSelectedFile();
+        System.out.println(directory_Path.toString());
+
+        try {
+            PrintWriter writer = new PrintWriter("Test.VEC", "UTF-8");
+            //Loop through each object drawn
+            for (Drawn_Shapes shape:drawn_Shapes) {
+                String line = shape.Type + " " + shape.coordinates.get(0) + " " + shape.coordinates.get(1) + " " +  shape.coordinates.get(2) + " " +  shape.coordinates.get(3);
+                writer.println(line);
+            }
+            writer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void load_File(){
+        //Prewritten GUI for file browsing, shows the users current directory on opening.
+        //Only shows VEC files.
+        JFileChooser chooser= new JFileChooser(System.getProperty("user.dir"));
+        chooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Only VEC Files", "VEC");
+        chooser.addChoosableFileFilter(filter);
+
+        //Show GUI and return the path when the choice is confirmed
+        int choice = chooser.showOpenDialog(null);
+        if (choice != JFileChooser.APPROVE_OPTION) return;
+        File chosenFile = chooser.getSelectedFile();
+
+        //Load the Image set
     }
 
     private void MouseClicked(MouseEvent event){
@@ -153,19 +227,18 @@ public class GUI extends JFrame {
 
     }
 
-    private void MouseDragged(MouseEvent event){
-        x_Current = event.getX();
-        y_Current = event.getY();
-        repaint();
-    }
-
     private void add_Shape(){
+        //Size of drawing area, used convert coordinates to percentage of screen size
+        double height = getContentPane().getComponent(2).getHeight();
+        double width = getContentPane().getComponent(2).getWidth();
+        DecimalFormat value = new DecimalFormat("#.#");
+
         //Add shape to previously drawn of shapes
-        ArrayList<Integer> Coords = new ArrayList<>();
-        Coords.add(x_Previous);
-        Coords.add(y_Previous);
-        Coords.add(x_Current);
-        Coords.add(y_Current);
+        ArrayList<Double> Coords = new ArrayList<>();
+        Coords.add(x_Previous/width);
+        Coords.add(y_Previous/height);
+        Coords.add(x_Current/width);
+        Coords.add(y_Current/height);
 
         //Creates a new element to insert into the list of drawn shapes
         Drawn_Shapes shape = new Drawn_Shapes(shape_Type.values()[selected_Tool], Coords);
@@ -186,15 +259,25 @@ public class GUI extends JFrame {
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
 
+            //These are used to convert the percentage into the current screen size coordinates
+            double height = getContentPane().getComponent(2).getHeight();
+            double width = getContentPane().getComponent(2).getWidth();
+            int x1,x2,y1,y2;
+
             //Draws shapes currently drawn to the screen
             for (Drawn_Shapes shape:drawn_Shapes) {
+                x1 = (int) round(shape.coordinates.get(0) * width);
+                y1 = (int) round(shape.coordinates.get(1) * height);
+                x2 = (int) round(shape.coordinates.get(2) * width);
+                y2 = (int) round(shape.coordinates.get(3) * height);
+
                 switch (shape.Type){
                     case LINE:
-                        g.drawLine(shape.coordinates.get(0), shape.coordinates.get(1), shape.coordinates.get(2), shape.coordinates.get(3));
+                        g.drawLine(x1,y1,x2,y2);
                         break;
                     case RECTANGLE:
                         //Is longer than Line as width and height are used not x and y coords
-                        g.drawRect(Math.min(shape.coordinates.get(0), shape.coordinates.get(2)),Math.min(shape.coordinates.get(1), shape.coordinates.get(3)),Math.abs(shape.coordinates.get(0) - shape.coordinates.get(2)),Math.abs(shape.coordinates.get(1) - shape.coordinates.get(3)));
+                        g.drawRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
                         break;
                     default:
                         System.out.println("Not a shape");

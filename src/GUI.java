@@ -22,12 +22,13 @@ import static java.lang.Math.round;
 // check saving can have any number of decimals
 //display error when changing size of screen, drawing on small moving to large. maybe fix by checking if screen size changes redraw.
 //In load file change selected tool to eraser
+//names for hoveriing over buttons
 
 public class GUI extends JFrame {
 
     //Find vector images with no background
     //List of buttons to include, needs to be na images file
-    static final String[] tool_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Circle.png"};
+    static final String[] tool_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Plot.png"};
     static final int num_Tool_Buttons = tool_Buttons.length;
 
     static final String[] file_Buttons = new String[]{"resources/Save.png", "resources/Load.png"};
@@ -39,7 +40,7 @@ public class GUI extends JFrame {
 
     //Stores shapes drawn in the drawing area
     enum shape_Type{
-        LINE, RECTANGLE, CIRCLE
+        LINE, RECTANGLE, PLOT
     }
     private ArrayList<Drawn_Shapes> drawn_Shapes = new ArrayList<>();
     public class Drawn_Shapes{
@@ -63,7 +64,7 @@ public class GUI extends JFrame {
         drawing_area();
 
         // Display the window.
-        setPreferredSize(new Dimension(400, 200));
+        setPreferredSize(new Dimension(400, 400));
         setLocation(new Point(100, 100));
         pack();
         setVisible(true);
@@ -222,7 +223,15 @@ public class GUI extends JFrame {
             while (sc.hasNextLine()){
                 //Reag each string seperated by space char
                 String data[] = sc.nextLine().split(" ");
-                add_Shape(shape_Type.valueOf(data[0]).ordinal() , Double.parseDouble(data[1]), Double.parseDouble(data[2]), Double.parseDouble(data[3]), Double.parseDouble(data[4]));
+
+                switch (shape_Type.valueOf(data[0])) {
+                    case PLOT:
+                        add_Shape(shape_Type.valueOf(data[0]).ordinal(), Double.parseDouble(data[1]), Double.parseDouble(data[2]), Double.parseDouble(data[1]), Double.parseDouble(data[2]));
+                        break;
+                    default:
+                        add_Shape(shape_Type.valueOf(data[0]).ordinal(), Double.parseDouble(data[1]), Double.parseDouble(data[2]), Double.parseDouble(data[3]), Double.parseDouble(data[4]));
+                        break;
+                }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -311,6 +320,9 @@ public class GUI extends JFrame {
                         //Is longer than Line as width and height are used not x and y coords
                         g.drawRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
                         break;
+                    case PLOT:
+                        g.drawOval(x1,y1,0,0);
+                        break;
                     default:
                         System.out.println("Not a shape");
                         //put exception throw here.
@@ -325,6 +337,9 @@ public class GUI extends JFrame {
                     break;
                 case RECTANGLE:
                     g.drawRect(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
+                    break;
+                case PLOT:
+                    g.drawOval(x_Previous,y_Previous,0,0);
                     break;
             }
         }

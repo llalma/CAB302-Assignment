@@ -4,12 +4,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.beans.PropertyChangeListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -177,7 +175,13 @@ public class GUI extends JFrame {
         File directory_Path = chooser.getSelectedFile();
 
         try {
-            PrintWriter writer = new PrintWriter(directory_Path + ".VEC", "UTF-8");
+            PrintWriter writer;
+            if(directory_Path.toString().contains("VEC")){
+                writer = new PrintWriter(directory_Path, "UTF-8");
+            }else{
+                writer = new PrintWriter(directory_Path + ".VEC", "UTF-8");
+            }
+
             //Loop through each object drawn
             for (Drawn_Shapes shape:drawn_Shapes) {
                 String line = shape.Type + " " + shape.coordinates.get(0) + " " + shape.coordinates.get(1) + " " +  shape.coordinates.get(2) + " " +  shape.coordinates.get(3);
@@ -204,7 +208,24 @@ public class GUI extends JFrame {
         if (choice != JFileChooser.APPROVE_OPTION) return;
         File chosenFile = chooser.getSelectedFile();
 
-        //Load the Image set
+        //Clear the drawing area by emptying drawn_Shapes
+        drawn_Shapes = new ArrayList<>();
+        //Load the file
+        try {
+            Scanner sc = new Scanner(chosenFile);
+
+            //Read each line in the file & add to drawn_Shapes
+            while (sc.hasNextLine()){
+                //Reag each string seperated by space char
+                String data[] = sc.nextLine().split(" ");
+                add_Shape(shape_Type.valueOf(data[0]).ordinal() , Double.parseDouble(data[1]), Double.parseDouble(data[2]), Double.parseDouble(data[3]), Double.parseDouble(data[4]));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        //Repaint screen with new shapes
+        repaint();
     }
 
     private void MouseClicked(MouseEvent event){
@@ -213,7 +234,6 @@ public class GUI extends JFrame {
         y_Previous = event.getY();
         x_Current = x_Previous;
         y_Current = y_Previous;
-        //System.out.println("mouse clicked");
     }
 
     private void MouseReleased(MouseEvent event){
@@ -223,29 +243,27 @@ public class GUI extends JFrame {
         //System.out.println("mouse released");
 
         //Add shape to previously drawn of shapes
-        add_Shape();
+        add_Shape(selected_Tool,x_Previous,y_Previous,x_Current,y_Current);
         repaint();
 
     }
 
-    private void add_Shape(){
+    private void add_Shape(int tool, double x1, double y1, double x2, double y2){
         //Size of drawing area, used convert coordinates to percentage of screen size
         double height = getContentPane().getComponent(2).getHeight();
         double width = getContentPane().getComponent(2).getWidth();
-        DecimalFormat value = new DecimalFormat("#.#");
 
         //Add shape to previously drawn of shapes
         ArrayList<Double> Coords = new ArrayList<>();
-        Coords.add(x_Previous/width);
-        Coords.add(y_Previous/height);
-        Coords.add(x_Current/width);
-        Coords.add(y_Current/height);
+        Coords.add(x1/width);
+        Coords.add(y1/height);
+        Coords.add(x2/width);
+        Coords.add(y2/height);
 
         //Creates a new element to insert into the list of drawn shapes
-        Drawn_Shapes shape = new Drawn_Shapes(shape_Type.values()[selected_Tool], Coords);
+        Drawn_Shapes shape = new Drawn_Shapes(shape_Type.values()[tool], Coords);
         drawn_Shapes.add(shape);
     }
-
 
     class Draw_Panel extends JPanel {
 

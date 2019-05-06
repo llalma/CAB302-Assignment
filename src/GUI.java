@@ -21,6 +21,7 @@ import static java.lang.Math.round;
 //LF file formats check mine is right
 // check saving can have any number of decimals
 //display error when changing size of screen, drawing on small moving to large. maybe fix by checking if screen size changes redraw.
+//In load file change selected tool to eraser
 
 public class GUI extends JFrame {
 
@@ -208,8 +209,11 @@ public class GUI extends JFrame {
         if (choice != JFileChooser.APPROVE_OPTION) return;
         File chosenFile = chooser.getSelectedFile();
 
-        //Clear the drawing area by emptying drawn_Shapes
+        //Clear the drawing area by emptying drawn_Shapes, change selected tool to the eraser as the shaped
+        //drawn immedietly before loading is still drawn.
         drawn_Shapes = new ArrayList<>();
+        selected_Tool = 2;
+
         //Load the file
         try {
             Scanner sc = new Scanner(chosenFile);
@@ -255,10 +259,19 @@ public class GUI extends JFrame {
 
         //Add shape to previously drawn of shapes
         ArrayList<Double> Coords = new ArrayList<>();
-        Coords.add(x1/width);
-        Coords.add(y1/height);
-        Coords.add(x2/width);
-        Coords.add(y2/height);
+        if(x1 == x_Previous && x2 == x_Current && y1 == y_Previous && y2 == y_Current){
+            //Adding from users inputs
+            Coords.add(x1/width);
+            Coords.add(y1/height);
+            Coords.add(x2/width);
+            Coords.add(y2/height);
+        }else{
+            //Adding from loading from file
+            Coords.add(x1);
+            Coords.add(y1);
+            Coords.add(x2);
+            Coords.add(y2);
+        }
 
         //Creates a new element to insert into the list of drawn shapes
         Drawn_Shapes shape = new Drawn_Shapes(shape_Type.values()[tool], Coords);

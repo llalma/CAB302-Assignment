@@ -17,8 +17,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="181" column="50" selection-start-line="181" selection-start-column="50" selection-end-line="181" selection-end-column="50" />
+            <state relative-caret-position="356">
+              <caret line="167" column="115" selection-start-line="167" selection-start-column="115" selection-end-line="167" selection-end-column="115" />
               <folding>
                 <element signature="class#shape_Type#0;class#GUI#0" />
                 <element signature="class#Drawn_Shapes#0;class#GUI#0" />
@@ -30,7 +30,6 @@
                 <element signature="e#4939#4940#0" expanded="true" />
                 <element signature="e#5040#5254#0" expanded="true" />
                 <element signature="e#5253#5254#0" expanded="true" />
-                <element signature="method#load_File#0;class#GUI#0" />
                 <element signature="method#MouseClicked#0;class#GUI#0" />
                 <element signature="method#MouseReleased#0;class#GUI#0" />
                 <element signature="method#add_Shape#0;class#GUI#0" />
@@ -204,8 +203,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="181" column="50" selection-start-line="181" selection-start-column="50" selection-end-line="181" selection-end-column="50" />
+        <state relative-caret-position="356">
+          <caret line="167" column="115" selection-start-line="167" selection-start-column="115" selection-end-line="167" selection-end-column="115" />
           <folding>
             <element signature="class#shape_Type#0;class#GUI#0" />
             <element signature="class#Drawn_Shapes#0;class#GUI#0" />
@@ -217,7 +216,6 @@
             <element signature="e#4939#4940#0" expanded="true" />
             <element signature="e#5040#5254#0" expanded="true" />
             <element signature="e#5253#5254#0" expanded="true" />
-            <element signature="method#load_File#0;class#GUI#0" />
             <element signature="method#MouseClicked#0;class#GUI#0" />
             <element signature="method#MouseReleased#0;class#GUI#0" />
             <element signature="method#add_Shape#0;class#GUI#0" />

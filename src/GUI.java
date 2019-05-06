@@ -165,18 +165,19 @@ public class GUI extends JFrame {
 
     private void save_File(){
         //Saves the file to the path specified by the user
-        //Only shows directories to select
+        //Only shows directories & Vec files to select, Default saves as VEC format, no other options are avaliable.
         JFileChooser chooser= new JFileChooser(System.getProperty("user.dir"));
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("VEC", "VEC");
+        chooser.addChoosableFileFilter(filter);
 
         //Show GUI and return the path when the choice is confirmed
         int choice = chooser.showDialog(null,"Select");
         if (choice != JFileChooser.APPROVE_OPTION) return;
         File directory_Path = chooser.getSelectedFile();
-        System.out.println(directory_Path.toString());
 
         try {
-            PrintWriter writer = new PrintWriter("Test.VEC", "UTF-8");
+            PrintWriter writer = new PrintWriter(directory_Path + ".VEC", "UTF-8");
             //Loop through each object drawn
             for (Drawn_Shapes shape:drawn_Shapes) {
                 String line = shape.Type + " " + shape.coordinates.get(0) + " " + shape.coordinates.get(1) + " " +  shape.coordinates.get(2) + " " +  shape.coordinates.get(3);

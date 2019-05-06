@@ -23,12 +23,13 @@ import static java.lang.Math.round;
 //display error when changing size of screen, drawing on small moving to large. maybe fix by checking if screen size changes redraw.
 //In load file change selected tool to eraser
 //names for hoveriing over buttons
+//changing off polygon without finishing it
 
 public class GUI extends JFrame {
 
     //Find vector images with no background
     //List of buttons to include, needs to be na images file
-    static final String[] tool_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Plot.png"};
+    static final String[] tool_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Plot.png","resources/Polygon.png"};
     static final int num_Tool_Buttons = tool_Buttons.length;
 
     static final String[] file_Buttons = new String[]{"resources/Save.png", "resources/Load.png"};
@@ -40,7 +41,7 @@ public class GUI extends JFrame {
 
     //Stores shapes drawn in the drawing area
     enum shape_Type{
-        LINE, RECTANGLE, PLOT
+        LINE, RECTANGLE,PLOT, POLYGON
     }
     private ArrayList<Drawn_Shapes> drawn_Shapes = new ArrayList<>();
     public class Drawn_Shapes{
@@ -52,6 +53,10 @@ public class GUI extends JFrame {
             this.coordinates = coordinates;
         }
     }
+
+    //Array list for a single Polygons
+    ArrayList<Integer[]> polygon = new ArrayList<>();
+    boolean polygon_Completed = true;
 
     //Selected drawing tool, defaults to Line
     private int selected_Tool = 0;
@@ -247,6 +252,12 @@ public class GUI extends JFrame {
         y_Previous = event.getY();
         x_Current = x_Previous;
         y_Current = y_Previous;
+
+        if(selected_Tool == shape_Type.POLYGON.ordinal()) {
+            polygon_Completed = false;
+            Integer coords[] = {x_Current, y_Current};
+            polygon.add(coords);
+        }
     }
 
     private void MouseReleased(MouseEvent event){
@@ -255,8 +266,14 @@ public class GUI extends JFrame {
         y_Current = event.getY();
         //System.out.println("mouse released");
 
-        //Add shape to previously drawn of shapes
-        add_Shape(selected_Tool,x_Previous,y_Previous,x_Current,y_Current);
+        if(selected_Tool == shape_Type.POLYGON.ordinal()){
+//           Integer coords[] = {x_Current,y_Current};
+//           polygon.add(coords);
+        }else{
+            //Add shape to previously drawn of shapes
+            add_Shape(selected_Tool,x_Previous,y_Previous,x_Current,y_Current);
+        }
+
         repaint();
 
     }
@@ -341,6 +358,19 @@ public class GUI extends JFrame {
                 case PLOT:
                     g.drawOval(x_Previous,y_Previous,0,0);
                     break;
+                case POLYGON:
+                    int size = polygon.size()-1;
+                    if(size < 1){
+                        //The first point of polygon
+                        g.drawLine(polygon.get(0)[0],polygon.get(0)[1], polygon.get(0)[0],polygon.get(0)[1]);
+                    }else{
+                        int i = 0;
+                        while(i <= size+1) {
+                            g.drawLine(polygon.get(i - 1)[0], polygon.get(i - 1)[1], polygon.get(i)[0], polygon.get(i)[1]);
+                            i++;
+                        }
+                    }
+                     break;
             }
         }
     }

@@ -21,13 +21,6 @@ import static java.lang.Math.round;
 
 //LF file formats check mine is right
 // check saving can have any number of decimals
-//display error when changing size of screen, drawing on small moving to large. maybe fix by checking if screen size changes redraw.
-//In load file change selected tool to eraser
-//names for hoveriing over buttons
-//changing off polygon without finishing it
-//Mouse snap?
-//Polygon dosnt quite finish on exact spot
-//if you move mosue just after clicking to place a polygon it messes up
 
 public class GUI extends JFrame {
 
@@ -84,8 +77,8 @@ public class GUI extends JFrame {
 
         panel.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent evt) {
-                MouseClicked(evt);
                 mouse_Pressed = true;
+                MouseClicked(evt);
             }
             public void mouseReleased(MouseEvent evt) {
                 if(selected_Tool != shape_Type.POLYGON.ordinal()) {
@@ -136,8 +129,9 @@ public class GUI extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //If the user selects another tool before polygon is completed make sure it ends
-                        polygon_Completed = true;
-                        polygon = new ArrayList<>();
+                            polygon_Completed = true;
+                            //Clear the polygon
+                            polygon = new ArrayList<>();
 
                         String x =e.getActionCommand();
                         selected_Tool = Integer.parseInt(x);
@@ -216,9 +210,22 @@ public class GUI extends JFrame {
                 writer = new PrintWriter(directory_Path + ".VEC", "UTF-8");
             }
 
+            //Declare variable to store the string before being written to the file
+
+
             //Loop through each object drawn
             for (Drawn_Shapes shape:drawn_Shapes) {
-                String line = shape.Type + " " + shape.coordinates.get(0) + " " + shape.coordinates.get(1) + " " +  shape.coordinates.get(2) + " " +  shape.coordinates.get(3);
+                StringBuilder line = new StringBuilder();
+                if(shape.Type == shape_Type.POLYGON){
+                    //Polygon saving is slightly different from other shapes
+                    int size = shape.coordinates.size();
+                    line.append(shape.Type.toString());
+                    for(int i = 1;i<size;i++){
+                        line.append(" " + shape.coordinates.get(i));
+                    }
+                }else{
+                    line.append(shape.Type + " " + shape.coordinates.get(0) + " " + shape.coordinates.get(1) + " " +  shape.coordinates.get(2) + " " +  shape.coordinates.get(3));
+                }
                 writer.println(line);
             }
             writer.close();
@@ -290,7 +297,8 @@ public class GUI extends JFrame {
 
             //Ends the polygon if original and latest position is within 10 pixels in any direction.
             if(polygon_Ending_Check() && polygon.size() > 4){
-
+                mouse_Pressed = false;
+                polygon_Completed = true;
                 //Remove last 2 inputs
                 polygon.remove(polygon.size()-2);
                 polygon.remove(polygon.size()-1);
@@ -302,9 +310,10 @@ public class GUI extends JFrame {
                 polygon_Completed = true;
                 Drawn_Shapes shape = new Drawn_Shapes(shape_Type.POLYGON, polygon);
                 drawn_Shapes.add(shape);
-            }
 
-            repaint();
+                //Clear the polygon
+                polygon = new ArrayList<>();
+            }
         }
     }
 
@@ -403,8 +412,9 @@ public class GUI extends JFrame {
                         g.drawOval(x1,y1,0,0);
                         break;
                     case POLYGON:
-                        for(int i = 3;i<polygon.size() - 1;i+=2){
-                            g.drawLine((int)round(polygon.get(i-3)),(int)round(polygon.get(i-2)), (int)round(polygon.get(i-1)),(int)round(polygon.get(i)));
+                        int size = shape.coordinates.size();
+                        for(int i = 3;i<size;i+=2){
+                            g.drawLine((int)round(shape.coordinates.get(i-3)),(int)round(shape.coordinates.get(i-2)), (int)round(shape.coordinates.get(i-1)),(int)round(shape.coordinates.get(i)));
                         }
 
                         break;

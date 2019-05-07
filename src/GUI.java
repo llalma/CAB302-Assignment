@@ -12,6 +12,7 @@ import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.event.PopupMenuListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
@@ -35,7 +36,6 @@ public class GUI extends JFrame {
     static final String[] file_Buttons = new String[]{"resources/Save.png", "resources/Load.png"};
     static final int num_File_Buttons = file_Buttons.length;
 
-
     //Positions of mouse pointer
     private int x_Previous,y_Previous,x_Current,y_Current;
 
@@ -55,8 +55,9 @@ public class GUI extends JFrame {
     }
 
     //Array list for a single Polygons
-    ArrayList<Integer[]> polygon = new ArrayList<>();
+    ArrayList<Double> polygon = new ArrayList<>();
     boolean polygon_Completed = true;
+    boolean mouse_Pressed = false;
 
     //Selected drawing tool, defaults to Line
     private int selected_Tool = 0;
@@ -81,17 +82,36 @@ public class GUI extends JFrame {
         panel.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent evt) {
                 MouseClicked(evt);
+                mouse_Pressed = true;
             }
             public void mouseReleased(MouseEvent evt) {
-                MouseReleased(evt);
+                if(selected_Tool != shape_Type.POLYGON.ordinal()) {
+                    mouse_Pressed = false;
+                    MouseReleased(evt);
+                }else{
+                    mousePressed(evt);
+                }
             }
         });
         panel.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                x_Current = e.getX();
-                y_Current = e.getY();
-                repaint();
+                //Dont want to repaint for dragging with the polygon tool as that cna allow the user to draw in a different position
+                if(selected_Tool != shape_Type.POLYGON.ordinal()){
+                    x_Current = e.getX();
+                    y_Current = e.getY();
+                    repaint();
+                }
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                //Dont want to repaint for dragging with the polygon tool as that cna allow the user to draw in a different position
+                if(selected_Tool == shape_Type.POLYGON.ordinal() && !polygon_Completed){
+                    x_Current = e.getX();
+                    y_Current = e.getY();
+                    repaint();
+                }
             }
         });
         getContentPane().add(panel,"Center");
@@ -112,6 +132,10 @@ public class GUI extends JFrame {
                 button.setAction(new AbstractAction() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        //If the user selects another tool before polygon is completed make sure it ends
+                        polygon_Completed = true;
+                        polygon = new ArrayList<>();
+
                         String x =e.getActionCommand();
                         selected_Tool = Integer.parseInt(x);
                         System.out.println(selected_Tool);
@@ -253,10 +277,23 @@ public class GUI extends JFrame {
         x_Current = x_Previous;
         y_Current = y_Previous;
 
+
         if(selected_Tool == shape_Type.POLYGON.ordinal()) {
             polygon_Completed = false;
-            Integer coords[] = {x_Current, y_Current};
+            Double coords = x_Current + 0.0;
             polygon.add(coords);
+            coords = y_Current + 0.0;
+            polygon.add(coords);
+
+
+            //ending polygon must be on same pixel
+            if(x_Current == polygon.get(0) && y_Current == polygon.get(1) && polygon.size() > 4){
+                polygon_Completed = true;
+                Drawn_Shapes shape = new Drawn_Shapes(shape_Type.POLYGON, polygon);
+                drawn_Shapes.add(shape);
+            }
+
+            repaint();
         }
     }
 
@@ -340,6 +377,12 @@ public class GUI extends JFrame {
                     case PLOT:
                         g.drawOval(x1,y1,0,0);
                         break;
+                    case POLYGON:
+                        for(int i = 3;i<polygon.size() - 1;i+=2){
+                            g.drawLine((int)round(polygon.get(i-3)),(int)round(polygon.get(i-2)), (int)round(polygon.get(i-1)),(int)round(polygon.get(i)));
+                        }
+
+                        break;
                     default:
                         System.out.println("Not a shape");
                         //put exception throw here.
@@ -359,18 +402,14 @@ public class GUI extends JFrame {
                     g.drawOval(x_Previous,y_Previous,0,0);
                     break;
                 case POLYGON:
-                    int size = polygon.size()-1;
-                    if(size < 1){
-                        //The first point of polygon
-                        g.drawLine(polygon.get(0)[0],polygon.get(0)[1], polygon.get(0)[0],polygon.get(0)[1]);
-                    }else{
-                        int i = 0;
-                        while(i <= size+1) {
-                            g.drawLine(polygon.get(i - 1)[0], polygon.get(i - 1)[1], polygon.get(i)[0], polygon.get(i)[1]);
-                            i++;
+                    int size = polygon.size() - 2;
+                    g.drawLine(x_Previous,y_Previous,x_Current,y_Current);
+                    if(size > 2){
+                        for(int i = 3;i<size;i+=2){
+                            g.drawLine((int)round(polygon.get(i-3)),(int)round(polygon.get(i-2)), (int)round(polygon.get(i-1)),(int)round(polygon.get(i)));
                         }
                     }
-                     break;
+                    break;
             }
         }
     }

@@ -25,6 +25,9 @@ import static java.lang.Math.round;
 //In load file change selected tool to eraser
 //names for hoveriing over buttons
 //changing off polygon without finishing it
+//Mouse snap?
+//Polygon dosnt quite finish on exact spot
+//if you move mosue just after clicking to place a polygon it messes up
 
 public class GUI extends JFrame {
 
@@ -285,9 +288,17 @@ public class GUI extends JFrame {
             coords = y_Current + 0.0;
             polygon.add(coords);
 
+            //Ends the polygon if original and latest position is within 10 pixels in any direction.
+            if(polygon_Ending_Check() && polygon.size() > 4){
 
-            //ending polygon must be on same pixel
-            if(x_Current == polygon.get(0) && y_Current == polygon.get(1) && polygon.size() > 4){
+                //Remove last 2 inputs
+                polygon.remove(polygon.size()-2);
+                polygon.remove(polygon.size()-1);
+
+                //Add the last 2 indexes as the original coordinates
+                polygon.add(polygon.get(0));
+                polygon.add(polygon.get(1));
+
                 polygon_Completed = true;
                 Drawn_Shapes shape = new Drawn_Shapes(shape_Type.POLYGON, polygon);
                 drawn_Shapes.add(shape);
@@ -295,6 +306,20 @@ public class GUI extends JFrame {
 
             repaint();
         }
+    }
+
+    private boolean polygon_Ending_Check(){
+        boolean same_Spot = false;
+        //Checks if the click is within 10 pixels either way of original point, for x coordinates
+        if (x_Current>polygon.get(0)-10 && x_Current<polygon.get(0)+10){
+            same_Spot = true;
+        }
+        //Checks if the click is within 10 pixels either way of original point, for y coordinates
+        //Extra check to see if the x-coordinate was on the point
+        if (y_Current>polygon.get(1)-10 && y_Current<polygon.get(1)+10 && same_Spot){
+            same_Spot = true;
+        }
+        return same_Spot;
     }
 
     private void MouseReleased(MouseEvent event){

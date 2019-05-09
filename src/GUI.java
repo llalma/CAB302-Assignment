@@ -26,7 +26,7 @@ public class GUI extends JFrame {
 
     //Find vector images with no background
     //List of buttons to include, needs to be na images file
-    static final String[] tool_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Plot.png","resources/Polygon.png"};
+    static final String[] tool_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Plot.png","resources/Ellipse.png","resources/Polygon.png"};
     static final int num_Tool_Buttons = tool_Buttons.length;
 
     static final String[] file_Buttons = new String[]{"resources/Save.png", "resources/Load.png"};
@@ -37,7 +37,7 @@ public class GUI extends JFrame {
 
     //Stores shapes drawn in the drawing area
     enum shape_Type{
-        LINE, RECTANGLE,PLOT, POLYGON
+        LINE, RECTANGLE,PLOT,ELLIPSE,POLYGON
     }
     private ArrayList<Drawn_Shapes> drawn_Shapes = new ArrayList<>();
     public class Drawn_Shapes{
@@ -313,7 +313,6 @@ public class GUI extends JFrame {
         x_Current = x_Previous;
         y_Current = y_Previous;
 
-
         if(selected_Tool == shape_Type.POLYGON.ordinal()) {
             polygon_Completed = false;
             Double coords = x_Current + 0.0;
@@ -418,7 +417,7 @@ public class GUI extends JFrame {
             double width = getContentPane().getComponent(2).getWidth();
             int x1,x2,y1,y2;
 
-            //Draws shapes currently drawn to the screen
+            //Draws shapes that have already been drawn or loaded
             for (Drawn_Shapes shape:drawn_Shapes) {
                 x1 = (int) round(shape.coordinates.get(0) * width);
                 y1 = (int) round(shape.coordinates.get(1) * height);
@@ -436,6 +435,9 @@ public class GUI extends JFrame {
                     case PLOT:
                         g.drawOval(x1,y1,0,0);
                         break;
+                    case ELLIPSE:
+                        g.drawOval(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
+                        break;
                     case POLYGON:
                         int size = shape.coordinates.size();
                         for(int i = 3;i<size;i+=2){
@@ -450,7 +452,7 @@ public class GUI extends JFrame {
                 }
             }
 
-            //Draw shape currently being drawn
+            //Draw shape user is in the process of drawing
             switch (shape_Type.values()[selected_Tool]) {
                 case LINE:
                     g.drawLine(x_Previous,y_Previous,x_Current,y_Current);
@@ -460,6 +462,9 @@ public class GUI extends JFrame {
                     break;
                 case PLOT:
                     g.drawOval(x_Previous,y_Previous,0,0);
+                    break;
+                case ELLIPSE:
+                    g.drawOval(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
                     break;
                 case POLYGON:
                     g.drawLine(x_Previous,y_Previous,x_Current,y_Current);

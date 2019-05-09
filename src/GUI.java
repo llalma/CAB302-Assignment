@@ -217,7 +217,9 @@ public class GUI extends JFrame {
                 if(shape.Type == shape_Type.POLYGON){
                     //Polygon saving is slightly different from other shapes
                     line.append(shape.Type.toString());
-                    for(int i = 0;i<shape.coordinates.size();i++){
+
+                    //Minus 2 from size as to not inlcude the last point which just direct back to the starting position
+                    for(int i = 0;i<shape.coordinates.size()-2;i++){
                         if(i%2 != 0){
                             line.append(" " + shape.coordinates.get(i) / getWidth());
                         }else{
@@ -297,6 +299,10 @@ public class GUI extends JFrame {
                 polygon.add(Double.parseDouble(data[i]) * height);
             }
         }
+
+        //Reconnecting the last point to the original
+        polygon.add(Double.parseDouble(data[1]) * width);
+        polygon.add(Double.parseDouble(data[2]) * height);
 
         //Add the polygon read from the VEC file and add to the drawing variable
         Drawn_Shapes shape = new Drawn_Shapes(shape_Type.valueOf(data[0]), polygon);

@@ -84,10 +84,6 @@ public class GUI extends JFrame {
                 if(selected_Tool != shape_Type.POLYGON.ordinal()) {
                     mouse_Pressed = false;
                     MouseReleased(evt);
-                }else if (!polygon_Completed){
-                    //This is here to prevent an extra line beign drawn when completing the polygon
-                    //However this needs function needs to be here to draw the line that is currently being drawn.
-                    mousePressed(evt);
                 }
             }
         });
@@ -220,9 +216,8 @@ public class GUI extends JFrame {
                 StringBuilder line = new StringBuilder();
                 if(shape.Type == shape_Type.POLYGON){
                     //Polygon saving is slightly different from other shapes
-                    int size = shape.coordinates.size();
                     line.append(shape.Type.toString());
-                    for(int i = 1;i<size;i++){
+                    for(int i = 0;i<shape.coordinates.size();i++){
                         line.append(" " + shape.coordinates.get(i));
                     }
                 }else{
@@ -438,12 +433,9 @@ public class GUI extends JFrame {
                     g.drawOval(x_Previous,y_Previous,0,0);
                     break;
                 case POLYGON:
-                    int size = polygon.size() - 2;
                     g.drawLine(x_Previous,y_Previous,x_Current,y_Current);
-                    if(size > 2){
-                        for(int i = 3;i<size;i+=2){
-                            g.drawLine((int)round(polygon.get(i-3)),(int)round(polygon.get(i-2)), (int)round(polygon.get(i-1)),(int)round(polygon.get(i)));
-                        }
+                    for(int i = 3;i<polygon.size();i+=2){
+                        g.drawLine((int)round(polygon.get(i-3)),(int)round(polygon.get(i-2)), (int)round(polygon.get(i-1)),(int)round(polygon.get(i)));
                     }
                     break;
             }

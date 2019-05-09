@@ -264,6 +264,9 @@ public class GUI extends JFrame {
                     case PLOT:
                         add_Shape(shape_Type.valueOf(data[0]).ordinal(), Double.parseDouble(data[1]), Double.parseDouble(data[2]), Double.parseDouble(data[1]), Double.parseDouble(data[2]));
                         break;
+                    case POLYGON:
+                        add_Polygon(data);
+                        break;
                     default:
                         add_Shape(shape_Type.valueOf(data[0]).ordinal(), Double.parseDouble(data[1]), Double.parseDouble(data[2]), Double.parseDouble(data[3]), Double.parseDouble(data[4]));
                         break;
@@ -275,6 +278,28 @@ public class GUI extends JFrame {
 
         //Repaint screen with new shapes
         repaint();
+    }
+
+    private void add_Polygon(String data[]){
+        double height = getContentPane().getComponent(2).getHeight();
+        double width = getContentPane().getComponent(2).getWidth();
+
+        //Add the coordinates of the polygon to a variable
+        for(int i = 1;i<data.length;i++){
+            //If odd will be an x value, else will be y value
+            if(i%2 != 0){
+                polygon.add(Double.parseDouble(data[i]) * width);
+            }else{
+                polygon.add(Double.parseDouble(data[i]) * height);
+            }
+        }
+
+        //Add the polygon read from the VEC file and add to the drawing variable
+        Drawn_Shapes shape = new Drawn_Shapes(shape_Type.valueOf(data[0]), polygon);
+        drawn_Shapes.add(shape);
+
+        //Clear the polygon coordinate variable
+        polygon = new ArrayList<>();
     }
 
     private void MouseClicked(MouseEvent event){

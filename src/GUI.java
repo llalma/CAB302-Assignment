@@ -218,7 +218,11 @@ public class GUI extends JFrame {
                     //Polygon saving is slightly different from other shapes
                     line.append(shape.Type.toString());
                     for(int i = 0;i<shape.coordinates.size();i++){
-                        line.append(" " + shape.coordinates.get(i));
+                        if(i%2 != 0){
+                            line.append(" " + shape.coordinates.get(i) / getWidth());
+                        }else{
+                            line.append(" " + shape.coordinates.get(i) / getHeight());
+                        }
                     }
                 }else{
                     line.append(shape.Type + " " + shape.coordinates.get(0) + " " + shape.coordinates.get(1) + " " +  shape.coordinates.get(2) + " " +  shape.coordinates.get(3));

@@ -84,7 +84,9 @@ public class GUI extends JFrame {
                 if(selected_Tool != shape_Type.POLYGON.ordinal()) {
                     mouse_Pressed = false;
                     MouseReleased(evt);
-                }else{
+                }else if (!polygon_Completed){
+                    //This is here to prevent an extra line beign drawn when completing the polygon
+                    //However this needs function needs to be here to draw the line that is currently being drawn.
                     mousePressed(evt);
                 }
             }
@@ -307,7 +309,6 @@ public class GUI extends JFrame {
                 polygon.add(polygon.get(0));
                 polygon.add(polygon.get(1));
 
-                polygon_Completed = true;
                 Drawn_Shapes shape = new Drawn_Shapes(shape_Type.POLYGON, polygon);
                 drawn_Shapes.add(shape);
 

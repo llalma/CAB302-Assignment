@@ -26,11 +26,18 @@ public class GUI extends JFrame {
 
     //Find vector images with no background
     //List of buttons to include, needs to be na images file
-    static final String[] tool_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Plot.png","resources/Ellipse.png","resources/Polygon.png"};
-    static final int num_Tool_Buttons = tool_Buttons.length;
+    private static final String[] tool_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Plot.png","resources/Ellipse.png","resources/Polygon.png"};
+    private static final int num_Tool_Buttons = tool_Buttons.length;
 
-    static final String[] file_Buttons = new String[]{"resources/Save.png", "resources/Load.png"};
-    static final int num_File_Buttons = file_Buttons.length;
+    private static final String[] file_Buttons = new String[]{"resources/Save.png", "resources/Load.png"};
+    private static final int num_File_Buttons = file_Buttons.length;
+
+    private static final Color[] colour_Buttons = new Color[]{Color.BLACK,Color.RED,Color.GREEN,Color.YELLOW,
+                                                              Color.WHITE,Color.BLUE,Color.ORANGE,Color.MAGENTA};
+    private static final int num_Colour_Buttons = colour_Buttons.length;
+
+    private static final String[] colour_Special_Buttons = new String[]{"resources/NoFill.jpg","resources/Rainbow.jpg"};
+    private static final int num_Colour_Special_Buttons = colour_Buttons.length;
 
     //Positions of mouse pointer
     private int x_Previous,y_Previous,x_Current,y_Current;
@@ -148,7 +155,7 @@ public class GUI extends JFrame {
         getContentPane().add(panel,"West");
 
         /* Need to make it so buttons can be a smaller size */
-        //Save buttons, new buttons ect.
+        //Save buttons, new buttons ect, On north edge.
         JPanel file_panel = new JPanel(new GridLayout(1, num_File_Buttons));
         for (int i = 0; i < num_File_Buttons; i++) {
             JButton button = new JButton();
@@ -185,6 +192,43 @@ public class GUI extends JFrame {
             file_panel.add(button);
         }
         getContentPane().add(file_panel,"North");
+
+        //Colour Buttons on south edge
+        //Plus 2 for number of coloums due to the 2 extra buttons fro nofill and selector
+        JPanel colour_panel = new JPanel(new GridLayout(2, num_Colour_Buttons+2));
+        for (int i = 0; i < num_Colour_Buttons; i++) {
+            JButton button = new JButton();
+            button.setBackground(colour_Buttons[i]);
+            button.setSize(10,10);
+            colour_panel.add(button);
+        }
+
+        //Load and add image to a button, used for the Nofill and the selector tools
+        //Also part of panel above
+        for(int i = 0;i<num_Colour_Special_Buttons;i++) {
+            try {
+                JButton button = new JButton();
+                Image img = ImageIO.read(getClass().getResource(colour_Special_Buttons[i]));
+                Image scaled_img = img.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+
+                //Sets whats the button will do when pressed, this case change the tool selected for drawing
+                //            button.setAction(new AbstractAction() {
+                //                @Override
+                //                public void actionPerformed(ActionEvent e) {
+                //
+                //                }
+                //            });
+
+                //These need to be after setAction
+                //button.setActionCommand(Integer.toString(i));
+                button.setIcon(new ImageIcon(scaled_img));
+                colour_panel.add(button);
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+        }
+
+        getContentPane().add(colour_panel,"South");
     }
 
     private void save_File(){
@@ -381,8 +425,8 @@ public class GUI extends JFrame {
 
     private void add_Shape(int tool, double x1, double y1, double x2, double y2){
         //Size of drawing area, used convert coordinates to percentage of screen size
-        double height = getContentPane().getComponent(2).getHeight();
-        double width = getContentPane().getComponent(2).getWidth();
+        double height = getContentPane().getComponent(3).getHeight();
+        double width = getContentPane().getComponent(3).getWidth();
 
         //Add shape to previously drawn of shapes
         ArrayList<Double> Coords = new ArrayList<>();
@@ -394,10 +438,10 @@ public class GUI extends JFrame {
             Coords.add(y2/height);
         }else{
             //Adding from loading from file
-            Coords.add(x1);
-            Coords.add(y1);
-            Coords.add(x2);
-            Coords.add(y2);
+            Coords.add(x1*width);
+            Coords.add(y1*height);
+            Coords.add(x2*width);
+            Coords.add(y2*height);
         }
 
         //Creates a new element to insert into the list of drawn shapes

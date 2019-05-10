@@ -63,7 +63,7 @@ public class GUI extends JFrame {
     private int selected_Tool = 0;
 
     //Selected Colour
-    private Color colour = Color.WHITE;
+    private Color pen_Colour = Color.BLACK;
 
     public GUI() {
         super("Paint");
@@ -79,9 +79,9 @@ public class GUI extends JFrame {
         setVisible(true);
 
         ArrayList<Double> RGB = new ArrayList<>();
-        RGB.add(255.0);
-        RGB.add(255.0);
-        RGB.add(255.0);
+        RGB.add(0.0);
+        RGB.add(0.0);
+        RGB.add(0.0);
         drawn_Shapes.add(new Drawn_Shapes(shape_Type.PEN, RGB));
     }
 
@@ -208,8 +208,8 @@ public class GUI extends JFrame {
             button.setAction(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    colour = button.getBackground();
-                    Add_Colour();
+                    pen_Colour = button.getBackground();
+                    Add_Pen_Colour();
                 }
             });
             button.setBackground(colour_Buttons[i]);
@@ -239,12 +239,12 @@ public class GUI extends JFrame {
     private class Colour_Chooser implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             //Sets colour then adds colour to list
-            colour = JColorChooser.showDialog(null, "Choose a Color", colour);
-            Add_Colour();
+            pen_Colour = JColorChooser.showDialog(null, "Choose a Color", pen_Colour);
+            Add_Pen_Colour();
         }
     }
 
-    void Add_Colour(){
+    private void Add_Pen_Colour(){
         //Add colour to list of shapes, same arrayList as shapes as the order matters
         //and arrayLists keeps the order
 
@@ -252,9 +252,9 @@ public class GUI extends JFrame {
         ArrayList<Double> RGB = new ArrayList<>();
 
 
-        RGB.add(colour.getRed() + 0.0);
-        RGB.add(colour.getGreen() + 0.0);
-        RGB.add(colour.getBlue() + 0.0);
+        RGB.add(pen_Colour.getRed() + 0.0);
+        RGB.add(pen_Colour.getGreen() + 0.0);
+        RGB.add(pen_Colour.getBlue() + 0.0);
 
         //Creates a new element to insert into the list of drawn shapes
         Drawn_Shapes shape = new Drawn_Shapes(shape_Type.PEN, RGB);
@@ -359,7 +359,8 @@ public class GUI extends JFrame {
                         int g = Integer.valueOf(data[1].substring(3,5),16);
                         int b = Integer.valueOf(data[1].substring(5,7),16);
 
-                        colour = new Color(r,g,b);
+                        pen_Colour = new Color(r,g,b);
+                        Add_Pen_Colour();
                         break;
                     case FILL:
                         break;
@@ -458,16 +459,11 @@ public class GUI extends JFrame {
         y_Current = event.getY();
         //System.out.println("mouse released");
 
-        if(selected_Tool == shape_Type.POLYGON.ordinal()){
-//           Integer coords[] = {x_Current,y_Current};
-//           polygon.add(coords);
-        }else{
+        if(selected_Tool != shape_Type.POLYGON.ordinal()){
             //Add shape to previously drawn of shapes
             add_Shape(selected_Tool,x_Previous,y_Previous,x_Current,y_Current);
         }
-
         repaint();
-
     }
 
     private void add_Shape(int tool, double x1, double y1, double x2, double y2){
@@ -485,10 +481,10 @@ public class GUI extends JFrame {
             Coords.add(y2/height);
         }else{
             //Adding from loading from file
-            Coords.add(x1*width);
-            Coords.add(y1*height);
-            Coords.add(x2*width);
-            Coords.add(y2*height);
+            Coords.add(x1);
+            Coords.add(y1);
+            Coords.add(x2);
+            Coords.add(y2);
         }
 
         //Creates a new element to insert into the list of drawn shapes
@@ -517,27 +513,36 @@ public class GUI extends JFrame {
             //Draws shapes that have already been drawn or loaded
             for (Drawn_Shapes shape:drawn_Shapes) {
                 if(shape.Type == shape_Type.PEN || shape.Type == shape_Type.FILL) {
-                    colour = new Color((int)round(shape.coordinates.get(0)),(int)round(shape.coordinates.get(1)),(int)round(shape.coordinates.get(2)));
-                    g.setColor(colour);
+                    pen_Colour = new Color((int)round(shape.coordinates.get(0)),(int)round(shape.coordinates.get(1)),(int)round(shape.coordinates.get(2)));
                 }else{
-                    x1 = (int) round(shape.coordinates.get(0));
-                    y1 = (int) round(shape.coordinates.get(1));
-                    x2 = (int) round(shape.coordinates.get(2));
-                    y2 = (int) round(shape.coordinates.get(3));
+                    x1 = (int) round(shape.coordinates.get(0) * width);
+                    y1 = (int) round(shape.coordinates.get(1) * height);
+                    x2 = (int) round(shape.coordinates.get(2) * width);
+                    y2 = (int) round(shape.coordinates.get(3) * height);
 
                     switch (shape.Type){
                         case LINE:
+                            g.setColor(pen_Colour);
                             g.drawLine(x1,y1,x2,y2);
                             break;
                         case RECTANGLE:
                             //Is longer than Line as width and height are used not x and y coords
-//                            g.drawRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
-                            g.fillRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
+                            //Draw outline
+                            g.setColor(pen_Colour);
+                            g.drawRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
+
+                            //Fill rectangle with colour
+//                            g.setColor(pen_Colour);
+//                            g.fillRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
                             break;
                         case PLOT:
-                            g.drawOval(x1,y1,0,0);
+                            //Draw outline
+                            g.setColor(pen_Colour);
+                            g.drawOval(x1,y1,1,1);
                             break;
                         case ELLIPSE:
+                            //Draw outline
+                            g.setColor(pen_Colour);
                             g.drawOval(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
                             break;
                         case POLYGON:
@@ -562,7 +567,7 @@ public class GUI extends JFrame {
                     break;
                 case RECTANGLE:
                     g.drawRect(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
-                    g.fillRect(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
+                    //g.fillRect(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
                     break;
                 case PLOT:
                     g.drawOval(x_Previous,y_Previous,0,0);

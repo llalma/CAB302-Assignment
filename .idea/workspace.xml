@@ -23,28 +23,31 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="210" column="41" selection-start-line="210" selection-start-column="41" selection-end-line="210" selection-end-column="41" />
+            <state relative-caret-position="192">
+              <caret line="494" column="36" selection-start-line="494" selection-start-column="36" selection-end-line="494" selection-end-column="36" />
               <folding>
                 <element signature="class#shape_Type#0;class#GUI#0" />
                 <element signature="class#Drawn_Shapes#0;class#GUI#0" />
                 <element signature="method#GUI#0;class#GUI#0" />
                 <element signature="method#drawing_area#0;class#GUI#0" />
+                <element signature="method#buttons_Create#0;class#GUI#0" />
                 <element signature="e#4588#5928#1" />
                 <element signature="e#6221#7633#1" />
                 <element signature="e#7288#7502#0" expanded="true" />
                 <element signature="e#7501#7502#0" expanded="true" />
+                <element signature="e#7950#8131#1" />
                 <element signature="e#8309#9274#1" />
                 <element signature="class#Colour#0;class#GUI#0" />
                 <element signature="method#Add_Colour#0;class#GUI#0" />
+                <element signature="method#save_File#0;class#GUI#0" />
                 <element signature="e#10773#12229#1" />
                 <element signature="method#load_File#0;class#GUI#0" />
                 <element signature="method#add_Polygon#0;class#GUI#0" />
                 <element signature="e#14053#14318#1" />
                 <element signature="method#MouseClicked#0;class#GUI#0" />
                 <element signature="method#polygon_Ending_Check#0;class#GUI#0" />
-                <element signature="method#MouseReleased#0;class#GUI#0" />
                 <element signature="method#add_Shape#0;class#GUI#0" />
+                <element signature="class#Draw_Panel#0;class#GUI#0" />
                 <element signature="method#Draw_Panel#0;class#Draw_Panel#0;class#GUI#0" />
               </folding>
             </state>
@@ -74,6 +77,8 @@
       <find>getWidth</find>
       <find>save_File</find>
       <find>Colour_Chooser</find>
+      <find>colour</find>
+      <find>Add_Colour</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -123,7 +128,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="282" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557469479409" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557471229223" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -175,17 +180,17 @@
     <frame x="-6" y="-6" width="1293" height="693" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.75965667" visible="true" weight="0.27044535" />
-      <window_info id="Structure" order="1" sideWeight="0.24034335" side_tool="true" visible="true" weight="0.27044535" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7598499" visible="true" weight="0.14251012" />
+      <window_info id="Structure" order="1" sideWeight="0.2401501" side_tool="true" visible="true" weight="0.14251012" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" sideWeight="0.50284094" side_tool="true" weight="0.13117409" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.1722913" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.28596804" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3285968" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.053285968" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.120781526" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -213,6 +218,11 @@
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>colour</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>line</expression-string>
         <language-id>JAVA</language-id>
@@ -263,28 +273,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="210" column="41" selection-start-line="210" selection-start-column="41" selection-end-line="210" selection-end-column="41" />
+        <state relative-caret-position="192">
+          <caret line="494" column="36" selection-start-line="494" selection-start-column="36" selection-end-line="494" selection-end-column="36" />
           <folding>
             <element signature="class#shape_Type#0;class#GUI#0" />
             <element signature="class#Drawn_Shapes#0;class#GUI#0" />
             <element signature="method#GUI#0;class#GUI#0" />
             <element signature="method#drawing_area#0;class#GUI#0" />
+            <element signature="method#buttons_Create#0;class#GUI#0" />
             <element signature="e#4588#5928#1" />
             <element signature="e#6221#7633#1" />
             <element signature="e#7288#7502#0" expanded="true" />
             <element signature="e#7501#7502#0" expanded="true" />
+            <element signature="e#7950#8131#1" />
             <element signature="e#8309#9274#1" />
             <element signature="class#Colour#0;class#GUI#0" />
             <element signature="method#Add_Colour#0;class#GUI#0" />
+            <element signature="method#save_File#0;class#GUI#0" />
             <element signature="e#10773#12229#1" />
             <element signature="method#load_File#0;class#GUI#0" />
             <element signature="method#add_Polygon#0;class#GUI#0" />
             <element signature="e#14053#14318#1" />
             <element signature="method#MouseClicked#0;class#GUI#0" />
             <element signature="method#polygon_Ending_Check#0;class#GUI#0" />
-            <element signature="method#MouseReleased#0;class#GUI#0" />
             <element signature="method#add_Shape#0;class#GUI#0" />
+            <element signature="class#Draw_Panel#0;class#GUI#0" />
             <element signature="method#Draw_Panel#0;class#Draw_Panel#0;class#GUI#0" />
           </folding>
         </state>

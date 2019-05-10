@@ -65,6 +65,9 @@ public class GUI extends JFrame {
     //Selected Colour
     private Color pen_Colour = Color.BLACK;
 
+    //Check the shape is to be filled
+    boolean fill = false;
+
     public GUI() {
         super("Paint");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -225,7 +228,27 @@ public class GUI extends JFrame {
                 Image img = ImageIO.read(getClass().getResource(colour_Special_Buttons[i]));
                 Image scaled_img = img.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 
-                button.addActionListener(new Colour_Chooser());
+                //Set action for buttons, makes each button get their specific functionality
+                if(colour_Special_Buttons[i].contains("NoFill")){
+                    //Initial starting colour, red == no fill, green == will fill
+                    button.setBackground(Color.RED);
+                    button.setAction(new AbstractAction() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            //Simple toggle of colours and fill states
+                            if(fill){
+                                fill = false;
+                                button.setBackground(Color.RED);
+                            }else{
+                                fill = true;
+                                button.setBackground(Color.GREEN);
+                            }
+                        }
+                    });
+                }else if(colour_Special_Buttons[i].contains("Rainbow")){
+                    button.addActionListener(new Colour_Chooser());
+                }
+
                 button.setIcon(new ImageIcon(scaled_img));
                 colour_panel.add(button);
             } catch (Exception ex) {
@@ -532,8 +555,10 @@ public class GUI extends JFrame {
                             g.drawRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
 
                             //Fill rectangle with colour
-//                            g.setColor(pen_Colour);
-//                            g.fillRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
+                            if(fill){
+//                                g.setColor(pen_Colour);
+//                                g.fillRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
+                            }
                             break;
                         case PLOT:
                             //Draw outline
@@ -544,6 +569,11 @@ public class GUI extends JFrame {
                             //Draw outline
                             g.setColor(pen_Colour);
                             g.drawOval(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
+
+                            if(fill){
+//                                g.setColor(pen_Colour);
+//                                g.fillRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
+                            }
                             break;
                         case POLYGON:
                             int size = shape.coordinates.size();
@@ -567,13 +597,24 @@ public class GUI extends JFrame {
                     break;
                 case RECTANGLE:
                     g.drawRect(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
-                    //g.fillRect(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
+
+                    if(fill){
+//                        g.setColor(pen_Colour);
+//                        g.fillRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
+                    }
+
                     break;
                 case PLOT:
                     g.drawOval(x_Previous,y_Previous,0,0);
                     break;
                 case ELLIPSE:
                     g.drawOval(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
+
+//                    if(fill){
+//                        g.setColor(pen_Colour);
+//                        g.fillRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
+//                    }
+
                     break;
                 case POLYGON:
                     g.drawLine(x_Previous,y_Previous,x_Current,y_Current);

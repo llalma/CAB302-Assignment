@@ -37,7 +37,7 @@ public class GUI extends JFrame {
     private static final int num_Colour_Buttons = colour_Buttons.length;
 
     private static final String[] colour_Special_Buttons = new String[]{"resources/NoFill.jpg","resources/Rainbow.jpg"};
-    private static final int num_Colour_Special_Buttons = colour_Buttons.length;
+    private static final int num_Colour_Special_Buttons = colour_Special_Buttons.length;
 
     //Positions of mouse pointer
     private int x_Previous,y_Previous,x_Current,y_Current;
@@ -260,14 +260,17 @@ public class GUI extends JFrame {
                 StringBuilder line = new StringBuilder();
                 if(shape.Type == shape_Type.POLYGON){
                     //Polygon saving is slightly different from other shapes
+                    double height = getContentPane().getComponent(3).getHeight();
+                    double width = getContentPane().getComponent(3).getWidth();
+
                     line.append(shape.Type.toString());
 
                     //Minus 2 from size as to not inlcude the last point which just direct back to the starting position
                     for(int i = 0;i<shape.coordinates.size()-2;i++){
-                        if(i%2 != 0){
-                            line.append(" " + shape.coordinates.get(i) / getWidth());
+                        if(i%2 == 0){
+                            line.append(" " + shape.coordinates.get(i) / width);
                         }else{
-                            line.append(" " + shape.coordinates.get(i) / getHeight());
+                            line.append(" " + shape.coordinates.get(i) / height);
                         }
                     }
                 }else{
@@ -331,8 +334,8 @@ public class GUI extends JFrame {
     }
 
     private void add_Polygon(String data[]){
-        double height = getContentPane().getComponent(2).getHeight();
-        double width = getContentPane().getComponent(2).getWidth();
+        double height = getContentPane().getComponent(3).getHeight();
+        double width = getContentPane().getComponent(3).getWidth();
 
         //Add the coordinates of the polygon to a variable
         for(int i = 1;i<data.length;i++){
@@ -463,16 +466,16 @@ public class GUI extends JFrame {
             super.paintComponent(g);
 
             //These are used to convert the percentage into the current screen size coordinates
-            double height = getContentPane().getComponent(2).getHeight();
-            double width = getContentPane().getComponent(2).getWidth();
+            double height = getContentPane().getComponent(3).getHeight();
+            double width = getContentPane().getComponent(3).getWidth();
             int x1,x2,y1,y2;
 
             //Draws shapes that have already been drawn or loaded
             for (Drawn_Shapes shape:drawn_Shapes) {
-                x1 = (int) round(shape.coordinates.get(0) * width);
-                y1 = (int) round(shape.coordinates.get(1) * height);
-                x2 = (int) round(shape.coordinates.get(2) * width);
-                y2 = (int) round(shape.coordinates.get(3) * height);
+                x1 = (int) round(shape.coordinates.get(0));
+                y1 = (int) round(shape.coordinates.get(1));
+                x2 = (int) round(shape.coordinates.get(2));
+                y2 = (int) round(shape.coordinates.get(3));
 
                 switch (shape.Type){
                     case LINE:

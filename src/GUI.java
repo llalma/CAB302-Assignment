@@ -204,6 +204,14 @@ public class GUI extends JFrame {
         JPanel colour_panel = new JPanel(new GridLayout(2, num_Colour_Buttons+2));
         for (int i = 0; i < num_Colour_Buttons; i++) {
             JButton button = new JButton();
+
+            button.setAction(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    colour = button.getBackground();
+                    Add_Colour();
+                }
+            });
             button.setBackground(colour_Buttons[i]);
             button.setSize(10,10);
             colour_panel.add(button);
@@ -230,18 +238,27 @@ public class GUI extends JFrame {
 
     private class Colour_Chooser implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            //Create array to store RGB values
-            ArrayList<Double> RGB = new ArrayList<>();
-
+            //Sets colour then adds colour to list
             colour = JColorChooser.showDialog(null, "Choose a Color", colour);
-            RGB.add(colour.getRed() + 0.0);
-            RGB.add(colour.getGreen() + 0.0);
-            RGB.add(colour.getBlue() + 0.0);
-
-            //Creates a new element to insert into the list of drawn shapes
-            Drawn_Shapes shape = new Drawn_Shapes(shape_Type.PEN, RGB);
-            drawn_Shapes.add(shape);
+            Add_Colour();
         }
+    }
+
+    void Add_Colour(){
+        //Add colour to list of shapes, same arrayList as shapes as the order matters
+        //and arrayLists keeps the order
+
+        //Create array to store RGB values
+        ArrayList<Double> RGB = new ArrayList<>();
+
+
+        RGB.add(colour.getRed() + 0.0);
+        RGB.add(colour.getGreen() + 0.0);
+        RGB.add(colour.getBlue() + 0.0);
+
+        //Creates a new element to insert into the list of drawn shapes
+        Drawn_Shapes shape = new Drawn_Shapes(shape_Type.PEN, RGB);
+        drawn_Shapes.add(shape);
     }
 
     private void save_File(){
@@ -500,9 +517,8 @@ public class GUI extends JFrame {
             //Draws shapes that have already been drawn or loaded
             for (Drawn_Shapes shape:drawn_Shapes) {
                 if(shape.Type == shape_Type.PEN || shape.Type == shape_Type.FILL) {
-//                    colour = new Color(255,255,255);
-//                    int r = (int)round(shape.coordinates.get(0));
                     colour = new Color((int)round(shape.coordinates.get(0)),(int)round(shape.coordinates.get(1)),(int)round(shape.coordinates.get(2)));
+                    g.setColor(colour);
                 }else{
                     x1 = (int) round(shape.coordinates.get(0));
                     y1 = (int) round(shape.coordinates.get(1));
@@ -515,7 +531,8 @@ public class GUI extends JFrame {
                             break;
                         case RECTANGLE:
                             //Is longer than Line as width and height are used not x and y coords
-                            g.drawRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
+//                            g.drawRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
+                            g.fillRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
                             break;
                         case PLOT:
                             g.drawOval(x1,y1,0,0);
@@ -545,6 +562,7 @@ public class GUI extends JFrame {
                     break;
                 case RECTANGLE:
                     g.drawRect(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
+                    g.fillRect(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
                     break;
                 case PLOT:
                     g.drawOval(x_Previous,y_Previous,0,0);

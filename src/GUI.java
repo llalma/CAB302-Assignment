@@ -1,8 +1,5 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+import java.awt.event.*;
 import java.beans.PropertyChangeListener;
 import java.io.*;
 import java.text.DecimalFormat;
@@ -44,7 +41,7 @@ public class GUI extends JFrame {
 
     //Stores shapes drawn in the drawing area
     enum shape_Type{
-        LINE, RECTANGLE,PLOT,ELLIPSE,POLYGON
+        LINE, RECTANGLE,PLOT,ELLIPSE,POLYGON,PEN,FILL
     }
     private ArrayList<Drawn_Shapes> drawn_Shapes = new ArrayList<>();
     public class Drawn_Shapes{
@@ -65,6 +62,9 @@ public class GUI extends JFrame {
     //Selected drawing tool, defaults to Line
     private int selected_Tool = 0;
 
+    //Selected Colour
+    private Color colour = Color.WHITE;
+
     public GUI() {
         super("Paint");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -77,6 +77,12 @@ public class GUI extends JFrame {
         setLocation(new Point(100, 100));
         pack();
         setVisible(true);
+
+        ArrayList<Double> RGB = new ArrayList<>();
+        RGB.add(255.0);
+        RGB.add(255.0);
+        RGB.add(255.0);
+        drawn_Shapes.add(new Drawn_Shapes(shape_Type.PEN, RGB));
     }
 
     private void drawing_area(){
@@ -211,16 +217,7 @@ public class GUI extends JFrame {
                 Image img = ImageIO.read(getClass().getResource(colour_Special_Buttons[i]));
                 Image scaled_img = img.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 
-                //Sets whats the button will do when pressed, this case change the tool selected for drawing
-                //            button.setAction(new AbstractAction() {
-                //                @Override
-                //                public void actionPerformed(ActionEvent e) {
-                //
-                //                }
-                //            });
-
-                //These need to be after setAction
-                //button.setActionCommand(Integer.toString(i));
+                button.addActionListener(new Colour_Chooser());
                 button.setIcon(new ImageIcon(scaled_img));
                 colour_panel.add(button);
             } catch (Exception ex) {
@@ -229,6 +226,22 @@ public class GUI extends JFrame {
         }
 
         getContentPane().add(colour_panel,"South");
+    }
+
+    private class Colour_Chooser implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            //Create array to store RGB values
+            ArrayList<Double> RGB = new ArrayList<>();
+
+            colour = JColorChooser.showDialog(null, "Choose a Color", colour);
+            RGB.add(colour.getRed() + 0.0);
+            RGB.add(colour.getGreen() + 0.0);
+            RGB.add(colour.getBlue() + 0.0);
+
+            //Creates a new element to insert into the list of drawn shapes
+            Drawn_Shapes shape = new Drawn_Shapes(shape_Type.PEN, RGB);
+            drawn_Shapes.add(shape);
+        }
     }
 
     private void save_File(){
@@ -252,13 +265,10 @@ public class GUI extends JFrame {
                 writer = new PrintWriter(directory_Path + ".VEC", "UTF-8");
             }
 
-            //Declare variable to store the string before being written to the file
-
-
             //Loop through each object drawn
             for (Drawn_Shapes shape:drawn_Shapes) {
                 StringBuilder line = new StringBuilder();
-                if(shape.Type == shape_Type.POLYGON){
+                if(shape.Type == shape_Type.POLYGON) {
                     //Polygon saving is slightly different from other shapes
                     double height = getContentPane().getComponent(3).getHeight();
                     double width = getContentPane().getComponent(3).getWidth();
@@ -266,14 +276,21 @@ public class GUI extends JFrame {
                     line.append(shape.Type.toString());
 
                     //Minus 2 from size as to not inlcude the last point which just direct back to the starting position
-                    for(int i = 0;i<shape.coordinates.size()-2;i++){
-                        if(i%2 == 0){
+                    for (int i = 0; i < shape.coordinates.size() - 2; i++) {
+                        if (i % 2 == 0) {
                             line.append(" " + shape.coordinates.get(i) / width);
-                        }else{
+                        } else {
                             line.append(" " + shape.coordinates.get(i) / height);
                         }
                     }
+                }else if(shape.Type == shape_Type.PEN || shape.Type == shape_Type.FILL){
+                    //Colour Saving
+                    Color colour_temp = new Color((int)round(shape.coordinates.get(0)),(int)round(shape.coordinates.get(1)),(int)round(shape.coordinates.get(2)));
+                    String hex = "#"+Integer.toHexString(colour_temp.getRGB()).substring(2);
+
+                    line.append(shape.Type + " " + hex);
                 }else{
+                    //All other shapes saving
                     line.append(shape.Type + " " + shape.coordinates.get(0) + " " + shape.coordinates.get(1) + " " +  shape.coordinates.get(2) + " " +  shape.coordinates.get(3));
                 }
                 writer.println(line);
@@ -320,6 +337,16 @@ public class GUI extends JFrame {
                     case POLYGON:
                         add_Polygon(data);
                         break;
+                    case PEN:
+                        int r = Integer.valueOf(data[1].substring(1,3),16);
+                        int g = Integer.valueOf(data[1].substring(3,5),16);
+                        int b = Integer.valueOf(data[1].substring(5,7),16);
+
+                        colour = new Color(r,g,b);
+                        break;
+                    case FILL:
+                        break;
+
                     default:
                         add_Shape(shape_Type.valueOf(data[0]).ordinal(), Double.parseDouble(data[1]), Double.parseDouble(data[2]), Double.parseDouble(data[3]), Double.parseDouble(data[4]));
                         break;
@@ -472,36 +499,42 @@ public class GUI extends JFrame {
 
             //Draws shapes that have already been drawn or loaded
             for (Drawn_Shapes shape:drawn_Shapes) {
-                x1 = (int) round(shape.coordinates.get(0));
-                y1 = (int) round(shape.coordinates.get(1));
-                x2 = (int) round(shape.coordinates.get(2));
-                y2 = (int) round(shape.coordinates.get(3));
+                if(shape.Type == shape_Type.PEN || shape.Type == shape_Type.FILL) {
+//                    colour = new Color(255,255,255);
+//                    int r = (int)round(shape.coordinates.get(0));
+                    colour = new Color((int)round(shape.coordinates.get(0)),(int)round(shape.coordinates.get(1)),(int)round(shape.coordinates.get(2)));
+                }else{
+                    x1 = (int) round(shape.coordinates.get(0));
+                    y1 = (int) round(shape.coordinates.get(1));
+                    x2 = (int) round(shape.coordinates.get(2));
+                    y2 = (int) round(shape.coordinates.get(3));
 
-                switch (shape.Type){
-                    case LINE:
-                        g.drawLine(x1,y1,x2,y2);
-                        break;
-                    case RECTANGLE:
-                        //Is longer than Line as width and height are used not x and y coords
-                        g.drawRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
-                        break;
-                    case PLOT:
-                        g.drawOval(x1,y1,0,0);
-                        break;
-                    case ELLIPSE:
-                        g.drawOval(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
-                        break;
-                    case POLYGON:
-                        int size = shape.coordinates.size();
-                        for(int i = 3;i<size;i+=2){
-                            g.drawLine((int)round(shape.coordinates.get(i-3)),(int)round(shape.coordinates.get(i-2)), (int)round(shape.coordinates.get(i-1)),(int)round(shape.coordinates.get(i)));
-                        }
+                    switch (shape.Type){
+                        case LINE:
+                            g.drawLine(x1,y1,x2,y2);
+                            break;
+                        case RECTANGLE:
+                            //Is longer than Line as width and height are used not x and y coords
+                            g.drawRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
+                            break;
+                        case PLOT:
+                            g.drawOval(x1,y1,0,0);
+                            break;
+                        case ELLIPSE:
+                            g.drawOval(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
+                            break;
+                        case POLYGON:
+                            int size = shape.coordinates.size();
+                            for(int i = 3;i<size;i+=2){
+                                g.drawLine((int)round(shape.coordinates.get(i-3)),(int)round(shape.coordinates.get(i-2)), (int)round(shape.coordinates.get(i-1)),(int)round(shape.coordinates.get(i)));
+                            }
 
-                        break;
-                    default:
-                        System.out.println("Not a shape");
-                        //put exception throw here.
-                        break;
+                            break;
+                        default:
+                            System.out.println("Not a shape");
+                            //put exception throw here.
+                            break;
+                    }
                 }
             }
 

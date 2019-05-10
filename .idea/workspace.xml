@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9e3b701-8b3c-4997-a1e6-87ba82d0e54d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/j.VEC" beforeDir="false" afterPath="$PROJECT_DIR$/j.VEC" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tes.VEC" beforeDir="false" afterPath="$PROJECT_DIR$/tes.VEC" afterDir="false" />
     </list>
@@ -24,27 +23,29 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="55">
-              <caret line="287" lean-forward="true" selection-start-line="287" selection-end-line="287" />
+            <state relative-caret-position="-627">
+              <caret line="305" column="28" selection-start-line="305" selection-start-column="28" selection-end-line="305" selection-end-column="28" />
               <folding>
                 <element signature="class#shape_Type#0;class#GUI#0" />
                 <element signature="class#Drawn_Shapes#0;class#GUI#0" />
                 <element signature="method#GUI#0;class#GUI#0" />
+                <element signature="method#drawing_area#0;class#GUI#0" />
+                <element signature="method#buttons_Create#0;class#GUI#0" />
                 <element signature="e#4588#5928#1" />
-                <element signature="e#7141#7355#0" expanded="true" />
-                <element signature="e#7354#7355#0" expanded="true" />
+                <element signature="e#6221#7633#1" />
+                <element signature="e#7288#7502#0" expanded="true" />
+                <element signature="e#7501#7502#0" expanded="true" />
                 <element signature="e#7950#8131#1" />
-                <element signature="e#8309#9274#1" />
-                <element signature="method#save_File#0;class#GUI#0" />
-                <element signature="e#10509#11508#1" />
+                <element signature="class#Colour#0;class#GUI#0" />
+                <element signature="e#10773#12229#1" />
                 <element signature="method#load_File#0;class#GUI#0" />
-                <element signature="e#12646#13624#0" />
                 <element signature="method#add_Polygon#0;class#GUI#0" />
                 <element signature="e#14053#14318#1" />
+                <element signature="method#MouseClicked#0;class#GUI#0" />
                 <element signature="method#polygon_Ending_Check#0;class#GUI#0" />
                 <element signature="method#MouseReleased#0;class#GUI#0" />
+                <element signature="method#add_Shape#0;class#GUI#0" />
                 <element signature="method#Draw_Panel#0;class#Draw_Panel#0;class#GUI#0" />
-                <element signature="method#paintComponent#0;class#Draw_Panel#0;class#GUI#0" />
               </folding>
             </state>
           </provider>
@@ -71,6 +72,7 @@
       <find>constraints</find>
       <find>getHeight</find>
       <find>getWidth</find>
+      <find>save_File</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -120,7 +122,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="282" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557463280050" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557467401354" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -172,8 +174,8 @@
     <frame x="-6" y="-6" width="1293" height="693" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7631027" visible="true" weight="0.27125505" />
-      <window_info id="Structure" order="1" sideWeight="0.23689727" side_tool="true" weight="0.26153848" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.75965667" visible="true" weight="0.27044535" />
+      <window_info id="Structure" order="1" sideWeight="0.24034335" side_tool="true" visible="true" weight="0.27044535" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -181,7 +183,7 @@
       <window_info id="Favorites" order="6" sideWeight="0.50284094" side_tool="true" weight="0.13117409" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.19538188" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.1722913" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.28596804" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -189,7 +191,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32960895" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50040483" side_tool="true" weight="0.26256984" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49959514" weight="0.26256984" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49959514" weight="0.26110125" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -201,6 +203,16 @@
     </layout>
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/GUI.java</url>
+          <line>241</line>
+          <properties />
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="polygon" />
@@ -260,27 +272,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="287" lean-forward="true" selection-start-line="287" selection-end-line="287" />
+        <state relative-caret-position="-627">
+          <caret line="305" column="28" selection-start-line="305" selection-start-column="28" selection-end-line="305" selection-end-column="28" />
           <folding>
             <element signature="class#shape_Type#0;class#GUI#0" />
             <element signature="class#Drawn_Shapes#0;class#GUI#0" />
             <element signature="method#GUI#0;class#GUI#0" />
+            <element signature="method#drawing_area#0;class#GUI#0" />
+            <element signature="method#buttons_Create#0;class#GUI#0" />
             <element signature="e#4588#5928#1" />
-            <element signature="e#7141#7355#0" expanded="true" />
-            <element signature="e#7354#7355#0" expanded="true" />
+            <element signature="e#6221#7633#1" />
+            <element signature="e#7288#7502#0" expanded="true" />
+            <element signature="e#7501#7502#0" expanded="true" />
             <element signature="e#7950#8131#1" />
-            <element signature="e#8309#9274#1" />
-            <element signature="method#save_File#0;class#GUI#0" />
-            <element signature="e#10509#11508#1" />
+            <element signature="class#Colour#0;class#GUI#0" />
+            <element signature="e#10773#12229#1" />
             <element signature="method#load_File#0;class#GUI#0" />
-            <element signature="e#12646#13624#0" />
             <element signature="method#add_Polygon#0;class#GUI#0" />
             <element signature="e#14053#14318#1" />
+            <element signature="method#MouseClicked#0;class#GUI#0" />
             <element signature="method#polygon_Ending_Check#0;class#GUI#0" />
             <element signature="method#MouseReleased#0;class#GUI#0" />
+            <element signature="method#add_Shape#0;class#GUI#0" />
             <element signature="method#Draw_Panel#0;class#Draw_Panel#0;class#GUI#0" />
-            <element signature="method#paintComponent#0;class#Draw_Panel#0;class#GUI#0" />
           </folding>
         </state>
       </provider>

@@ -67,6 +67,7 @@ public class GUI extends JFrame {
 
     //Check the shape is to be filled
     boolean fill = false;
+    private Color fill_Colour = Color.BLACK;
 
     public GUI() {
         super("Paint");
@@ -88,7 +89,7 @@ public class GUI extends JFrame {
         drawn_Shapes.add(new Drawn_Shapes(shape_Type.PEN, RGB));
     }
 
-    private void drawing_area(){
+    private void drawing_area() {
         JPanel panel = new Draw_Panel();
 
         panel.addMouseListener(new MouseAdapter() {
@@ -210,9 +211,17 @@ public class GUI extends JFrame {
 
             button.setAction(new AbstractAction() {
                 @Override
-                public void actionPerformed(ActionEvent e) {
-                    pen_Colour = button.getBackground();
-                    Add_Pen_Colour();
+                public void actionPerformed(ActionEvent evt) {
+                    int type = 0;
+                    //0 is a fill command, 1 is a pen command
+                    if(evt.getModifiers() == 18){
+                        //18 is  a left control + left mouse click
+                        fill_Colour = button.getBackground();
+                    }else{
+                        pen_Colour = button.getBackground();
+                        type = 1;
+                    }
+                    Add_Colour(type);
                 }
             });
             button.setBackground(colour_Buttons[i]);
@@ -260,27 +269,44 @@ public class GUI extends JFrame {
     }
 
     private class Colour_Chooser implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent evt) {
             //Sets colour then adds colour to list
-            pen_Colour = JColorChooser.showDialog(null, "Choose a Color", pen_Colour);
-            Add_Pen_Colour();
+            int type = 0;
+            //0 is a fill command, 1 is a pen command
+            if(evt.getModifiers() == 18){
+                //18 is  a left control + left mouse click
+                fill_Colour = JColorChooser.showDialog(null, "Choose a Color", pen_Colour);
+            }else{
+                pen_Colour = JColorChooser.showDialog(null, "Choose a Color", pen_Colour);
+                type = 1;
+            }
+            Add_Colour(type);
         }
     }
 
-    private void Add_Pen_Colour(){
+    private void Add_Colour(int type){
         //Add colour to list of shapes, same arrayList as shapes as the order matters
         //and arrayLists keeps the order
 
         //Create array to store RGB values
         ArrayList<Double> RGB = new ArrayList<>();
 
-
-        RGB.add(pen_Colour.getRed() + 0.0);
-        RGB.add(pen_Colour.getGreen() + 0.0);
-        RGB.add(pen_Colour.getBlue() + 0.0);
-
         //Creates a new element to insert into the list of drawn shapes
-        Drawn_Shapes shape = new Drawn_Shapes(shape_Type.PEN, RGB);
+        Drawn_Shapes shape;
+        //dosent work for colour selector wheel
+        if(type == 0){
+            //0 is a fill command
+            RGB.add(fill_Colour.getRed() + 0.0);
+            RGB.add(fill_Colour.getGreen() + 0.0);
+            RGB.add(fill_Colour.getBlue() + 0.0);
+            shape = new Drawn_Shapes(shape_Type.FILL, RGB);
+        }else{
+            RGB.add(pen_Colour.getRed() + 0.0);
+            RGB.add(pen_Colour.getGreen() + 0.0);
+            RGB.add(pen_Colour.getBlue() + 0.0);
+            shape = new Drawn_Shapes(shape_Type.PEN, RGB);
+        }
+
         drawn_Shapes.add(shape);
     }
 
@@ -383,7 +409,7 @@ public class GUI extends JFrame {
                         int b = Integer.valueOf(data[1].substring(5,7),16);
 
                         pen_Colour = new Color(r,g,b);
-                        Add_Pen_Colour();
+                        Add_Colour(1);
                         break;
                     case FILL:
                         break;
@@ -549,15 +575,13 @@ public class GUI extends JFrame {
                             g.drawLine(x1,y1,x2,y2);
                             break;
                         case RECTANGLE:
-                            //Is longer than Line as width and height are used not x and y coords
                             //Draw outline
                             g.setColor(pen_Colour);
                             g.drawRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
-
                             //Fill rectangle with colour
                             if(fill){
-//                                g.setColor(pen_Colour);
-//                                g.fillRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
+                                g.setColor(fill_Colour);
+                                g.fillRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
                             }
                             break;
                         case PLOT:
@@ -569,10 +593,9 @@ public class GUI extends JFrame {
                             //Draw outline
                             g.setColor(pen_Colour);
                             g.drawOval(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
-
                             if(fill){
-//                                g.setColor(pen_Colour);
-//                                g.fillRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
+                                g.setColor(fill_Colour);
+                                g.fillOval(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
                             }
                             break;
                         case POLYGON:
@@ -597,24 +620,20 @@ public class GUI extends JFrame {
                     break;
                 case RECTANGLE:
                     g.drawRect(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
-
                     if(fill){
-//                        g.setColor(pen_Colour);
-//                        g.fillRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
+                        g.setColor(fill_Colour);
+                        g.fillRect(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
                     }
-
                     break;
                 case PLOT:
-                    g.drawOval(x_Previous,y_Previous,0,0);
+                    g.drawOval(x_Previous,y_Previous,1,1);
                     break;
                 case ELLIPSE:
                     g.drawOval(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
-
-//                    if(fill){
-//                        g.setColor(pen_Colour);
-//                        g.fillRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
-//                    }
-
+                    if(fill){
+                        g.setColor(fill_Colour);
+                        g.fillOval(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
+                    }
                     break;
                 case POLYGON:
                     g.drawLine(x_Previous,y_Previous,x_Current,y_Current);
@@ -630,5 +649,4 @@ public class GUI extends JFrame {
         JFrame.setDefaultLookAndFeelDecorated(false);
         new GUI();
     }
-
 }

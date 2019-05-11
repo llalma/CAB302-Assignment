@@ -25,7 +25,7 @@ public class GUI extends JFrame {
     private static final String[] tool_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Plot.png","resources/Ellipse.png","resources/Polygon.png"};
     private static final int num_Tool_Buttons = tool_Buttons.length;
 
-    private static final String[] file_Buttons = new String[]{"resources/Save.png", "resources/Load.png"};
+    private static final String[] file_Buttons = new String[]{"resources/Save.png", "resources/Load.png", "resources/Undo.png"};
     private static final int num_File_Buttons = file_Buttons.length;
 
     private static final Color[] colour_Buttons = new Color[]{Color.BLACK,Color.RED,Color.GREEN,Color.YELLOW,
@@ -120,7 +120,20 @@ public class GUI extends JFrame {
                 }
             }
         });
+        panel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                int key = e.getKeyCode();
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                super.keyReleased(e);
+            }
+        });
         getContentPane().add(panel,"Center");
+        getContentPane().getComponent(2).setFocusable(true);
     }
 
     private void buttons_Create(){
@@ -145,7 +158,7 @@ public class GUI extends JFrame {
 
                         String x =e.getActionCommand();
                         selected_Tool = Integer.parseInt(x);
-                        System.out.println(selected_Tool);
+                        //System.out.println(selected_Tool);
                     }
                 });
 
@@ -159,7 +172,6 @@ public class GUI extends JFrame {
         }
         getContentPane().add(panel,"West");
 
-        /* Need to make it so buttons can be a smaller size */
         //Save buttons, new buttons ect, On north edge.
         JPanel file_panel = new JPanel(new GridLayout(1, num_File_Buttons));
         for (int i = 0; i < num_File_Buttons; i++) {
@@ -184,6 +196,14 @@ public class GUI extends JFrame {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             load_File();
+                        }
+                    });
+                }else if(file_Buttons[i].contains("Undo")){
+                    //This is the load button, Give load functionality
+                    button.setAction(new AbstractAction() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                           undo();
                         }
                     });
                 }
@@ -315,6 +335,21 @@ public class GUI extends JFrame {
         }
 
         drawn_Shapes.add(shape);
+    }
+
+    private void undo(){
+        //Remove the last thing added to draw_shapes.
+        //this will undo the last thing done
+        if(drawn_Shapes.size() > 2){
+            drawn_Shapes.remove(drawn_Shapes.size()-1);
+            x_Current = -1;
+            x_Previous = -1;
+            y_Current = -1;
+            y_Previous = -1;
+            repaint();
+        }else{
+            //Throw exception, index out of range
+        }
     }
 
     private void save_File(){

@@ -87,6 +87,7 @@ public class GUI extends JFrame {
     private void drawing_area() {
         JPanel panel = new Draw_Panel();
 
+
         panel.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent evt) {
                 mouse_Pressed = true;
@@ -120,20 +121,8 @@ public class GUI extends JFrame {
                 }
             }
         });
-        panel.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                super.keyPressed(e);
-                int key = e.getKeyCode();
-            }
 
-            @Override
-            public void keyReleased(KeyEvent e) {
-                super.keyReleased(e);
-            }
-        });
         getContentPane().add(panel,"Center");
-        getContentPane().getComponent(2).setFocusable(true);
     }
 
     private void buttons_Create(){
@@ -625,6 +614,21 @@ public class GUI extends JFrame {
             setBackground(new java.awt.Color(255, 255, 255));
             setBorder(BorderFactory.createLineBorder(Color.black));
             setName("Paint Area");
+
+            //Get the input and action maps for drawing panel
+            InputMap inputmap = this.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+            ActionMap actionmap = this.getActionMap();
+
+            //Add an input of left control and Z
+            inputmap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z ,KeyEvent.CTRL_DOWN_MASK ), "Undo" );
+
+            //Action when left control and z is pressed
+            actionmap.put("Undo", new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent arg0) {
+                    undo();
+                }
+            });
         }
 
         @Override

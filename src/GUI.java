@@ -61,12 +61,14 @@ public class GUI extends JFrame {
     //Selected drawing tool, defaults to Line
     private int selected_Tool = 0;
 
-    //Selected Colour
+    //Selected Colour for Pen
     private Color pen_Colour = Color.BLACK;
+    JLabel colour_Pen;
 
-    //Check the shape is to be filled
+    //Check the shape is to be filled and fill colour
     boolean fill = false;
     private Color fill_Colour = Color.BLACK;
+    JLabel colour_Fill;
 
     public GUI()  {
         super("Paint");
@@ -127,37 +129,57 @@ public class GUI extends JFrame {
 
     private void buttons_Create(){
         //Tool Buttons, on west edge
-        JPanel panel = new JPanel(new GridLayout(num_Tool_Buttons, 1));
-        for (int i = 0; i < num_Tool_Buttons; i++) {
+        JPanel panel = new JPanel(new GridLayout(num_Tool_Buttons+2, 1));
+        for (int i = 0; i < num_Tool_Buttons+2; i++) {
             JButton button = new JButton();
 
-            //Load and add image to a button
-            try {
-                Image img = ImageIO.read(getClass().getResource(tool_Buttons[i]));
-                Image scaled_img = img.getScaledInstance( 50, 50,  java.awt.Image.SCALE_SMOOTH ) ;
+            if( i < num_Tool_Buttons){
+                //Buttons
 
-                //Sets whats the button will do when pressed, this case change the tool selected for drawing
-                button.setAction(new AbstractAction() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        //If the user selects another tool before polygon is completed make sure it ends
+                //Load and add image to a button
+                try {
+                    Image img = ImageIO.read(getClass().getResource(tool_Buttons[i]));
+                    Image scaled_img = img.getScaledInstance( 50, 50,  java.awt.Image.SCALE_SMOOTH ) ;
+
+                    //Sets whats the button will do when pressed, this case change the tool selected for drawing
+                    button.setAction(new AbstractAction() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            //If the user selects another tool before polygon is completed make sure it ends
                             polygon_Completed = true;
                             //Clear the polygon
                             polygon = new ArrayList<>();
 
-                        String x =e.getActionCommand();
-                        selected_Tool = Integer.parseInt(x);
-                        //System.out.println(selected_Tool);
-                    }
-                });
+                            String x =e.getActionCommand();
+                            selected_Tool = Integer.parseInt(x);
+                            //System.out.println(selected_Tool);
+                        }
+                    });
 
-                //These need to be after setAction
-                button.setActionCommand(Integer.toString(i));
-                button.setIcon(new ImageIcon(scaled_img));
-            } catch (Exception ex) {
-                System.out.println(ex);
+                    //These need to be after setAction
+                    button.setActionCommand(Integer.toString(i));
+                    button.setIcon(new ImageIcon(scaled_img));
+                } catch (Exception ex) {
+                    System.out.println(ex);
+                }
+                //Add button to panel
+                panel.add(button);
+            }else if(i == num_Tool_Buttons){
+                //Current pen  colour display
+                colour_Pen = new JLabel("PEN");
+                colour_Pen.setBackground(pen_Colour);
+                colour_Pen.setHorizontalAlignment(0);
+                colour_Pen.setForeground(Color.WHITE);
+                colour_Pen.setOpaque(true);
+                panel.add(colour_Pen);
+            }else{
+                //Current fill colour display
+                colour_Fill = new JLabel("FILL");
+                colour_Fill.setBackground(null);
+                colour_Fill.setHorizontalAlignment(0);
+                colour_Fill.setOpaque(true);
+                panel.add(colour_Fill);
             }
-            panel.add(button);
         }
         getContentPane().add(panel,"West");
 
@@ -247,7 +269,6 @@ public class GUI extends JFrame {
                 //Set action for buttons, makes each button get their specific functionality
                 if(colour_Special_Buttons[i].contains("NoFill")){
                     //Initial starting colour, red == no fill, green == will fill
-                    button.setBackground(Color.RED);
                     button.setName("Fill");
                     button.setAction(new AbstractAction() {
                         @Override
@@ -256,10 +277,8 @@ public class GUI extends JFrame {
                             if(fill){
                                 fill = false;
                                 Add_Colour(3);
-                                button.setBackground(Color.RED);
                             }else{
                                 fill = true;
-                                button.setBackground(Color.GREEN);
                             }
                         }
                     });
@@ -310,17 +329,36 @@ public class GUI extends JFrame {
             RGB.add(fill_Colour.getGreen() + 0.0);
             RGB.add(fill_Colour.getBlue() + 0.0);
             shape = new Drawn_Shapes(shape_Type.FILL, RGB);
+            colour_Fill.setBackground(fill_Colour);
+
+            //Change the colour of text based on the background colour
+            if(fill_Colour == Color.WHITE){
+                colour_Fill.setForeground(Color.BLACK);
+            }else{
+                colour_Fill.setForeground(Color.WHITE);
+            }
         }else if(type == 3){
             //3 is a no fill command
             RGB.add((double)'O');
             RGB.add((double)'F');
             RGB.add((double)'F');
             shape = new Drawn_Shapes(shape_Type.FILL, RGB);
+            colour_Fill.setBackground(null);
+            colour_Fill.setForeground(Color.BLACK);
         }else{
+            //Pen colour command
             RGB.add(pen_Colour.getRed() + 0.0);
             RGB.add(pen_Colour.getGreen() + 0.0);
             RGB.add(pen_Colour.getBlue() + 0.0);
             shape = new Drawn_Shapes(shape_Type.PEN, RGB);
+            colour_Pen.setBackground(pen_Colour);
+
+            //Change the colour of text based on the background colour
+            if(pen_Colour == Color.WHITE){
+                colour_Pen.setForeground(Color.BLACK);
+            }else{
+                colour_Pen.setForeground(Color.WHITE);
+            }
         }
 
         drawn_Shapes.add(shape);

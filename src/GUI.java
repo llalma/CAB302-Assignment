@@ -39,36 +39,23 @@ public class GUI extends JFrame {
     private int x_Previous,y_Previous,x_Current,y_Current;
 
     //Stores shapes drawn in the drawing area
-    enum shape_Type{
-        LINE, RECTANGLE,PLOT,ELLIPSE,POLYGON,PEN,FILL
-    }
-    private ArrayList<Drawn_Shapes> drawn_Shapes = new ArrayList<>();
-    public class Drawn_Shapes{
-        shape_Type Type;
-        ArrayList<Double> coordinates;
-
-        Drawn_Shapes(shape_Type Type, ArrayList<Double> coordinates){
-            this.Type = Type;
-            this.coordinates = coordinates;
-        }
-    }
+    public ArrayList<Drawn_Shapes> drawn_Shapes = new ArrayList<>();
 
     //Array list for a single Polygons
     ArrayList<Double> polygon = new ArrayList<>();
-    boolean polygon_Completed = true;
-    boolean mouse_Pressed = false;
+    private boolean polygon_Completed = true;
 
     //Selected drawing tool, defaults to Line
     private int selected_Tool = 0;
 
     //Selected Colour for Pen
     private Color pen_Colour = Color.BLACK;
-    JLabel colour_Pen;
+    private JLabel colour_Pen;
 
     //Check the shape is to be filled and fill colour
     boolean fill = false;
     private Color fill_Colour = Color.BLACK;
-    JLabel colour_Fill;
+    private JLabel colour_Fill;
 
     public GUI()  {
         super("Paint");
@@ -89,15 +76,12 @@ public class GUI extends JFrame {
     private void drawing_area() {
         JPanel panel = new Draw_Panel();
 
-
         panel.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent evt) {
-                mouse_Pressed = true;
                 MouseClicked(evt);
             }
             public void mouseReleased(MouseEvent evt) {
                 if(selected_Tool != shape_Type.POLYGON.ordinal()) {
-                    mouse_Pressed = false;
                     MouseReleased(evt);
                 }
             }
@@ -313,7 +297,7 @@ public class GUI extends JFrame {
         }
     }
 
-    private void Add_Colour(int type){
+    public void Add_Colour(int type){
         //Add colour to list of shapes, same arrayList as shapes as the order matters
         //and arrayLists keeps the order
 
@@ -364,7 +348,7 @@ public class GUI extends JFrame {
         drawn_Shapes.add(shape);
     }
 
-    private void undo(){
+    public void undo(){
         //Remove the last thing added to draw_shapes.
         //this will undo the last thing done
         if(drawn_Shapes.size() > 2){
@@ -573,7 +557,6 @@ public class GUI extends JFrame {
 
             //Ends the polygon if original and latest position is within 10 pixels in any direction.
             if(polygon_Ending_Check() && polygon.size() > 4){
-                mouse_Pressed = false;
                 polygon_Completed = true;
                 //Remove last 2 inputs
                 polygon.remove(polygon.size()-2);
@@ -603,7 +586,9 @@ public class GUI extends JFrame {
         if (y_Current>polygon.get(1)-10 && y_Current<polygon.get(1)+10 && same_Spot){
             same_Spot = true;
         }
+        System.out.println(x_Current);
         return same_Spot;
+
     }
 
     private void MouseReleased(MouseEvent event){
@@ -619,7 +604,7 @@ public class GUI extends JFrame {
         repaint();
     }
 
-    private void add_Shape(int tool, double x1, double y1, double x2, double y2){
+    public void add_Shape(int tool, double x1, double y1, double x2, double y2){
         //Size of drawing area, used convert coordinates to percentage of screen size
         double height = getContentPane().getComponent(3).getHeight();
         double width = getContentPane().getComponent(3).getWidth();

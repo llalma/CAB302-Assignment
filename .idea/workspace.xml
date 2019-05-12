@@ -23,14 +23,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="701">
-              <caret line="315" column="37" selection-start-line="315" selection-start-column="37" selection-end-line="315" selection-end-column="37" />
+            <state relative-caret-position="136">
+              <caret line="75" column="32" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="32" />
               <folding>
-                <element signature="class#shape_Type#0;class#GUI#0" />
-                <element signature="class#Drawn_Shapes#0;class#GUI#0" />
                 <element signature="method#GUI#0;class#GUI#0" />
                 <element signature="method#drawing_area#0;class#GUI#0" />
-                <element signature="class#3075:3482" />
+                <element signature="e#2868#2869#0" expanded="true" />
+                <element signature="e#2917#2918#0" expanded="true" />
                 <element signature="class#3526:4423" />
                 <element signature="method#buttons_Create#0;class#GUI#0" />
                 <element signature="e#4830#5946#0" />
@@ -62,10 +61,8 @@
                 <element signature="method#MouseReleased#0;class#GUI#0" />
                 <element signature="method#add_Shape#0;class#GUI#0" />
                 <element signature="class#Draw_Panel#0;class#GUI#0" />
-                <element signature="method#Draw_Panel#0;class#Draw_Panel#0;class#GUI#0" />
-                <element signature="e#26817#26989#0" expanded="true" />
-                <element signature="e#26988#26989#0" expanded="true" />
-                <element signature="e#25757#29993#1" />
+                <element signature="e#26777#26949#0" expanded="true" />
+                <element signature="e#26948#26949#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,6 +73,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -109,11 +108,17 @@
       <list>
         <option value="$PROJECT_DIR$/src/GUI.form" />
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/Tests.java" />
+        <option value="$PROJECT_DIR$/src/shape_Type.java" />
+        <option value="$PROJECT_DIR$/src/GUI_Test.java" />
+        <option value="$PROJECT_DIR$/src/Draw_Panel.java" />
+        <option value="$PROJECT_DIR$/src/g.java" />
+        <option value="$PROJECT_DIR$/src/Drawn_Shapes.java" />
         <option value="$PROJECT_DIR$/src/GUI.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
     <option name="width" value="1940" />
@@ -146,13 +151,31 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="282" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557471229223" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -166,20 +189,60 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true">
+  <component name="RunManager" selected="JUnit.GUI_Test">
+    <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUI" />
       <module name="Assignment" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GUI_Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Assignment" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GUI_Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GUI_Test.testAddColour" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Assignment" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GUI_Test" />
+      <option name="METHOD_NAME" value="testAddColour" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GUI_Test.testAddFillColour" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Assignment" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GUI_Test" />
+      <option name="METHOD_NAME" value="testAddFillColour" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GUI_Test.testPolygonEndCheck" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Assignment" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GUI_Test" />
+      <option name="METHOD_NAME" value="testPolygonEndCheck" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.GUI_Test" />
+        <item itemvalue="Application.GUI" />
+        <item itemvalue="JUnit.GUI_Test.testPolygonEndCheck" />
+        <item itemvalue="JUnit.GUI_Test.testAddFillColour" />
+        <item itemvalue="JUnit.GUI_Test.testAddColour" />
       </list>
     </recent_temporary>
   </component>
@@ -196,11 +259,42 @@
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="GUI_Test_testAddFillColour - 2019.05.12 at 22h 27m 43s.xml">
+      <configuration name="GUI_Test.testAddFillColour" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test_testAddFillColour - 2019.05.12 at 22h 27m 58s.xml">
+      <configuration name="GUI_Test.testAddFillColour" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test_testPolygonEndCheck - 2019.05.12 at 22h 30m 07s.xml">
+      <configuration name="GUI_Test.testPolygonEndCheck" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test_testPolygonEndCheck - 2019.05.12 at 22h 34m 18s.xml">
+      <configuration name="GUI_Test.testPolygonEndCheck" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test_testPolygonEndCheck - 2019.05.12 at 22h 35m 17s.xml">
+      <configuration name="GUI_Test.testPolygonEndCheck" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test_testPolygonEndCheck - 2019.05.12 at 22h 48m 04s.xml">
+      <configuration name="GUI_Test.testPolygonEndCheck" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test_testPolygonEndCheck - 2019.05.12 at 22h 48m 09s.xml">
+      <configuration name="GUI_Test.testPolygonEndCheck" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test_testPolygonEndCheck - 2019.05.12 at 22h 48m 59s.xml">
+      <configuration name="GUI_Test.testPolygonEndCheck" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test - 2019.05.12 at 23h 01m 22s.xml">
+      <configuration name="GUI_Test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test - 2019.05.12 at 23h 02m 50s.xml">
+      <configuration name="GUI_Test" configurationId="JUnit" />
+    </history-entry>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.75696766" visible="true" weight="0.26918977" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.75696766" visible="true" weight="0.26918977" />
       <window_info id="Structure" order="1" sideWeight="0.24303234" side_tool="true" visible="true" weight="0.14552239" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -209,7 +303,7 @@
       <window_info id="Favorites" order="6" sideWeight="0.50284094" side_tool="true" weight="0.13117409" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3277592" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22296543" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.22296543" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.30100334" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -274,16 +368,63 @@
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.desktop/java/awt/Container.java" />
     <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.desktop/java/awt/Graphics.java" />
+    <entry file="file://$PROJECT_DIR$/src/Tests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/shape_Type.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="1" column="35" selection-start-line="1" selection-start-column="35" selection-end-line="1" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Draw_Panel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI_Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#240#241#0" expanded="true" />
+            <element signature="e#271#272#0" expanded="true" />
+            <element signature="method#testUndo1#0;class#GUI_Test#0" />
+            <element signature="method#testAddShape#1;class#GUI_Test#0" />
+            <element signature="method#testAddPenColour#1;class#GUI_Test#0" />
+            <element signature="method#testConstruction#1;class#GUI_Test#0" />
+            <element signature="method#testUndo#1;class#GUI_Test#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Drawn_Shapes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="701">
-          <caret line="315" column="37" selection-start-line="315" selection-start-column="37" selection-end-line="315" selection-end-column="37" />
+        <state relative-caret-position="136">
+          <caret line="75" column="32" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="32" />
           <folding>
-            <element signature="class#shape_Type#0;class#GUI#0" />
-            <element signature="class#Drawn_Shapes#0;class#GUI#0" />
             <element signature="method#GUI#0;class#GUI#0" />
             <element signature="method#drawing_area#0;class#GUI#0" />
-            <element signature="class#3075:3482" />
+            <element signature="e#2868#2869#0" expanded="true" />
+            <element signature="e#2917#2918#0" expanded="true" />
             <element signature="class#3526:4423" />
             <element signature="method#buttons_Create#0;class#GUI#0" />
             <element signature="e#4830#5946#0" />
@@ -315,13 +456,83 @@
             <element signature="method#MouseReleased#0;class#GUI#0" />
             <element signature="method#add_Shape#0;class#GUI#0" />
             <element signature="class#Draw_Panel#0;class#GUI#0" />
-            <element signature="method#Draw_Panel#0;class#Draw_Panel#0;class#GUI#0" />
-            <element signature="e#26817#26989#0" expanded="true" />
-            <element signature="e#26988#26989#0" expanded="true" />
-            <element signature="e#25757#29993#1" />
+            <element signature="e#26777#26949#0" expanded="true" />
+            <element signature="e#26948#26949#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>Assignment</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

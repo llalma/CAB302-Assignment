@@ -20,20 +20,14 @@ import static java.lang.Math.*;
 
 public class GUI extends JFrame {
 
-    //Find vector images with no background
-    //List of buttons to include, needs to be na images file
+    //List of buttons to include, needs to be an images file
+    //Path to image files that are displayed on the buttons
     private static final String[] tool_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Plot.png","resources/Ellipse.png","resources/Polygon.png"};
-    private static final int num_Tool_Buttons = tool_Buttons.length;
-
     private static final String[] file_Buttons = new String[]{"resources/Save.png", "resources/Load.png", "resources/Undo.png"};
-    private static final int num_File_Buttons = file_Buttons.length;
-
-    private static final Color[] colour_Buttons = new Color[]{Color.BLACK,Color.RED,Color.GREEN,Color.YELLOW,
-                                                              Color.WHITE,Color.BLUE,Color.ORANGE,Color.MAGENTA};
-    private static final int num_Colour_Buttons = colour_Buttons.length;
-
     private static final String[] colour_Special_Buttons = new String[]{"resources/NoFill.jpg","resources/Rainbow.jpg"};
-    private static final int num_Colour_Special_Buttons = colour_Special_Buttons.length;
+
+    private static final Color[] colour_Buttons = new Color[]{Color.BLACK,Color.RED,Color.GREEN,Color.YELLOW,Color.WHITE,Color.BLUE,Color.ORANGE,Color.MAGENTA};
+    private static final int num_Tool_Buttons = tool_Buttons.length;
 
     //Positions of mouse pointer
     private int x_Previous,y_Previous,x_Current,y_Current;
@@ -42,21 +36,22 @@ public class GUI extends JFrame {
     public ArrayList<Drawn_Shapes> drawn_Shapes = new ArrayList<>();
 
     //Array list for a single Polygons
-    ArrayList<Double> polygon = new ArrayList<>();
+    private ArrayList<Double> polygon = new ArrayList<>();
     private boolean polygon_Completed = true;
 
     //Selected drawing tool, defaults to Line
-    private int selected_Tool = 0;
+    public int selected_Tool = 0;
 
     //Selected Colour for Pen
-    private Color pen_Colour = Color.BLACK;
+    public Color pen_Colour = Color.BLACK;
     private JLabel colour_Pen;
 
     //Check the shape is to be filled and fill colour
-    boolean fill = false;
+    private boolean fill = false;
     private Color fill_Colour = Color.BLACK;
     private JLabel colour_Fill;
 
+    //Default Constructor
     public GUI()  {
         super("Paint");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -73,6 +68,7 @@ public class GUI extends JFrame {
        new_Drawn_Shapes();
     }
 
+    //Drawing Panel create
     private void drawing_area() {
         JPanel panel = new Draw_Panel();
 
@@ -111,8 +107,55 @@ public class GUI extends JFrame {
         getContentPane().add(panel,"Center");
     }
 
-    private void buttons_Create(){
-        //Tool Buttons, on west edge
+    //Mouse Events
+    private void MouseClicked(MouseEvent event){
+        //get the x and y coordinates when the click occours
+        x_Previous = event.getX();
+        y_Previous = event.getY();
+        x_Current = x_Previous;
+        y_Current = y_Previous;
+
+        if(selected_Tool == shape_Type.POLYGON.ordinal()) {
+            polygon_Completed = false;
+            Double coords = x_Current + 0.0;
+            polygon.add(coords);
+            coords = y_Current + 0.0;
+            polygon.add(coords);
+
+            //Ends the polygon if original and latest position is within 10 pixels in any direction.
+            if(polygon_Ending_Check() && polygon.size() > 4){
+                polygon_Completed = true;
+                //Remove last 2 inputs
+                polygon.remove(polygon.size()-2);
+                polygon.remove(polygon.size()-1);
+
+                //Add the last 2 indexes as the original coordinates
+                polygon.add(polygon.get(0));
+                polygon.add(polygon.get(1));
+
+                Drawn_Shapes shape = new Drawn_Shapes(shape_Type.POLYGON, polygon);
+                drawn_Shapes.add(shape);
+
+                //Clear the polygon
+                polygon = new ArrayList<>();
+            }
+        }
+    }
+    private void MouseReleased(MouseEvent event){
+
+        x_Current = event.getX();
+        y_Current = event.getY();
+        //System.out.println("mouse released");
+
+        if(selected_Tool != shape_Type.POLYGON.ordinal()){
+            //Add shape to previously drawn of shapes
+            add_Shape(selected_Tool,x_Previous,y_Previous,x_Current,y_Current);
+        }
+        repaint();
+    }
+
+    //Button creates
+    private JPanel Tool_Buttons(){
         JPanel panel = new JPanel(new GridLayout(num_Tool_Buttons+2, 1));
         for (int i = 0; i < num_Tool_Buttons+2; i++) {
             JButton button = new JButton();
@@ -165,11 +208,12 @@ public class GUI extends JFrame {
                 panel.add(colour_Fill);
             }
         }
-        getContentPane().add(panel,"West");
 
-        //Save buttons, new buttons ect, On north edge.
-        JPanel file_panel = new JPanel(new GridLayout(1, num_File_Buttons));
-        for (int i = 0; i < num_File_Buttons; i++) {
+        return panel;
+    }
+    private JPanel File_Buttons(){
+        JPanel file_panel = new JPanel(new GridLayout(1, file_Buttons.length));
+        for (int i = 0; i < file_Buttons.length; i++) {
             JButton button = new JButton();
             //Load and add image to a button
             try {
@@ -198,7 +242,7 @@ public class GUI extends JFrame {
                     button.setAction(new AbstractAction() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                           undo();
+                            undo();
                         }
                     });
                 }
@@ -211,12 +255,14 @@ public class GUI extends JFrame {
             button.setPreferredSize(new Dimension(40, 40));
             file_panel.add(button);
         }
-        getContentPane().add(file_panel,"North");
 
+        return file_panel;
+    }
+    private JPanel Colour_Buttons(){
         //Colour Buttons on south edge
         //Plus 2 for number of coloums due to the 2 extra buttons fro nofill and selector
-        JPanel colour_panel = new JPanel(new GridLayout(2, num_Colour_Buttons+2));
-        for (int i = 0; i < num_Colour_Buttons; i++) {
+        JPanel colour_panel = new JPanel(new GridLayout(2, colour_Buttons.length+2));
+        for (int i = 0; i < colour_Buttons.length; i++) {
             JButton button = new JButton();
 
             button.setAction(new AbstractAction() {
@@ -244,7 +290,7 @@ public class GUI extends JFrame {
 
         //Load and add image to a button, used for the Nofill and the selector tools
         //Also part of panel above
-        for(int i = 0;i<num_Colour_Special_Buttons;i++) {
+        for(int i = 0;i<colour_Special_Buttons.length;i++) {
             try {
                 JButton button = new JButton();
                 Image img = ImageIO.read(getClass().getResource(colour_Special_Buttons[i]));
@@ -278,25 +324,21 @@ public class GUI extends JFrame {
         }
 
         colour_panel.setName("Colour_Panel");
-        getContentPane().add(colour_panel,"South");
+        return colour_panel;
+    }
+    private void buttons_Create() {
+        //Tool Buttons, on west edge
+        getContentPane().add(Tool_Buttons(), "West");
+
+        //Save buttons, new buttons ect, On north edge.
+        getContentPane().add(File_Buttons(), "North");
+
+        //Colout Buttons
+        getContentPane().add(Colour_Buttons(), "South");
     }
 
-    private class Colour_Chooser implements ActionListener {
-        public void actionPerformed(ActionEvent evt) {
-            //Sets colour then adds colour to list
-            int type = 0;
-            //0 is a fill command, 1 is a pen command
-            if(evt.getModifiers() == 18){
-                //18 is  a left control + left mouse click
-                fill_Colour = JColorChooser.showDialog(null, "Choose a Color", pen_Colour);
-            }else{
-                pen_Colour = JColorChooser.showDialog(null, "Choose a Color", pen_Colour);
-                type = 1;
-            }
-            Add_Colour(type);
-        }
-    }
 
+    //Adding objects to draw_Shapes
     public void Add_Colour(int type){
         //Add colour to list of shapes, same arrayList as shapes as the order matters
         //and arrayLists keeps the order
@@ -344,10 +386,75 @@ public class GUI extends JFrame {
                 colour_Pen.setForeground(Color.WHITE);
             }
         }
+        drawn_Shapes.add(shape);
+    }
+    public void add_Polygon(String data[]){
+        double height = getContentPane().getComponent(3).getHeight();
+        double width = getContentPane().getComponent(3).getWidth();
 
+        //Add the coordinates of the polygon to a variable
+        for(int i = 1;i<data.length;i++){
+            //If odd will be an x value, else will be y value
+            if(i%2 != 0){
+                polygon.add(Double.parseDouble(data[i]) * width);
+            }else{
+                polygon.add(Double.parseDouble(data[i]) * height);
+            }
+        }
+
+        //Reconnecting the last point to the original
+        polygon.add(Double.parseDouble(data[1]) * width);
+        polygon.add(Double.parseDouble(data[2]) * height);
+
+        //Add the polygon read from the VEC file and add to the drawing variable
+        Drawn_Shapes shape = new Drawn_Shapes(shape_Type.valueOf(data[0]), polygon);
+        drawn_Shapes.add(shape);
+
+        //Clear the polygon coordinate variable
+        polygon = new ArrayList<>();
+    }
+    private boolean polygon_Ending_Check(){
+        boolean same_Spot = false;
+        //Checks if the click is within 10 pixels either way of original point, for x coordinates
+        if (x_Current>polygon.get(0)-10 && x_Current<polygon.get(0)+10){
+            same_Spot = true;
+        }
+        //Checks if the click is within 10 pixels either way of original point, for y coordinates
+        //Extra check to see if the x-coordinate was on the point
+        if (y_Current>polygon.get(1)-10 && y_Current<polygon.get(1)+10 && same_Spot){
+            same_Spot = true;
+        }
+        System.out.println(x_Current);
+        return same_Spot;
+
+    }
+    public void add_Shape(int tool, double x1, double y1, double x2, double y2){
+        //Size of drawing area, used convert coordinates to percentage of screen size
+        double height = getContentPane().getComponent(3).getHeight();
+        double width = getContentPane().getComponent(3).getWidth();
+
+        //Add shape to previously drawn of shapes
+        ArrayList<Double> Coords = new ArrayList<>();
+        if(x1 == x_Previous && x2 == x_Current && y1 == y_Previous && y2 == y_Current){
+            //Adding from users inputs
+            Coords.add(x1/width);
+            Coords.add(y1/height);
+            Coords.add(x2/width);
+            Coords.add(y2/height);
+        }else{
+            //Adding from loading from file
+            Coords.add(x1);
+            Coords.add(y1);
+            Coords.add(x2);
+            Coords.add(y2);
+        }
+
+        //Creates a new element to insert into the list of drawn shapes
+        Drawn_Shapes shape = new Drawn_Shapes(shape_Type.values()[tool], Coords);
         drawn_Shapes.add(shape);
     }
 
+    //Undo Action
     public void undo(){
         //Remove the last thing added to draw_shapes.
         //this will undo the last thing done
@@ -363,6 +470,7 @@ public class GUI extends JFrame {
         }
     }
 
+    //Saving and Loading
     private void save_File(){
         //Saves the file to the path specified by the user
         //Only shows directories & Vec files to select, Default saves as VEC format, no other options are avaliable.
@@ -428,7 +536,6 @@ public class GUI extends JFrame {
             e.printStackTrace();
         }
     }
-
     private void load_File(){
         //Prewritten GUI for file browsing, shows the users current directory on opening.
         //Only shows VEC files.
@@ -497,6 +604,8 @@ public class GUI extends JFrame {
         repaint();
     }
 
+    //Initilisation for drawn_Shapes
+    //Populates with default values
     private void new_Drawn_Shapes(){
         //Sets the default values in every new instance of drawn_Shapes.
         drawn_Shapes = new ArrayList<>();
@@ -515,121 +624,22 @@ public class GUI extends JFrame {
         drawn_Shapes.add(new Drawn_Shapes(shape_Type.FILL, RGB));
     }
 
-    private void add_Polygon(String data[]){
-        double height = getContentPane().getComponent(3).getHeight();
-        double width = getContentPane().getComponent(3).getWidth();
-
-        //Add the coordinates of the polygon to a variable
-        for(int i = 1;i<data.length;i++){
-            //If odd will be an x value, else will be y value
-            if(i%2 != 0){
-                polygon.add(Double.parseDouble(data[i]) * width);
-            }else{
-                polygon.add(Double.parseDouble(data[i]) * height);
+    //Classes
+    class Colour_Chooser implements ActionListener {
+            public void actionPerformed(ActionEvent evt) {
+                //Sets colour then adds colour to list
+                int type = 0;
+                //0 is a fill command, 1 is a pen command
+                if(evt.getModifiers() == 18){
+                    //18 is  a left control + left mouse click
+                    fill_Colour = JColorChooser.showDialog(null, "Choose a Color", pen_Colour);
+                }else{
+                    pen_Colour = JColorChooser.showDialog(null, "Choose a Color", pen_Colour);
+                    type = 1;
+                }
+                Add_Colour(type);
             }
         }
-
-        //Reconnecting the last point to the original
-        polygon.add(Double.parseDouble(data[1]) * width);
-        polygon.add(Double.parseDouble(data[2]) * height);
-
-        //Add the polygon read from the VEC file and add to the drawing variable
-        Drawn_Shapes shape = new Drawn_Shapes(shape_Type.valueOf(data[0]), polygon);
-        drawn_Shapes.add(shape);
-
-        //Clear the polygon coordinate variable
-        polygon = new ArrayList<>();
-    }
-
-    private void MouseClicked(MouseEvent event){
-        //get the x and y coordinates when the click occours
-        x_Previous = event.getX();
-        y_Previous = event.getY();
-        x_Current = x_Previous;
-        y_Current = y_Previous;
-
-        if(selected_Tool == shape_Type.POLYGON.ordinal()) {
-            polygon_Completed = false;
-            Double coords = x_Current + 0.0;
-            polygon.add(coords);
-            coords = y_Current + 0.0;
-            polygon.add(coords);
-
-            //Ends the polygon if original and latest position is within 10 pixels in any direction.
-            if(polygon_Ending_Check() && polygon.size() > 4){
-                polygon_Completed = true;
-                //Remove last 2 inputs
-                polygon.remove(polygon.size()-2);
-                polygon.remove(polygon.size()-1);
-
-                //Add the last 2 indexes as the original coordinates
-                polygon.add(polygon.get(0));
-                polygon.add(polygon.get(1));
-
-                Drawn_Shapes shape = new Drawn_Shapes(shape_Type.POLYGON, polygon);
-                drawn_Shapes.add(shape);
-
-                //Clear the polygon
-                polygon = new ArrayList<>();
-            }
-        }
-    }
-
-    private boolean polygon_Ending_Check(){
-        boolean same_Spot = false;
-        //Checks if the click is within 10 pixels either way of original point, for x coordinates
-        if (x_Current>polygon.get(0)-10 && x_Current<polygon.get(0)+10){
-            same_Spot = true;
-        }
-        //Checks if the click is within 10 pixels either way of original point, for y coordinates
-        //Extra check to see if the x-coordinate was on the point
-        if (y_Current>polygon.get(1)-10 && y_Current<polygon.get(1)+10 && same_Spot){
-            same_Spot = true;
-        }
-        System.out.println(x_Current);
-        return same_Spot;
-
-    }
-
-    private void MouseReleased(MouseEvent event){
-
-        x_Current = event.getX();
-        y_Current = event.getY();
-        //System.out.println("mouse released");
-
-        if(selected_Tool != shape_Type.POLYGON.ordinal()){
-            //Add shape to previously drawn of shapes
-            add_Shape(selected_Tool,x_Previous,y_Previous,x_Current,y_Current);
-        }
-        repaint();
-    }
-
-    public void add_Shape(int tool, double x1, double y1, double x2, double y2){
-        //Size of drawing area, used convert coordinates to percentage of screen size
-        double height = getContentPane().getComponent(3).getHeight();
-        double width = getContentPane().getComponent(3).getWidth();
-
-        //Add shape to previously drawn of shapes
-        ArrayList<Double> Coords = new ArrayList<>();
-        if(x1 == x_Previous && x2 == x_Current && y1 == y_Previous && y2 == y_Current){
-            //Adding from users inputs
-            Coords.add(x1/width);
-            Coords.add(y1/height);
-            Coords.add(x2/width);
-            Coords.add(y2/height);
-        }else{
-            //Adding from loading from file
-            Coords.add(x1);
-            Coords.add(y1);
-            Coords.add(x2);
-            Coords.add(y2);
-        }
-
-        //Creates a new element to insert into the list of drawn shapes
-        Drawn_Shapes shape = new Drawn_Shapes(shape_Type.values()[tool], Coords);
-        drawn_Shapes.add(shape);
-    }
-
     class Draw_Panel extends JPanel {
 
         Draw_Panel() {
@@ -654,10 +664,39 @@ public class GUI extends JFrame {
             });
         }
 
-        @Override
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g);
+        private void draw_Users_Current_shape (Graphics g){
+            //Draw shape user is in the process of drawing
+            switch (shape_Type.values()[selected_Tool]) {
+                case LINE:
+                    g.drawLine(x_Previous,y_Previous,x_Current,y_Current);
+                    break;
+                case RECTANGLE:
+                    g.drawRect(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
+                    if(fill){
+                        g.setColor(fill_Colour);
+                        g.fillRect(Math.min(x_Previous, x_Current)+1,Math.min(y_Previous, y_Current)+1,Math.abs(x_Previous - x_Current)-1,Math.abs(y_Previous - y_Current)-1);
+                    }
+                    break;
+                case PLOT:
+                    g.drawOval(x_Previous,y_Previous,1,1);
+                    break;
+                case ELLIPSE:
+                    g.drawOval(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
+                    if(fill){
+                        g.setColor(fill_Colour);
+                        g.fillOval(Math.min(x_Previous, x_Current)+1,Math.min(y_Previous, y_Current)+1,Math.abs(x_Previous - x_Current)-2,Math.abs(y_Previous - y_Current)-2);
+                    }
+                    break;
+                case POLYGON:
+                    g.drawLine(x_Previous,y_Previous,x_Current,y_Current);
+                    for(int i = 3;i<polygon.size();i+=2){
+                        g.drawLine((int)round(polygon.get(i-3)),(int)round(polygon.get(i-2)), (int)round(polygon.get(i-1)),(int)round(polygon.get(i)));
+                    }
+                    break;
+            }
+        }
 
+        private void draw_Shapes_in_drawn_Shapes(Graphics g){
             //These are used to convert the percentage into the current screen size coordinates
             double height = getContentPane().getComponent(3).getHeight();
             double width = getContentPane().getComponent(3).getWidth();
@@ -742,38 +781,20 @@ public class GUI extends JFrame {
                     }
                 }
             }
+        }
+
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+
+            //Draw objects in drawn_shapes
+            draw_Shapes_in_drawn_Shapes(g);
 
             //Change the colour back to the current pen colour
             g.setColor(pen_Colour);
-            //Draw shape user is in the process of drawing
-            switch (shape_Type.values()[selected_Tool]) {
-                case LINE:
-                    g.drawLine(x_Previous,y_Previous,x_Current,y_Current);
-                    break;
-                case RECTANGLE:
-                    g.drawRect(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
-                    if(fill){
-                        g.setColor(fill_Colour);
-                        g.fillRect(Math.min(x_Previous, x_Current)+1,Math.min(y_Previous, y_Current)+1,Math.abs(x_Previous - x_Current)-1,Math.abs(y_Previous - y_Current)-1);
-                    }
-                    break;
-                case PLOT:
-                    g.drawOval(x_Previous,y_Previous,1,1);
-                    break;
-                case ELLIPSE:
-                    g.drawOval(Math.min(x_Previous, x_Current),Math.min(y_Previous, y_Current),Math.abs(x_Previous - x_Current),Math.abs(y_Previous - y_Current));
-                    if(fill){
-                        g.setColor(fill_Colour);
-                        g.fillOval(Math.min(x_Previous, x_Current)+1,Math.min(y_Previous, y_Current)+1,Math.abs(x_Previous - x_Current)-2,Math.abs(y_Previous - y_Current)-2);
-                    }
-                    break;
-                case POLYGON:
-                    g.drawLine(x_Previous,y_Previous,x_Current,y_Current);
-                    for(int i = 3;i<polygon.size();i+=2){
-                        g.drawLine((int)round(polygon.get(i-3)),(int)round(polygon.get(i-2)), (int)round(polygon.get(i-1)),(int)round(polygon.get(i)));
-                    }
-                    break;
-            }
+
+            //Draw the object hte user is in the process of drawing
+            draw_Users_Current_shape(g);
         }
     }
 

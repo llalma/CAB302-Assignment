@@ -2,8 +2,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.text.*;
 
-import java.sql.Time;
-import java.util.ArrayList;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -120,7 +118,7 @@ class GUI_Test {
 
         //Iterate undo a random number of times.
         for(int i  = 0;i<rand.nextInt(10)+1 ;i++){
-            GUI.undo();
+            //GUI.undo();
         }
 
         for(int i = 0;i<GUI.drawn_Shapes.size();i++){
@@ -157,9 +155,9 @@ class GUI_Test {
         GUI.Add_Colour(3);
 
         //Remove most recent shape, pen and fill colour
-        GUI.undo();
-        GUI.undo();
-        GUI.undo();
+//        GUI.undo();
+//        GUI.undo();
+//        GUI.undo();
 
         for(int i = 0;i<GUI.drawn_Shapes.size();i++){
             output.append(GUI.drawn_Shapes.get(i).Type.toString());

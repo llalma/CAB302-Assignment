@@ -1,3 +1,9 @@
+/************************************************************************
+ * @author Liam Hulsman-Benson, N9960392
+ * @version 1.0, May 2019
+ * CAB302 - Software development programming assignment
+ ************************************************************************/
+
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeListener;
@@ -14,9 +20,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
 import static java.lang.Math.*;
-
-//LF file formats check mine is right
-// check saving can have any number of decimals
 
 public class GUI extends JFrame {
 
@@ -51,11 +54,16 @@ public class GUI extends JFrame {
     private Color fill_Colour = Color.BLACK;
     private JLabel colour_Fill;
 
-    //Default Constructor
+    /**
+     * Default constructor,
+     * creates a window at point 100,100 with a size of 400,400. Uses the computers default window style,
+     * Adds all buttons and the drawing area to the window. Also populates drawn_Shapes with deafult data
+     */
     public GUI()  {
         super("Paint");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        //Create the jpanels for the buttons and the drawing area
         buttons_Create();
         drawing_area();
 
@@ -65,10 +73,14 @@ public class GUI extends JFrame {
         pack();
         setVisible(true);
 
+        //Populate drawn_Shapes with default data
        new_Drawn_Shapes();
     }
 
-    //Drawing Panel create
+    /**
+     * Creates the user input drawing area, adds a mouse listener and a mouse motion lister to the panel.
+     * Then adds the panel to the GUI frame.
+     */
     private void drawing_area() {
         JPanel panel = new Draw_Panel();
 
@@ -108,8 +120,19 @@ public class GUI extends JFrame {
     }
 
     //Mouse Events
+
+    /**
+     * Gets the position of the mouse when the click occoured.
+     * If the user has the polygon tool selected, the coordinates that were
+     * clicked are added to the current instance of the polygon shape.
+     *
+     * If the coordinates added to the polygon is within 10 pixels in any direction of the starting
+     * coordinates. The newest coordinates are set to the starting postion and the polygon is completed.
+     *
+     * @param event -  The event that triggered the mouse listener.
+     */
     private void MouseClicked(MouseEvent event){
-        //get the x and y coordinates when the click occours
+        //Get the x and y coordinates when the click occours.
         x_Previous = event.getX();
         y_Previous = event.getY();
         x_Current = x_Previous;
@@ -124,37 +147,42 @@ public class GUI extends JFrame {
 
             //Ends the polygon if original and latest position is within 10 pixels in any direction.
             if(polygon_Ending_Check() && polygon.size() > 4){
-                polygon_Completed = true;
-                //Remove last 2 inputs
-                polygon.remove(polygon.size()-2);
-                polygon.remove(polygon.size()-1);
-
-                //Add the last 2 indexes as the original coordinates
-                polygon.add(polygon.get(0));
-                polygon.add(polygon.get(1));
-
-                Drawn_Shapes shape = new Drawn_Shapes(shape_Type.POLYGON, polygon);
-                drawn_Shapes.add(shape);
-
-                //Clear the polygon
-                polygon = new ArrayList<>();
+                polygon_End();
             }
         }
     }
+
+    /**
+     * Gets the current x & y coordinates of the mouse when the event occoured.
+     * If any tool besides the polygon tool is selected, the shape is added to drawn_Shapes.
+     *
+     * This occours as with any shape besides the polygon is drawn with dragging and releasing the mouse,
+     * whereas the polygon requires clicks as each vertex.
+     *
+     * The entire drawing area is then repainted to update for the shape just added.
+     *
+     * @param event - The event that triggered the mouse listener.
+     */
     private void MouseReleased(MouseEvent event){
 
         x_Current = event.getX();
         y_Current = event.getY();
-        //System.out.println("mouse released");
 
         if(selected_Tool != shape_Type.POLYGON.ordinal()){
             //Add shape to previously drawn of shapes
-            add_Shape(selected_Tool,x_Previous,y_Previous,x_Current,y_Current);
+            add_Shape(shape_Type.values()[selected_Tool],x_Previous,y_Previous,x_Current,y_Current);
         }
         repaint();
     }
 
     //Button creates
+
+    /**
+     * Creates a JPanel containing the tools in the program.
+     * Additional tools buttons are added by adding another image file to the tool_Buttons variable.
+     *
+     * @return  - JPanel containing all the tool buttons in a column contain all the tools
+     */
     private JPanel Tool_Buttons(){
         JPanel panel = new JPanel(new GridLayout(num_Tool_Buttons+2, 1));
         for (int i = 0; i < num_Tool_Buttons+2; i++) {
@@ -211,6 +239,13 @@ public class GUI extends JFrame {
 
         return panel;
     }
+
+    /**
+     * Creates a JPanel containing the File buttons of the program: Save,Load and Undo currently.
+     * Additional File buttons are added by adding another image file to the file_Buttons variable.
+     *
+     * @return  - JPanel containing all the File buttons in a row.
+     */
     private JPanel File_Buttons(){
         JPanel file_panel = new JPanel(new GridLayout(1, file_Buttons.length));
         for (int i = 0; i < file_Buttons.length; i++) {
@@ -258,6 +293,14 @@ public class GUI extends JFrame {
 
         return file_panel;
     }
+
+    /**
+     * Creates a JPanel containing the quick access colours as-well as the no-fill and colour palette buttons.
+     * Additional quick access colours can be added by adding more colours to the colour_Buttons variable.
+     * The buttons are displayed in 2 rows with the columns growing as necessary.
+     *
+     * @return  - JPanel containing all the File buttons in a row.
+     */
     private JPanel Colour_Buttons(){
         //Colour Buttons on south edge
         //Plus 2 for number of coloums due to the 2 extra buttons fro nofill and selector
@@ -280,7 +323,7 @@ public class GUI extends JFrame {
                         pen_Colour = button.getBackground();
                         type = 1;
                     }
-                    Add_Colour(type);
+                    Add_Colour(draw_Type.values()[type]);
                 }
             });
             button.setBackground(colour_Buttons[i]);
@@ -306,7 +349,7 @@ public class GUI extends JFrame {
                             //Simple toggle of colours and fill states
                             if(fill){
                                 fill = false;
-                                Add_Colour(3);
+                                Add_Colour(draw_Type.FILL_NULL);
                             }else{
                                 fill = true;
                             }
@@ -326,20 +369,31 @@ public class GUI extends JFrame {
         colour_panel.setName("Colour_Panel");
         return colour_panel;
     }
+
+    /**
+     * Adds the JPanels returned from the above functions and adds them to the JFrame.
+     */
     private void buttons_Create() {
         //Tool Buttons, on west edge
         getContentPane().add(Tool_Buttons(), "West");
-
         //Save buttons, new buttons ect, On north edge.
         getContentPane().add(File_Buttons(), "North");
-
-        //Colout Buttons
+        //Colour Buttons
         getContentPane().add(Colour_Buttons(), "South");
     }
 
 
     //Adding objects to draw_Shapes
-    public void Add_Colour(int type){
+
+    /**
+     * Adds the fill or pen colour change to drawn_shapes. It is added to drawn_Shapes as this will allow
+     * undo to simply delete the last member of drawn_Shapes to function. THis also makes saving easier
+     * as all objects are in one list, and order does not to be kept track.
+     *
+     * @param type - draw_Type enum specifying what the selected colour is te be used for,
+     *             either fill,pen or turn off the fill.
+     */
+    public void Add_Colour(draw_Type type){
         //Add colour to list of shapes, same arrayList as shapes as the order matters
         //and arrayLists keeps the order
 
@@ -349,7 +403,7 @@ public class GUI extends JFrame {
         //Creates a new element to insert into the list of drawn shapes
         Drawn_Shapes shape;
         //dosent work for colour selector wheel
-        if(type == 0){
+        if(type == draw_Type.FILL_COLOUR){
             //0 is a fill command
             RGB.add(fill_Colour.getRed() + 0.0);
             RGB.add(fill_Colour.getGreen() + 0.0);
@@ -363,7 +417,7 @@ public class GUI extends JFrame {
             }else{
                 colour_Fill.setForeground(Color.WHITE);
             }
-        }else if(type == 3){
+        }else if(type == draw_Type.FILL_NULL){
             //3 is a no fill command
             RGB.add((double)'O');
             RGB.add((double)'F');
@@ -388,6 +442,14 @@ public class GUI extends JFrame {
         }
         drawn_Shapes.add(shape);
     }
+
+    /**
+     * Adds a polygon shape to drawn_Shapes, cannot use add_shape as
+     * polygon is saved differently and polygon can be any length.
+     *
+     * @param data - Specifying string of data to be added to a polygon instance.
+     *             Format = {"POLYGON" "0.2565789473684211" "0.2975609756097561" "0.3355263157894737" "0.7268292682926829" "0.6973684210526315" "0.5902439024390244" "0.7335526315789473" "0.28780487804878047"}
+     */
     public void add_Polygon(String data[]){
         double height = getContentPane().getComponent(3).getHeight();
         double width = getContentPane().getComponent(3).getWidth();
@@ -413,6 +475,12 @@ public class GUI extends JFrame {
         //Clear the polygon coordinate variable
         polygon = new ArrayList<>();
     }
+
+    /**
+     * Checks if the latest point of the polygon is withing 10 pixels in any direction of the starting point
+     *
+     * @return -  True or false.
+     */
     private boolean polygon_Ending_Check(){
         boolean same_Spot = false;
         //Checks if the click is within 10 pixels either way of original point, for x coordinates
@@ -424,11 +492,46 @@ public class GUI extends JFrame {
         if (y_Current>polygon.get(1)-10 && y_Current<polygon.get(1)+10 && same_Spot){
             same_Spot = true;
         }
-        System.out.println(x_Current);
         return same_Spot;
 
     }
-    public void add_Shape(int tool, double x1, double y1, double x2, double y2){
+
+    /**
+     * Completes the polygon and adds it to the drawn_Shapes variable.
+     *
+     * Changes polygon_Completed to true, then replaces the last coordinates
+     * of the polygon to the starting coordinates, then adds to drawn_Shapes.
+     * Finally, clears "polygon" ready for the next polygon to being.
+     */
+    private void polygon_End(){
+        polygon_Completed = true;
+        //Remove last 2 inputs
+        polygon.remove(polygon.size()-2);
+        polygon.remove(polygon.size()-1);
+
+        //Add the last 2 indexes as the original coordinates
+        polygon.add(polygon.get(0));
+        polygon.add(polygon.get(1));
+
+        Drawn_Shapes shape = new Drawn_Shapes(shape_Type.POLYGON, polygon);
+        drawn_Shapes.add(shape);
+
+        //Clear the polygon
+        polygon = new ArrayList<>();
+    }
+
+    /**
+     * Adds the shape specified by tool and the coordinates to the drawn_shape variable.
+     * If the shape is a users input the values are edited into vec format by dividing by the current height and width of the drawing area respectively.
+     * If the shape is loaded from a file the values are not effected
+     *
+     * @param tool - enum of the shape that is being added.
+     * @param x1 - First X-coordinate of shape
+     * @param y1 - First Y-coordinate of shape
+     * @param x2 - Second X-coordinate of shape
+     * @param y2 - Second Y-coordinate of shape
+     */
+    public void add_Shape(shape_Type tool, double x1, double y1, double x2, double y2){
         //Size of drawing area, used convert coordinates to percentage of screen size
         double height = getContentPane().getComponent(3).getHeight();
         double width = getContentPane().getComponent(3).getWidth();
@@ -450,11 +553,16 @@ public class GUI extends JFrame {
         }
 
         //Creates a new element to insert into the list of drawn shapes
-        Drawn_Shapes shape = new Drawn_Shapes(shape_Type.values()[tool], Coords);
+        Drawn_Shapes shape = new Drawn_Shapes(tool, Coords);
         drawn_Shapes.add(shape);
     }
 
-    //Undo Action
+    /**
+     * Undoes the last action in drawn_Shape, including change of fill or pen colours and drawing shapes.
+     * Undoes by removing the last index from drawn_Shapes, also sets x,y previous and current values to -1
+     * so the shape last drawn does not appear.
+     * Drawing area is then repainted to remove the latest object from the drawing area.
+     */
     public void undo(){
         //Remove the last thing added to draw_shapes.
         //this will undo the last thing done
@@ -470,10 +578,14 @@ public class GUI extends JFrame {
         }
     }
 
-    //Saving and Loading
-    private void save_File(){
-        //Saves the file to the path specified by the user
-        //Only shows directories & Vec files to select, Default saves as VEC format, no other options are avaliable.
+
+    /**
+     * User browses system explorer to place file. Other VEC files can be selected to save over.
+     * Only Folders and VEC files are shown in the explorer.
+     *
+     * @return - File object to the location the user selected in the popup interface.
+     */
+    private File find_Path(){
         JFileChooser chooser= new JFileChooser(System.getProperty("user.dir"));
         chooser.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter filter = new FileNameExtensionFilter("VEC", "VEC");
@@ -481,11 +593,71 @@ public class GUI extends JFrame {
 
         //Show GUI and return the path when the choice is confirmed
         int choice = chooser.showDialog(null,"Select");
-        if (choice != JFileChooser.APPROVE_OPTION) return;
-        File directory_Path = chooser.getSelectedFile();
+        if (choice != JFileChooser.APPROVE_OPTION){
+            //Throw Exception
+        }
+        return chooser.getSelectedFile();
+    }
 
+    /**
+     * Converts a polygon saved in drawn_Shapes to the appropriate format for a VEC file.
+     *
+     * @param shape - The shape being read from. Is a Drawn_Shapes object
+     * @return - The StringBuilder that will be written to VEC file.
+     */
+    private StringBuilder save_Polygon(Drawn_Shapes shape){
+        //Polygon saving is slightly different from other shapes
+        double height = getContentPane().getComponent(3).getHeight();
+        double width = getContentPane().getComponent(3).getWidth();
+        StringBuilder line = new StringBuilder();
+
+        line.append(shape.Type.toString());
+
+        //Minus 2 from size as to not include the last point which just direct back to the starting position
+        for (int i = 0; i < shape.coordinates.size() - 2; i++) {
+            if (i % 2 == 0) {
+                line.append(" " + shape.coordinates.get(i) / width);
+            } else {
+                line.append(" " + shape.coordinates.get(i) / height);
+            }
+        }
+        return line;
+    }
+
+    /**
+     * Converts a colour save in drawn_Shapes to the appropriate format for a VEC file.
+     *
+     * @param shape - The shape being read from. Is a Drawn_Shapes object
+     * @return - The StringBuilder that will be written to VEC file.
+     */
+    private StringBuilder save_Colour(Drawn_Shapes shape){
+        //Colour Saving
+        StringBuilder line = new StringBuilder();
+        Color colour_temp = new Color((int)round(shape.coordinates.get(0)),(int)round(shape.coordinates.get(1)),(int)round(shape.coordinates.get(2)));
+        Color oFF = new Color((int)'O',(int)'F',(int)'F');
+        String hex;
+
+        if(colour_temp.getRGB() == oFF.getRGB()){
+            //Save into the file as OFF instead of an RGB value
+            hex = "OFF";
+        }else{
+            hex = "#"+Integer.toHexString(colour_temp.getRGB()).substring(2);
+        }
+
+        line.append(shape.Type + " " + hex);
+        return line;
+    }
+
+    /**
+     * Saves all objects in the drawn_Shapes variable. Saves to the location returned by
+     * find_Path().
+     */
+    private void save_File(){
+        //Saves the file to the path specified by the user
+        File directory_Path = find_Path();
         try {
             PrintWriter writer;
+            //Create or load a VEC file depending on the path
             if(directory_Path.toString().contains("VEC")){
                 writer = new PrintWriter(directory_Path, "UTF-8");
             }else{
@@ -496,46 +668,79 @@ public class GUI extends JFrame {
             for (Drawn_Shapes shape:drawn_Shapes) {
                 StringBuilder line = new StringBuilder();
                 if(shape.Type == shape_Type.POLYGON) {
-                    //Polygon saving is slightly different from other shapes
-                    double height = getContentPane().getComponent(3).getHeight();
-                    double width = getContentPane().getComponent(3).getWidth();
-
-                    line.append(shape.Type.toString());
-
-                    //Minus 2 from size as to not inlcude the last point which just direct back to the starting position
-                    for (int i = 0; i < shape.coordinates.size() - 2; i++) {
-                        if (i % 2 == 0) {
-                            line.append(" " + shape.coordinates.get(i) / width);
-                        } else {
-                            line.append(" " + shape.coordinates.get(i) / height);
-                        }
-                    }
+                    //Save polygon
+                    line = save_Polygon(shape);
                 }else if(shape.Type == shape_Type.PEN || shape.Type == shape_Type.FILL){
-                    //Colour Saving
-                    Color colour_temp = new Color((int)round(shape.coordinates.get(0)),(int)round(shape.coordinates.get(1)),(int)round(shape.coordinates.get(2)));
-                    Color oFF = new Color((int)'O',(int)'F',(int)'F');
-                    String hex;
-                    if(colour_temp.getRGB() == oFF.getRGB()){
-                        //Save into the file as OFF insteda of an RGB value
-                        hex = "OFF";
-                    }else{
-                        hex = "#"+Integer.toHexString(colour_temp.getRGB()).substring(2);
-                    }
-
-                    line.append(shape.Type + " " + hex);
+                    //Save colours
+                    line = save_Colour(shape);
                 }else{
                     //All other shapes saving
                     line.append(shape.Type + " " + shape.coordinates.get(0) + " " + shape.coordinates.get(1) + " " +  shape.coordinates.get(2) + " " +  shape.coordinates.get(3));
                 }
                 writer.println(line);
             }
+
+            //Close connection to the created VEC file
             writer.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            //Throw exception
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+            //Throw exception
         }
     }
+
+    /**
+     * Reads a line of the file specified by sc and adds it to drawn_shape using the correct method.
+     * E.G. polygon uses add_Polygon().
+     *
+     * @param sc - Scanner object for the file being read.
+     */
+    private void read_Line(Scanner sc){
+        //Reag each string seperated by space char
+        String data[] = sc.nextLine().split(" ");
+
+        switch (shape_Type.valueOf(data[0])) {
+            case PLOT:
+                add_Shape(shape_Type.valueOf(data[0]), Double.parseDouble(data[1]), Double.parseDouble(data[2]), Double.parseDouble(data[1]), Double.parseDouble(data[2]));
+                break;
+            case POLYGON:
+                add_Polygon(data);
+                break;
+            case PEN:
+                int r = Integer.valueOf(data[1].substring(1,3),16);
+                int g = Integer.valueOf(data[1].substring(3,5),16);
+                int b = Integer.valueOf(data[1].substring(5,7),16);
+
+                pen_Colour = new Color(r,g,b);
+                Add_Colour(draw_Type.PEN);
+                break;
+            case FILL:
+                if(data[1].equals("OFF")){
+                    Add_Colour(draw_Type.FILL_NULL);
+                }else {
+                    r = Integer.valueOf(data[1].substring(1, 3), 16);
+                    g = Integer.valueOf(data[1].substring(3, 5), 16);
+                    b = Integer.valueOf(data[1].substring(5, 7), 16);
+
+                    fill_Colour = new Color(r, g, b);
+                    Add_Colour(draw_Type.FILL_COLOUR);
+                }
+                break;
+
+            default:
+                add_Shape(shape_Type.valueOf(data[0]), Double.parseDouble(data[1]), Double.parseDouble(data[2]), Double.parseDouble(data[3]), Double.parseDouble(data[4]));
+                break;
+        }
+    }
+
+    /**
+     * File explorer interface where user selects a VEC file to load.
+     * Only VEC files and folders are displayed
+     *
+     * Selected file is then looped through by line with each line being read by read_Line().
+     */
     private void load_File(){
         //Prewritten GUI for file browsing, shows the users current directory on opening.
         //Only shows VEC files.
@@ -549,63 +754,30 @@ public class GUI extends JFrame {
         if (choice != JFileChooser.APPROVE_OPTION) return;
         File chosenFile = chooser.getSelectedFile();
 
-        //Clear the drawing area by emptying drawn_Shapes, change selected tool to the eraser as the shaped
-        //drawn immedietly before loading is still drawn.
+        //Clear the drawing area by emptying drawn_Shapes.
         new_Drawn_Shapes();
-        selected_Tool = 2;
 
         //Load the file
         try {
             Scanner sc = new Scanner(chosenFile);
-
             //Read each line in the file & add to drawn_Shapes
             while (sc.hasNextLine()){
-                //Reag each string seperated by space char
-                String data[] = sc.nextLine().split(" ");
-
-                switch (shape_Type.valueOf(data[0])) {
-                    case PLOT:
-                        add_Shape(shape_Type.valueOf(data[0]).ordinal(), Double.parseDouble(data[1]), Double.parseDouble(data[2]), Double.parseDouble(data[1]), Double.parseDouble(data[2]));
-                        break;
-                    case POLYGON:
-                        add_Polygon(data);
-                        break;
-                    case PEN:
-                        int r = Integer.valueOf(data[1].substring(1,3),16);
-                        int g = Integer.valueOf(data[1].substring(3,5),16);
-                        int b = Integer.valueOf(data[1].substring(5,7),16);
-
-                        pen_Colour = new Color(r,g,b);
-                        Add_Colour(1);
-                        break;
-                    case FILL:
-                        if(data[1].equals("OFF")){
-                            Add_Colour(3);
-                        }else {
-                            r = Integer.valueOf(data[1].substring(1, 3), 16);
-                            g = Integer.valueOf(data[1].substring(3, 5), 16);
-                            b = Integer.valueOf(data[1].substring(5, 7), 16);
-
-                            fill_Colour = new Color(r, g, b);
-                            Add_Colour(0);
-                        }
-                        break;
-
-                    default:
-                        add_Shape(shape_Type.valueOf(data[0]).ordinal(), Double.parseDouble(data[1]), Double.parseDouble(data[2]), Double.parseDouble(data[3]), Double.parseDouble(data[4]));
-                        break;
-                }
+                read_Line(sc);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            //Thrown Exception
         }
 
         //Repaint screen with new shapes
         repaint();
     }
 
-    //Initilisation for drawn_Shapes
-    //Populates with default values
+    /**
+     * Emptys drawn_Shapes object and adds the two default values of:
+     * BLACK pen colour
+     * Null fill colour
+     */
     private void new_Drawn_Shapes(){
         //Sets the default values in every new instance of drawn_Shapes.
         drawn_Shapes = new ArrayList<>();
@@ -624,7 +796,14 @@ public class GUI extends JFrame {
         drawn_Shapes.add(new Drawn_Shapes(shape_Type.FILL, RGB));
     }
 
-    //Classes
+
+    /**
+     * Class used when displaying the colour palette to the user, implements an ActionListener interface.
+     * When the "ok" button is pressed, whatever colour that was selected will be used in Add_Colour.
+     *
+     * A fill command will be given if left Control + left click is used to press the colour palette button.
+     * If only a click occours the colour will be used for a pen colour.
+     */
     class Colour_Chooser implements ActionListener {
             public void actionPerformed(ActionEvent evt) {
                 //Sets colour then adds colour to list
@@ -637,11 +816,22 @@ public class GUI extends JFrame {
                     pen_Colour = JColorChooser.showDialog(null, "Choose a Color", pen_Colour);
                     type = 1;
                 }
-                Add_Colour(type);
+                Add_Colour(draw_Type.values()[type]);
             }
         }
+
+    /**
+     * Class that the drawing panel uses, extends the JPanel class.
+     */
     class Draw_Panel extends JPanel {
 
+        /**
+         * Default constructior for Draw_Panel.
+         * Sets background to white, sets the name to "Paint Area", adds a black border.
+         *
+         * An input and action map are also added to react to listen to the keyboard,
+         * used to activate undo from keyboard using "CTRL + Z"
+         */
         Draw_Panel() {
             //Initilise Drawing panel
             setBackground(new java.awt.Color(255, 255, 255));
@@ -664,6 +854,12 @@ public class GUI extends JFrame {
             });
         }
 
+        /**
+         * Draws the shape the user is currently drawing, either being dragged or using the polygon tool.
+         * Shape will have the last pen and fill colour while drawing.
+         *
+         * @param g - Graphics object of the class
+         */
         private void draw_Users_Current_shape (Graphics g){
             //Draw shape user is in the process of drawing
             switch (shape_Type.values()[selected_Tool]) {
@@ -693,9 +889,18 @@ public class GUI extends JFrame {
                         g.drawLine((int)round(polygon.get(i-3)),(int)round(polygon.get(i-2)), (int)round(polygon.get(i-1)),(int)round(polygon.get(i)));
                     }
                     break;
+                default:
+                    //Throw Error
+                    break;
             }
         }
 
+        /**
+         * Gets all objects in drawn_Shapes and either draws in the case of a shape, or changes the pen or
+         * fill colour in the event of a pen or fill command.
+         *
+         * @param g - Graphics object of the class
+         */
         private void draw_Shapes_in_drawn_Shapes(Graphics g){
             //These are used to convert the percentage into the current screen size coordinates
             double height = getContentPane().getComponent(3).getHeight();
@@ -776,13 +981,18 @@ public class GUI extends JFrame {
                             break;
                         default:
                             System.out.println("Not a shape");
-                            //put exception throw here.
+                            //Throw Exception
                             break;
                     }
                 }
             }
         }
 
+        /**
+         * Overrides the paintComponent of JPanel, to work in this scenario.
+         *
+         * @param g - Graphics object of the class
+         */
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -798,6 +1008,11 @@ public class GUI extends JFrame {
         }
     }
 
+    /**
+     * Main of the GUI class.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         JFrame.setDefaultLookAndFeelDecorated(false);
         new GUI();

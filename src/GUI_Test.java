@@ -51,7 +51,7 @@ class GUI_Test {
         String expected = "PEN[0.0, 0.0, 0.0]FILL[79.0, 70.0, 70.0]" + shape_Type.values()[tool].toString() + "[" + formatter.format(x1).toUpperCase() + ", "
                           + formatter.format(y1).toUpperCase() + ", " + formatter.format(x2).toUpperCase() + ", " + formatter.format(y2).toUpperCase() + "]";
 
-        GUI.add_Shape(tool,x1,y1,x2,y2);
+        GUI.add_Shape(shape_Type.values()[tool],x1,y1,x2,y2);
 
         for(int i = 0;i<GUI.drawn_Shapes.size();i++){
             output.append(GUI.drawn_Shapes.get(i).Type.toString());
@@ -74,7 +74,7 @@ class GUI_Test {
         StringBuilder output = new StringBuilder();
         String expected = "PEN[0.0, 0.0, 0.0]FILL[79.0, 70.0, 70.0]PEN[0.0, 0.0, 0.0]";
 
-        GUI.Add_Colour(1);
+        GUI.Add_Colour(draw_Type.PEN);
 
         for(int i = 0;i<GUI.drawn_Shapes.size();i++){
             output.append(GUI.drawn_Shapes.get(i).Type.toString());
@@ -97,7 +97,7 @@ class GUI_Test {
         StringBuilder output = new StringBuilder();
         String expected = "PEN[0.0, 0.0, 0.0]FILL[79.0, 70.0, 70.0]FILL[79.0, 70.0, 70.0]";
 
-        GUI.Add_Colour(3);
+        GUI.Add_Colour(draw_Type.FILL_NULL);
 
         for(int i = 0;i<GUI.drawn_Shapes.size();i++){
             output.append(GUI.drawn_Shapes.get(i).Type.toString());
@@ -147,17 +147,17 @@ class GUI_Test {
         String expected = "PEN[0.0, 0.0, 0.0]FILL[79.0, 70.0, 70.0]" + shape_Type.values()[tool].toString() + "[" + formatter.format(x1).toUpperCase() + ", "
                 + formatter.format(y1).toUpperCase() + ", " + formatter.format(x2).toUpperCase() + ", " + formatter.format(y2).toUpperCase() + "]";
 
-        GUI.add_Shape(tool,x1,y1,x2,y2);
+        GUI.add_Shape(shape_Type.values()[tool],x1,y1,x2,y2);
 
         //Add a shape, fill colour and pen colour
-        GUI.add_Shape(4,6,6,2,8);
-        GUI.Add_Colour(1);
-        GUI.Add_Colour(3);
+        GUI.add_Shape(shape_Type.values()[4],6,6,2,8);
+        GUI.Add_Colour(draw_Type.PEN);
+        GUI.Add_Colour(draw_Type.FILL_NULL);
 
         //Remove most recent shape, pen and fill colour
-//        GUI.undo();
-//        GUI.undo();
-//        GUI.undo();
+        GUI.undo();
+        GUI.undo();
+        GUI.undo();
 
         for(int i = 0;i<GUI.drawn_Shapes.size();i++){
             output.append(GUI.drawn_Shapes.get(i).Type.toString());

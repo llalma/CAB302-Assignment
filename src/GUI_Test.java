@@ -1,8 +1,12 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.File;
+import java.io.PrintWriter;
 import java.text.*;
 
 import java.util.Random;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -164,6 +168,53 @@ class GUI_Test {
             output.append(GUI.drawn_Shapes.get(i).coordinates.toString());
         }
         assertEquals(expected,output.toString());
+    }
+
+    /*
+     * Test 6: Test Loading VEC file with error
+     *
+     * Error of a enum that does not exist is placed in a temporary VEC file,
+     * to see if the load file method catches the error.
+     *
+     */
+    @Test
+    public void testFileErrorLoad() {
+
+        File f;
+
+        try {
+            // creates temporary file
+            f = File.createTempFile("VEC_Test_Error", ".VEC", new File(System.getProperty("user.dir")));
+            //Set the file to readable and writable
+            f.setWritable(true);
+
+            //Open the file
+            PrintWriter writer = new PrintWriter(f.getPath(), "UTF-8");
+
+            //Write to the file
+            writer.println("PEN #000000");
+            writer.println("FILL OFF");
+            writer.println("Error 0.23355263157894737 0.15121951219512195 0.7269736842105263 0.7317073170731707");
+
+            //Close the writer connection
+            writer.close();
+
+            Scanner sc = new Scanner(f.getPath());
+
+            String expected = "No enum constant shape_Type";
+            StringBuilder output = new StringBuilder(GUI.read_Line(sc,true));
+            output.replace(27,output.length(),"");
+
+            assertEquals(expected, output.toString());
+
+            // deletes file when the virtual machine terminate
+            f.deleteOnExit();
+
+        } catch(Exception e) {
+            // if any error occurs
+            e.printStackTrace();
+        }
+
     }
 
 

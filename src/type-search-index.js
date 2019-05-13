@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"<Unnamed>","l":"GUI.Colour_Chooser"},{"p":"<Unnamed>","l":"GUI.Draw_Panel"},{"p":"<Unnamed>","l":"Drawn_Shapes"},{"p":"<Unnamed>","l":"GUI"},{"p":"<Unnamed>","l":"GUI_Test"},{"p":"<Unnamed>","l":"shape_Type"}]

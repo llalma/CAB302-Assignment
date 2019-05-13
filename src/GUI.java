@@ -20,6 +20,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 
 import static java.lang.Math.*;
+import static javax.swing.JOptionPane.getRootFrame;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class GUI extends JFrame {
 
@@ -573,8 +575,11 @@ public class GUI extends JFrame {
             y_Current = -1;
             y_Previous = -1;
             repaint();
-        }else{
-            //Throw exception, index out of range
+        }else {
+            JOptionPane.showMessageDialog(getRootFrame(),
+                    "Nothing left to undo.",
+                    "Undo Error",
+                    JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -593,9 +598,6 @@ public class GUI extends JFrame {
 
         //Show GUI and return the path when the choice is confirmed
         int choice = chooser.showDialog(null,"Select");
-        if (choice != JFileChooser.APPROVE_OPTION){
-            //Throw Exception
-        }
         return chooser.getSelectedFile();
     }
 
@@ -683,11 +685,9 @@ public class GUI extends JFrame {
             //Close connection to the created VEC file
             writer.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            //Throw exception
+            JOptionPane.showMessageDialog(getRootFrame(), e.getMessage(),"File-Read Error", JOptionPane.WARNING_MESSAGE);
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            //Throw exception
+            JOptionPane.showMessageDialog(getRootFrame(), e.getMessage(),"Unsupported Encoding Error", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -695,63 +695,81 @@ public class GUI extends JFrame {
      * Reads a line of the file specified by sc and adds it to drawn_shape using the correct method.
      * E.G. polygon uses add_Polygon().
      *
+     * If in testing mode the function returns the exception string, else it will display an alert
+     * in GUI operation
+     *
      * @param sc - Scanner object for the file being read.
+     * @param testing - boolean checking if the function is in testing mode.
      */
-    private void read_Line(Scanner sc){
+    public String read_Line(Scanner sc,boolean testing){
         //Reag each string seperated by space char
         String data[] = sc.nextLine().split(" ");
 
-        switch (shape_Type.valueOf(data[0])) {
-            case PLOT:
-                add_Shape(shape_Type.valueOf(data[0]), Double.parseDouble(data[1]), Double.parseDouble(data[2]), Double.parseDouble(data[1]), Double.parseDouble(data[2]));
-                break;
-            case POLYGON:
-                add_Polygon(data);
-                break;
-            case PEN:
-                int r = Integer.valueOf(data[1].substring(1,3),16);
-                int g = Integer.valueOf(data[1].substring(3,5),16);
-                int b = Integer.valueOf(data[1].substring(5,7),16);
+        try {
+            switch (shape_Type.valueOf(data[0])) {
+                case PLOT:
+                    add_Shape(shape_Type.valueOf(data[0]), Double.parseDouble(data[1]), Double.parseDouble(data[2]), Double.parseDouble(data[1]), Double.parseDouble(data[2]));
+                    break;
+                case POLYGON:
+                    add_Polygon(data);
+                    break;
+                case PEN:
+                    int r = Integer.valueOf(data[1].substring(1, 3), 16);
+                    int g = Integer.valueOf(data[1].substring(3, 5), 16);
+                    int b = Integer.valueOf(data[1].substring(5, 7), 16);
 
-                pen_Colour = new Color(r,g,b);
-                Add_Colour(draw_Type.PEN);
-                break;
-            case FILL:
-                if(data[1].equals("OFF")){
-                    Add_Colour(draw_Type.FILL_NULL);
-                }else {
-                    r = Integer.valueOf(data[1].substring(1, 3), 16);
-                    g = Integer.valueOf(data[1].substring(3, 5), 16);
-                    b = Integer.valueOf(data[1].substring(5, 7), 16);
+                    pen_Colour = new Color(r, g, b);
+                    Add_Colour(draw_Type.PEN);
+                    break;
+                case FILL:
+                    if (data[1].equals("OFF")) {
+                        Add_Colour(draw_Type.FILL_NULL);
+                    } else {
+                        r = Integer.valueOf(data[1].substring(1, 3), 16);
+                        g = Integer.valueOf(data[1].substring(3, 5), 16);
+                        b = Integer.valueOf(data[1].substring(5, 7), 16);
 
-                    fill_Colour = new Color(r, g, b);
-                    Add_Colour(draw_Type.FILL_COLOUR);
-                }
-                break;
+                        fill_Colour = new Color(r, g, b);
+                        Add_Colour(draw_Type.FILL_COLOUR);
+                    }
+                    break;
+                default:
+                    add_Shape(shape_Type.valueOf(data[0]), Double.parseDouble(data[1]), Double.parseDouble(data[2]), Double.parseDouble(data[3]), Double.parseDouble(data[4]));
+                    break;
+            }
+        }catch(IllegalArgumentException e){
+            if(!testing){
+                //Normal GUI operation
+                JOptionPane.showMessageDialog(getRootFrame(), e.getMessage(),"Error", JOptionPane.WARNING_MESSAGE);
+            }else{
+                //Testing operation
+                return e.getMessage();
 
-            default:
-                add_Shape(shape_Type.valueOf(data[0]), Double.parseDouble(data[1]), Double.parseDouble(data[2]), Double.parseDouble(data[3]), Double.parseDouble(data[4]));
-                break;
+            }
         }
+
+        //returns null in GUI operation
+        return null;
     }
 
     /**
+     *
      * File explorer interface where user selects a VEC file to load.
      * Only VEC files and folders are displayed
-     *
      * Selected file is then looped through by line with each line being read by read_Line().
+     *
+     *
      */
     private void load_File(){
         //Prewritten GUI for file browsing, shows the users current directory on opening.
         //Only shows VEC files.
-        JFileChooser chooser= new JFileChooser(System.getProperty("user.dir"));
+        JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
         chooser.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Only VEC Files", "VEC");
         chooser.addChoosableFileFilter(filter);
 
         //Show GUI and return the path when the choice is confirmed
-        int choice = chooser.showOpenDialog(null);
-        if (choice != JFileChooser.APPROVE_OPTION) return;
+        chooser.showOpenDialog(null);
         File chosenFile = chooser.getSelectedFile();
 
         //Clear the drawing area by emptying drawn_Shapes.
@@ -762,11 +780,15 @@ public class GUI extends JFrame {
             Scanner sc = new Scanner(chosenFile);
             //Read each line in the file & add to drawn_Shapes
             while (sc.hasNextLine()){
-                read_Line(sc);
+                read_Line(sc,false);
             }
+            //Ensures the latest drawing is not displayed
+            x_Current = -1;
+            x_Previous = -1;
+            y_Current = -1;
+            y_Previous = -1;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            //Thrown Exception
+             JOptionPane.showMessageDialog(getRootFrame(), e.getMessage(),"File-Read Error", JOptionPane.WARNING_MESSAGE);
         }
 
         //Repaint screen with new shapes
@@ -980,8 +1002,7 @@ public class GUI extends JFrame {
 
                             break;
                         default:
-                            System.out.println("Not a shape");
-                            //Throw Exception
+                            JOptionPane.showMessageDialog(getRootFrame(), "Selected tool is not a shape","Error", JOptionPane.WARNING_MESSAGE);
                             break;
                     }
                 }

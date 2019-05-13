@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9e3b701-8b3c-4997-a1e6-87ba82d0e54d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/draw_Type.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/Drawn_Shapes.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Assignment/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment/GUI$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Assignment/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment/GUI$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Assignment/GUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment/GUI$3.class" afterDir="false" />
@@ -17,10 +16,99 @@
       <change beforePath="$PROJECT_DIR$/out/production/Assignment/GUI$Colour_Chooser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment/GUI$Colour_Chooser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Assignment/GUI$Draw_Panel$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment/GUI$Draw_Panel$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Assignment/GUI$Draw_Panel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment/GUI$Draw_Panel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/GUI.Colour_Chooser.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/GUI.Draw_Panel.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Assignment/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment/GUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/GUI.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Assignment/GUI_Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment/GUI_Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/GUI_Test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/allclasses-index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/allclasses.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/allpackages-index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/constant-values.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/deprecated-list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/element-list" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/help-doc.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-10.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-11.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-12.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-13.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-14.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-15.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-16.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-17.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-18.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-4.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-5.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-6.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-7.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-8.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index-files/index-9.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/member-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/member-search-index.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/overview-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/package-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/package-search-index.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/search.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/serialized-form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/shape_Type.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/stylesheet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/type-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment/type-search-index.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Drawn_Shapes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.Colour_Chooser.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.Draw_Panel.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI_Test.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI_Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI_Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/allclasses-index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/allclasses.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/allpackages-index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/constant-values.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/deprecated-list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/element-list" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/help-doc.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-10.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-11.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-12.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-13.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-14.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-15.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-16.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-17.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-18.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-4.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-5.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-6.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-7.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-8.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index-files/index-9.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/member-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/member-search-index.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/overview-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package-search-index.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/search.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serialized-form.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shape_Type.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stylesheet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/type-search-index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/type-search-index.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tes.VEC" beforeDir="false" afterPath="$PROJECT_DIR$/tes.VEC" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -41,8 +129,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="862" column="58" selection-start-line="862" selection-start-column="58" selection-end-line="862" selection-end-column="58" />
+            <state relative-caret-position="242">
+              <caret line="818" column="5" lean-forward="true" selection-start-line="818" selection-start-column="5" selection-end-line="818" selection-end-column="5" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="method#GUI#0;class#GUI#0" />
@@ -56,42 +144,41 @@
                 <element signature="method#MouseClicked#0;class#GUI#0" />
                 <element signature="method#MouseReleased#0;class#GUI#0" />
                 <element signature="method#Tool_Buttons#0;class#GUI#0" />
-                <element signature="e#7715#8347#0" expanded="true" />
-                <element signature="e#8346#8347#0" expanded="true" />
+                <element signature="e#7824#8456#0" expanded="true" />
+                <element signature="e#8455#8456#0" expanded="true" />
                 <element signature="method#File_Buttons#0;class#GUI#0" />
-                <element signature="e#10446#10660#0" expanded="true" />
-                <element signature="e#10659#10660#0" expanded="true" />
-                <element signature="e#10831#11045#0" expanded="true" />
-                <element signature="e#11044#11045#0" expanded="true" />
-                <element signature="e#11216#11425#0" expanded="true" />
-                <element signature="e#11424#11425#0" expanded="true" />
-                <element signature="e#12513#13231#0" expanded="true" />
-                <element signature="e#13230#13231#0" expanded="true" />
+                <element signature="e#10555#10769#0" expanded="true" />
+                <element signature="e#10768#10769#0" expanded="true" />
+                <element signature="e#10940#11158#0" expanded="true" />
+                <element signature="e#11157#11158#0" expanded="true" />
+                <element signature="e#11329#11538#0" expanded="true" />
+                <element signature="e#11537#11538#0" expanded="true" />
+                <element signature="method#Colour_Buttons#0;class#GUI#0" />
+                <element signature="e#12626#13344#0" expanded="true" />
+                <element signature="e#13343#13344#0" expanded="true" />
                 <element signature="e#9942#11370#1" />
-                <element signature="e#14129#14632#0" expanded="true" />
-                <element signature="e#14631#14632#0" expanded="true" />
+                <element signature="e#14242#14745#0" expanded="true" />
+                <element signature="e#14744#14745#0" expanded="true" />
                 <element signature="method#buttons_Create#0;class#GUI#0" />
                 <element signature="method#Add_Colour#0;class#GUI#0" />
                 <element signature="method#add_Polygon#0;class#GUI#0" />
                 <element signature="method#polygon_Ending_Check#0;class#GUI#0" />
                 <element signature="method#polygon_End#0;class#GUI#0" />
                 <element signature="method#add_Shape#0;class#GUI#0" />
-                <element signature="e#18189#18636#0" />
+                <element signature="e#22662#23483#0" />
                 <element signature="method#find_Path#0;class#GUI#0" />
                 <element signature="method#save_Polygon#0;class#GUI#0" />
                 <element signature="e#25327#26069#0" />
                 <element signature="method#save_File#0;class#GUI#0" />
-                <element signature="e#27966#29759#0" />
-                <element signature="method#load_File#0;class#GUI#0" />
+                <element signature="e#28246#30182#0" />
+                <element signature="e#30812#32264#0" />
                 <element signature="method#new_Drawn_Shapes#0;class#GUI#0" />
                 <element signature="class#25466:26097" />
-                <element signature="method#Draw_Panel#0;class#Draw_Panel#0;class#GUI#0" />
-                <element signature="e#34081#34253#0" expanded="true" />
-                <element signature="e#34252#34253#0" expanded="true" />
+                <element signature="e#34913#35085#0" expanded="true" />
+                <element signature="e#35084#35085#0" expanded="true" />
                 <element signature="method#draw_Users_Current_shape#0;class#Draw_Panel#0;class#GUI#0" />
                 <element signature="method#draw_Shapes_in_drawn_Shapes#0;class#Draw_Panel#0;class#GUI#0" />
                 <element signature="method#paintComponent#0;class#Draw_Panel#0;class#GUI#0" />
-                <element signature="method#main#0;class#GUI#0" />
               </folding>
             </state>
           </provider>
@@ -100,14 +187,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GUI_Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="101">
-              <caret line="152" column="44" selection-start-line="152" selection-start-column="44" selection-end-line="152" selection-end-column="44" />
+            <state relative-caret-position="69">
+              <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="method#testConstruction#0;class#GUI_Test#0" />
+                <element signature="method#testAddShape#0;class#GUI_Test#0" />
                 <element signature="method#testAddPenColour#0;class#GUI_Test#0" />
                 <element signature="method#testAddFillColour#0;class#GUI_Test#0" />
                 <element signature="method#testUndo#0;class#GUI_Test#0" />
+                <element signature="method#testUndoMultiple#0;class#GUI_Test#0" />
+                <element signature="method#testFileErrorLoad#0;class#GUI_Test#0" />
               </folding>
             </state>
           </provider>
@@ -126,16 +215,12 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>serialVersionUID</find>
-      <find>image_Buttons</find>
-      <find>drawn_Shapes</find>
       <find>Point</find>
       <find>Drawn_Shapes</find>
       <find>state</find>
       <find>constraints</find>
       <find>getHeight</find>
       <find>getWidth</find>
-      <find>save_File</find>
       <find>colour</find>
       <find>print</find>
       <find>System.out</find>
@@ -152,6 +237,14 @@
       <find>Add_Colour</find>
       <find>add_Shape</find>
       <find>switch</find>
+      <find>throw</find>
+      <find>undo</find>
+      <find>JFrame</find>
+      <find>exception</find>
+      <find>save_File</find>
+      <find>load_File</find>
+      <find>Error</find>
+      <find>JOptionPane.showMessageDialog</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -214,7 +307,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="282" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557740956483" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557747454643" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="create.test.in.the.same.root" value="true" />
@@ -263,21 +356,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GUI_Test.testAddColour" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GUI_Test.testFileError" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Assignment" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="GUI_Test" />
-      <option name="METHOD_NAME" value="testAddColour" />
+      <option name="METHOD_NAME" value="testFileError" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GUI_Test.testAddFillColour" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GUI_Test.testFileErrorLoad" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Assignment" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="GUI_Test" />
-      <option name="METHOD_NAME" value="testAddFillColour" />
+      <option name="METHOD_NAME" value="testFileErrorLoad" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -297,9 +390,9 @@
       <list>
         <item itemvalue="JUnit.GUI_Test" />
         <item itemvalue="Application.GUI" />
+        <item itemvalue="JUnit.GUI_Test.testFileErrorLoad" />
+        <item itemvalue="JUnit.GUI_Test.testFileError" />
         <item itemvalue="JUnit.GUI_Test.testPolygonEndCheck" />
-        <item itemvalue="JUnit.GUI_Test.testAddFillColour" />
-        <item itemvalue="JUnit.GUI_Test.testAddColour" />
       </list>
     </recent_temporary>
   </component>
@@ -317,42 +410,43 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="GUI_Test - 2019.05.12 at 23h 02m 50s.xml">
+    <history-entry file="GUI_Test_testFileErrorLoad - 2019.05.13 at 21h 26m 27s.xml">
+      <configuration name="GUI_Test.testFileErrorLoad" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test_testFileErrorLoad - 2019.05.13 at 21h 27m 23s.xml">
+      <configuration name="GUI_Test.testFileErrorLoad" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test_testFileErrorLoad - 2019.05.13 at 21h 27m 37s.xml">
+      <configuration name="GUI_Test.testFileErrorLoad" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test_testFileErrorLoad - 2019.05.13 at 21h 28m 00s.xml">
+      <configuration name="GUI_Test.testFileErrorLoad" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test_testFileErrorLoad - 2019.05.13 at 21h 28m 25s.xml">
+      <configuration name="GUI_Test.testFileErrorLoad" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test_testFileErrorLoad - 2019.05.13 at 21h 31m 18s.xml">
+      <configuration name="GUI_Test.testFileErrorLoad" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test_testFileErrorLoad - 2019.05.13 at 21h 31m 44s.xml">
+      <configuration name="GUI_Test.testFileErrorLoad" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test - 2019.05.13 at 21h 32m 29s.xml">
       <configuration name="GUI_Test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GUI_Test - 2019.05.13 at 13h 36m 30s.xml">
+    <history-entry file="GUI_Test - 2019.05.13 at 21h 35m 28s.xml">
       <configuration name="GUI_Test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="GUI_Test - 2019.05.13 at 13h 55m 35s.xml">
-      <configuration name="GUI_Test" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GUI_Test - 2019.05.13 at 13h 58m 44s.xml">
-      <configuration name="GUI_Test" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GUI_Test - 2019.05.13 at 18h 32m 01s.xml">
-      <configuration name="GUI_Test" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GUI_Test - 2019.05.13 at 18h 32m 52s.xml">
-      <configuration name="GUI_Test" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GUI_Test - 2019.05.13 at 18h 33m 45s.xml">
-      <configuration name="GUI_Test" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GUI_Test - 2019.05.13 at 18h 34m 08s.xml">
-      <configuration name="GUI_Test" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GUI_Test - 2019.05.13 at 18h 50m 10s.xml">
-      <configuration name="GUI_Test" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GUI_Test - 2019.05.13 at 19h 48m 36s.xml">
+    <history-entry file="GUI_Test - 2019.05.13 at 21h 37m 20s.xml">
       <configuration name="GUI_Test" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1293" height="693" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.689759" visible="true" weight="0.24048583" />
-      <window_info id="Structure" order="1" sideWeight="0.31024095" side_tool="true" visible="true" weight="0.24048583" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.69033533" visible="true" weight="0.24048583" />
+      <window_info id="Structure" order="1" sideWeight="0.3096647" side_tool="true" visible="true" weight="0.24048583" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -360,15 +454,15 @@
       <window_info id="Favorites" order="6" sideWeight="0.50284094" side_tool="true" weight="0.13117409" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.15456238" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.38175046" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.30100334" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.05586592" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.05586592" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32960895" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50040483" side_tool="true" weight="0.26256984" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49959514" weight="0.26070765" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49959514" weight="0.29608938" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -426,13 +520,6 @@
     <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.desktop/java/awt/Container.java" />
     <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.desktop/java/awt/Graphics.java" />
     <entry file="file://$PROJECT_DIR$/src/Tests.java" />
-    <entry file="file://$PROJECT_DIR$/src/Drawn_Shapes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="20" lean-forward="true" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Buttons.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -483,24 +570,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.desktop/java/awt/EventDispatchThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="108" selection-start-line="108" selection-end-line="108" />
+          <folding>
+            <element signature="e#2706#2707#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.base/java/lang/Enum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="239" selection-start-line="239" selection-end-line="239" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Drawn_Shapes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI_Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="152" column="44" selection-start-line="152" selection-start-column="44" selection-end-line="152" selection-end-column="44" />
+        <state relative-caret-position="69">
+          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="method#testConstruction#0;class#GUI_Test#0" />
+            <element signature="method#testAddShape#0;class#GUI_Test#0" />
             <element signature="method#testAddPenColour#0;class#GUI_Test#0" />
             <element signature="method#testAddFillColour#0;class#GUI_Test#0" />
             <element signature="method#testUndo#0;class#GUI_Test#0" />
+            <element signature="method#testUndoMultiple#0;class#GUI_Test#0" />
+            <element signature="method#testFileErrorLoad#0;class#GUI_Test#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="862" column="58" selection-start-line="862" selection-start-column="58" selection-end-line="862" selection-end-column="58" />
+        <state relative-caret-position="242">
+          <caret line="818" column="5" lean-forward="true" selection-start-line="818" selection-start-column="5" selection-end-line="818" selection-end-column="5" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="method#GUI#0;class#GUI#0" />
@@ -514,42 +627,41 @@
             <element signature="method#MouseClicked#0;class#GUI#0" />
             <element signature="method#MouseReleased#0;class#GUI#0" />
             <element signature="method#Tool_Buttons#0;class#GUI#0" />
-            <element signature="e#7715#8347#0" expanded="true" />
-            <element signature="e#8346#8347#0" expanded="true" />
+            <element signature="e#7824#8456#0" expanded="true" />
+            <element signature="e#8455#8456#0" expanded="true" />
             <element signature="method#File_Buttons#0;class#GUI#0" />
-            <element signature="e#10446#10660#0" expanded="true" />
-            <element signature="e#10659#10660#0" expanded="true" />
-            <element signature="e#10831#11045#0" expanded="true" />
-            <element signature="e#11044#11045#0" expanded="true" />
-            <element signature="e#11216#11425#0" expanded="true" />
-            <element signature="e#11424#11425#0" expanded="true" />
-            <element signature="e#12513#13231#0" expanded="true" />
-            <element signature="e#13230#13231#0" expanded="true" />
+            <element signature="e#10555#10769#0" expanded="true" />
+            <element signature="e#10768#10769#0" expanded="true" />
+            <element signature="e#10940#11158#0" expanded="true" />
+            <element signature="e#11157#11158#0" expanded="true" />
+            <element signature="e#11329#11538#0" expanded="true" />
+            <element signature="e#11537#11538#0" expanded="true" />
+            <element signature="method#Colour_Buttons#0;class#GUI#0" />
+            <element signature="e#12626#13344#0" expanded="true" />
+            <element signature="e#13343#13344#0" expanded="true" />
             <element signature="e#9942#11370#1" />
-            <element signature="e#14129#14632#0" expanded="true" />
-            <element signature="e#14631#14632#0" expanded="true" />
+            <element signature="e#14242#14745#0" expanded="true" />
+            <element signature="e#14744#14745#0" expanded="true" />
             <element signature="method#buttons_Create#0;class#GUI#0" />
             <element signature="method#Add_Colour#0;class#GUI#0" />
             <element signature="method#add_Polygon#0;class#GUI#0" />
             <element signature="method#polygon_Ending_Check#0;class#GUI#0" />
             <element signature="method#polygon_End#0;class#GUI#0" />
             <element signature="method#add_Shape#0;class#GUI#0" />
-            <element signature="e#18189#18636#0" />
+            <element signature="e#22662#23483#0" />
             <element signature="method#find_Path#0;class#GUI#0" />
             <element signature="method#save_Polygon#0;class#GUI#0" />
             <element signature="e#25327#26069#0" />
             <element signature="method#save_File#0;class#GUI#0" />
-            <element signature="e#27966#29759#0" />
-            <element signature="method#load_File#0;class#GUI#0" />
+            <element signature="e#28246#30182#0" />
+            <element signature="e#30812#32264#0" />
             <element signature="method#new_Drawn_Shapes#0;class#GUI#0" />
             <element signature="class#25466:26097" />
-            <element signature="method#Draw_Panel#0;class#Draw_Panel#0;class#GUI#0" />
-            <element signature="e#34081#34253#0" expanded="true" />
-            <element signature="e#34252#34253#0" expanded="true" />
+            <element signature="e#34913#35085#0" expanded="true" />
+            <element signature="e#35084#35085#0" expanded="true" />
             <element signature="method#draw_Users_Current_shape#0;class#Draw_Panel#0;class#GUI#0" />
             <element signature="method#draw_Shapes_in_drawn_Shapes#0;class#Draw_Panel#0;class#GUI#0" />
             <element signature="method#paintComponent#0;class#Draw_Panel#0;class#GUI#0" />
-            <element signature="method#main#0;class#GUI#0" />
           </folding>
         </state>
       </provider>

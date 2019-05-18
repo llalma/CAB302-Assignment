@@ -129,74 +129,33 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="818" column="5" lean-forward="true" selection-start-line="818" selection-start-column="5" selection-end-line="818" selection-end-column="5" />
+            <state relative-caret-position="240">
+              <caret line="289" column="17" lean-forward="true" selection-start-line="289" selection-start-column="17" selection-end-line="289" selection-end-column="17" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
-                <element signature="method#GUI#0;class#GUI#0" />
-                <element signature="e#2730#4186#0" />
-                <element signature="class#2809:3135" />
-                <element signature="e#2879#2880#0" expanded="true" />
-                <element signature="e#2928#2929#0" expanded="true" />
-                <element signature="method#mouseReleased#0;class#2809:3135" />
-                <element signature="class#3179:4076" />
-                <element signature="method#mouseDragged#0;class#3179:4076" />
-                <element signature="method#MouseClicked#0;class#GUI#0" />
-                <element signature="method#MouseReleased#0;class#GUI#0" />
-                <element signature="method#Tool_Buttons#0;class#GUI#0" />
-                <element signature="e#7824#8456#0" expanded="true" />
-                <element signature="e#8455#8456#0" expanded="true" />
-                <element signature="method#File_Buttons#0;class#GUI#0" />
-                <element signature="e#10555#10769#0" expanded="true" />
-                <element signature="e#10768#10769#0" expanded="true" />
-                <element signature="e#10940#11158#0" expanded="true" />
-                <element signature="e#11157#11158#0" expanded="true" />
-                <element signature="e#11329#11538#0" expanded="true" />
-                <element signature="e#11537#11538#0" expanded="true" />
-                <element signature="method#Colour_Buttons#0;class#GUI#0" />
-                <element signature="e#12626#13344#0" expanded="true" />
-                <element signature="e#13343#13344#0" expanded="true" />
-                <element signature="e#9942#11370#1" />
-                <element signature="e#14242#14745#0" expanded="true" />
-                <element signature="e#14744#14745#0" expanded="true" />
-                <element signature="method#buttons_Create#0;class#GUI#0" />
-                <element signature="method#Add_Colour#0;class#GUI#0" />
-                <element signature="method#add_Polygon#0;class#GUI#0" />
-                <element signature="method#polygon_Ending_Check#0;class#GUI#0" />
-                <element signature="method#polygon_End#0;class#GUI#0" />
-                <element signature="method#add_Shape#0;class#GUI#0" />
-                <element signature="e#22662#23483#0" />
-                <element signature="method#find_Path#0;class#GUI#0" />
-                <element signature="method#save_Polygon#0;class#GUI#0" />
-                <element signature="e#25327#26069#0" />
-                <element signature="method#save_File#0;class#GUI#0" />
-                <element signature="e#28246#30182#0" />
-                <element signature="e#30812#32264#0" />
-                <element signature="method#new_Drawn_Shapes#0;class#GUI#0" />
-                <element signature="class#25466:26097" />
-                <element signature="e#34913#35085#0" expanded="true" />
-                <element signature="e#35084#35085#0" expanded="true" />
-                <element signature="method#draw_Users_Current_shape#0;class#Draw_Panel#0;class#GUI#0" />
-                <element signature="method#draw_Shapes_in_drawn_Shapes#0;class#Draw_Panel#0;class#GUI#0" />
-                <element signature="method#paintComponent#0;class#Draw_Panel#0;class#GUI#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GUI_Test.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
-              <folding>
-                <element signature="method#testConstruction#0;class#GUI_Test#0" />
-                <element signature="method#testAddShape#0;class#GUI_Test#0" />
-                <element signature="method#testAddPenColour#0;class#GUI_Test#0" />
-                <element signature="method#testAddFillColour#0;class#GUI_Test#0" />
-                <element signature="method#testUndo#0;class#GUI_Test#0" />
-                <element signature="method#testUndoMultiple#0;class#GUI_Test#0" />
-                <element signature="method#testFileErrorLoad#0;class#GUI_Test#0" />
+                <element signature="e#2373#3085#0" />
+                <element signature="e#3091#4687#0" />
+                <element signature="e#4713#5940#0" />
+                <element signature="e#5946#6837#0" />
+                <element signature="e#6865#9561#0" />
+                <element signature="e#12546#13478#1" />
+                <element signature="e#15193#15617#0" />
+                <element signature="e#15661#18082#0" />
+                <element signature="e#18088#19545#0" />
+                <element signature="e#19551#20324#0" />
+                <element signature="e#20330#21143#0" />
+                <element signature="e#21149#22765#0" />
+                <element signature="e#22771#23705#0" />
+                <element signature="e#23712#24441#0" />
+                <element signature="e#24447#25472#0" />
+                <element signature="e#25478#26406#0" />
+                <element signature="e#26412#28240#0" />
+                <element signature="e#28246#30802#0" />
+                <element signature="e#30808#32384#0" />
+                <element signature="e#32390#33079#0" />
+                <element signature="e#33086#34198#0" />
+                <element signature="e#34204#43210#0" />
+                <element signature="e#37660#42628#0" />
+                <element signature="e#42638#43204#0" />
               </folding>
             </state>
           </provider>
@@ -280,7 +239,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -297,6 +255,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -339,7 +298,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.GUI_Test">
+  <component name="RunManager" selected="Application.GUI">
     <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUI" />
       <module name="Assignment" />
@@ -388,8 +347,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GUI_Test" />
         <item itemvalue="Application.GUI" />
+        <item itemvalue="JUnit.GUI_Test" />
         <item itemvalue="JUnit.GUI_Test.testFileErrorLoad" />
         <item itemvalue="JUnit.GUI_Test.testFileError" />
         <item itemvalue="JUnit.GUI_Test.testPolygonEndCheck" />
@@ -442,11 +401,11 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1293" height="693" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.69033533" visible="true" weight="0.24048583" />
-      <window_info id="Structure" order="1" sideWeight="0.3096647" side_tool="true" visible="true" weight="0.24048583" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.68949234" visible="true" weight="0.10554371" />
+      <window_info id="Structure" order="1" sideWeight="0.31050768" side_tool="true" visible="true" weight="0.10554371" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -454,7 +413,7 @@
       <window_info id="Favorites" order="6" sideWeight="0.50284094" side_tool="true" weight="0.13117409" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.15456238" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.05586592" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.05574136" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.05586592" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -462,7 +421,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32960895" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50040483" side_tool="true" weight="0.26256984" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49959514" weight="0.29608938" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49959514" weight="0.2954292" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -520,42 +479,9 @@
     <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.desktop/java/awt/Container.java" />
     <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.desktop/java/awt/Graphics.java" />
     <entry file="file://$PROJECT_DIR$/src/Tests.java" />
-    <entry file="file://$PROJECT_DIR$/src/Buttons.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Colour_Chooser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#227#228#0" expanded="true" />
-            <element signature="e#250#251#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Draw_Panel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Draw_Panel#0;class#Draw_Panel#0;class#Draw_Panel#0" />
-            <element signature="method#undo#0;class#Draw_Panel#0" />
-            <element signature="method#draw_Users_Current_shape#0;class#Draw_Panel#0;class#Draw_Panel#0" />
-            <element signature="method#paintComponent#0;class#Draw_Panel#0;class#Draw_Panel#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Buttons.java" />
+    <entry file="file://$PROJECT_DIR$/src/Colour_Chooser.java" />
+    <entry file="file://$PROJECT_DIR$/src/Draw_Panel.java" />
     <entry file="file://$PROJECT_DIR$/src/shape_Type.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
@@ -563,30 +489,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/draw_Type.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="21" selection-start-column="12" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.desktop/java/awt/EventDispatchThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="108" selection-start-line="108" selection-end-line="108" />
-          <folding>
-            <element signature="e#2706#2707#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.base/java/lang/Enum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="239" selection-start-line="239" selection-end-line="239" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/draw_Type.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.desktop/java/awt/EventDispatchThread.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-11.0.2/lib/src.zip!/java.base/java/lang/Enum.java" />
     <entry file="file://$PROJECT_DIR$/src/Drawn_Shapes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
@@ -594,74 +499,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI_Test.java">
+    <entry file="file://$PROJECT_DIR$/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
+        <state relative-caret-position="240">
+          <caret line="289" column="17" lean-forward="true" selection-start-line="289" selection-start-column="17" selection-end-line="289" selection-end-column="17" />
           <folding>
-            <element signature="method#testConstruction#0;class#GUI_Test#0" />
-            <element signature="method#testAddShape#0;class#GUI_Test#0" />
-            <element signature="method#testAddPenColour#0;class#GUI_Test#0" />
-            <element signature="method#testAddFillColour#0;class#GUI_Test#0" />
-            <element signature="method#testUndo#0;class#GUI_Test#0" />
-            <element signature="method#testUndoMultiple#0;class#GUI_Test#0" />
-            <element signature="method#testFileErrorLoad#0;class#GUI_Test#0" />
+            <element signature="e#2373#3085#0" />
+            <element signature="e#3091#4687#0" />
+            <element signature="e#4713#5940#0" />
+            <element signature="e#5946#6837#0" />
+            <element signature="e#6865#9561#0" />
+            <element signature="e#12546#13478#1" />
+            <element signature="e#15193#15617#0" />
+            <element signature="e#15661#18082#0" />
+            <element signature="e#18088#19545#0" />
+            <element signature="e#19551#20324#0" />
+            <element signature="e#20330#21143#0" />
+            <element signature="e#21149#22765#0" />
+            <element signature="e#22771#23705#0" />
+            <element signature="e#23712#24441#0" />
+            <element signature="e#24447#25472#0" />
+            <element signature="e#25478#26406#0" />
+            <element signature="e#26412#28240#0" />
+            <element signature="e#28246#30802#0" />
+            <element signature="e#30808#32384#0" />
+            <element signature="e#32390#33079#0" />
+            <element signature="e#33086#34198#0" />
+            <element signature="e#34204#43210#0" />
+            <element signature="e#37660#42628#0" />
+            <element signature="e#42638#43204#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI.java">
+    <entry file="file://$PROJECT_DIR$/src/GUI_Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="818" column="5" lean-forward="true" selection-start-line="818" selection-start-column="5" selection-end-line="818" selection-end-column="5" />
+        <state relative-caret-position="144">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="method#GUI#0;class#GUI#0" />
-            <element signature="e#2730#4186#0" />
-            <element signature="class#2809:3135" />
-            <element signature="e#2879#2880#0" expanded="true" />
-            <element signature="e#2928#2929#0" expanded="true" />
-            <element signature="method#mouseReleased#0;class#2809:3135" />
-            <element signature="class#3179:4076" />
-            <element signature="method#mouseDragged#0;class#3179:4076" />
-            <element signature="method#MouseClicked#0;class#GUI#0" />
-            <element signature="method#MouseReleased#0;class#GUI#0" />
-            <element signature="method#Tool_Buttons#0;class#GUI#0" />
-            <element signature="e#7824#8456#0" expanded="true" />
-            <element signature="e#8455#8456#0" expanded="true" />
-            <element signature="method#File_Buttons#0;class#GUI#0" />
-            <element signature="e#10555#10769#0" expanded="true" />
-            <element signature="e#10768#10769#0" expanded="true" />
-            <element signature="e#10940#11158#0" expanded="true" />
-            <element signature="e#11157#11158#0" expanded="true" />
-            <element signature="e#11329#11538#0" expanded="true" />
-            <element signature="e#11537#11538#0" expanded="true" />
-            <element signature="method#Colour_Buttons#0;class#GUI#0" />
-            <element signature="e#12626#13344#0" expanded="true" />
-            <element signature="e#13343#13344#0" expanded="true" />
-            <element signature="e#9942#11370#1" />
-            <element signature="e#14242#14745#0" expanded="true" />
-            <element signature="e#14744#14745#0" expanded="true" />
-            <element signature="method#buttons_Create#0;class#GUI#0" />
-            <element signature="method#Add_Colour#0;class#GUI#0" />
-            <element signature="method#add_Polygon#0;class#GUI#0" />
-            <element signature="method#polygon_Ending_Check#0;class#GUI#0" />
-            <element signature="method#polygon_End#0;class#GUI#0" />
-            <element signature="method#add_Shape#0;class#GUI#0" />
-            <element signature="e#22662#23483#0" />
-            <element signature="method#find_Path#0;class#GUI#0" />
-            <element signature="method#save_Polygon#0;class#GUI#0" />
-            <element signature="e#25327#26069#0" />
-            <element signature="method#save_File#0;class#GUI#0" />
-            <element signature="e#28246#30182#0" />
-            <element signature="e#30812#32264#0" />
-            <element signature="method#new_Drawn_Shapes#0;class#GUI#0" />
-            <element signature="class#25466:26097" />
-            <element signature="e#34913#35085#0" expanded="true" />
-            <element signature="e#35084#35085#0" expanded="true" />
-            <element signature="method#draw_Users_Current_shape#0;class#Draw_Panel#0;class#GUI#0" />
-            <element signature="method#draw_Shapes_in_drawn_Shapes#0;class#Draw_Panel#0;class#GUI#0" />
-            <element signature="method#paintComponent#0;class#Draw_Panel#0;class#GUI#0" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#testUndoMultiple#0;class#GUI_Test#0" />
           </folding>
         </state>
       </provider>

@@ -34,6 +34,10 @@ public class GUI extends JFrame {
     private static final Color[] colour_Buttons = new Color[]{Color.BLACK,Color.RED,Color.GREEN,Color.YELLOW,Color.WHITE,Color.BLUE,Color.ORANGE,Color.MAGENTA};
     private static final int num_Tool_Buttons = tool_Buttons.length;
 
+    //Button tool tips
+    private static final String[] tool_Button_Tip = new String[]{"Drag and release to draw line.","Drag and release to draw rectangle.", "Click to place a point at location", "Drag and release to draw ellipse.", "Click on multiple points to draw a polygon. Finish near the starting point to complete the shape."};
+    private static final String[] file_Button_Tip = new String[]{"Save the current file to the user selected location.", "Load the selected file from the specified user location", "Undo the last action"};
+
     //Positions of mouse pointer
     private int x_Previous,y_Previous,x_Current,y_Current;
 
@@ -216,6 +220,7 @@ public class GUI extends JFrame {
                     //These need to be after setAction
                     button.setActionCommand(Integer.toString(i));
                     button.setIcon(new ImageIcon(scaled_img));
+                    button.setToolTipText(tool_Button_Tip[i]);
                 } catch (Exception ex) {
                     System.out.println(ex);
                 }
@@ -290,6 +295,7 @@ public class GUI extends JFrame {
                 System.out.println(ex);
             }
             button.setPreferredSize(new Dimension(40, 40));
+            button.setToolTipText(file_Button_Tip[i]);
             file_panel.add(button);
         }
 
@@ -329,6 +335,7 @@ public class GUI extends JFrame {
                 }
             });
             button.setBackground(colour_Buttons[i]);
+            button.setToolTipText("Hold Left CTRL + click for fill or click for PEN.");
             button.setSize(10,10);
             colour_panel.add(button);
         }
@@ -343,7 +350,6 @@ public class GUI extends JFrame {
 
                 //Set action for buttons, makes each button get their specific functionality
                 if(colour_Special_Buttons[i].contains("NoFill")){
-                    //Initial starting colour, red == no fill, green == will fill
                     button.setName("Fill");
                     button.setAction(new AbstractAction() {
                         @Override
@@ -352,12 +358,15 @@ public class GUI extends JFrame {
                             if(fill){
                                 fill = false;
                                 Add_Colour(draw_Type.FILL_NULL);
+
                             }else{
                                 fill = true;
                             }
                         }
                     });
+                    button.setToolTipText("Click to enable and disable fill. Current selection is shown on left hand side in the fill box.");
                 }else if(colour_Special_Buttons[i].contains("Rainbow")){
+                    button.setToolTipText("Displays popup window that user can select more colour or insert RGB values. Hold Left CTRL + click for fill or click for PEN.");
                     button.addActionListener(new Colour_Chooser());
                 }
 

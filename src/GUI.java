@@ -76,6 +76,17 @@ public class GUI extends JFrame {
         // Display the window.
         setPreferredSize(new Dimension(400, 400));
         setLocation(new Point(100, 100));
+
+        //Listen for a screen size change. If one occours repaint the screen with correct sizes.
+        //Set x_current and previous to -1, so the last drawn shape is not drawn.
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                x_Current = -1;
+                x_Previous = -1;
+                repaint();
+            }
+        });
         pack();
         setVisible(true);
 

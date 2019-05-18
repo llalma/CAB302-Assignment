@@ -129,14 +129,16 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="289" column="17" lean-forward="true" selection-start-line="289" selection-start-column="17" selection-end-line="289" selection-end-column="17" />
+            <state relative-caret-position="422">
+              <caret line="80" column="81" selection-start-line="80" selection-start-column="81" selection-end-line="80" selection-end-column="81" />
               <folding>
-                <element signature="e#2373#3085#0" />
+                <element signature="e#3532#3707#0" expanded="true" />
+                <element signature="e#3706#3707#0" expanded="true" />
                 <element signature="e#3091#4687#0" />
                 <element signature="e#4713#5940#0" />
                 <element signature="e#5946#6837#0" />
                 <element signature="e#6865#9561#0" />
+                <element signature="e#9567#11846#0" />
                 <element signature="e#12546#13478#1" />
                 <element signature="e#15193#15617#0" />
                 <element signature="e#15661#18082#0" />
@@ -414,7 +416,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.15456238" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.05574136" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.05586592" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.46042365" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -501,14 +503,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="289" column="17" lean-forward="true" selection-start-line="289" selection-start-column="17" selection-end-line="289" selection-end-column="17" />
+        <state relative-caret-position="422">
+          <caret line="80" column="81" selection-start-line="80" selection-start-column="81" selection-end-line="80" selection-end-column="81" />
           <folding>
-            <element signature="e#2373#3085#0" />
+            <element signature="e#3532#3707#0" expanded="true" />
+            <element signature="e#3706#3707#0" expanded="true" />
             <element signature="e#3091#4687#0" />
             <element signature="e#4713#5940#0" />
             <element signature="e#5946#6837#0" />
             <element signature="e#6865#9561#0" />
+            <element signature="e#9567#11846#0" />
             <element signature="e#12546#13478#1" />
             <element signature="e#15193#15617#0" />
             <element signature="e#15661#18082#0" />

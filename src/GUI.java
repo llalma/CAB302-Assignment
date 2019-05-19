@@ -150,24 +150,38 @@ public class GUI extends JFrame {
      * @param event -  The event that triggered the mouse listener.
      */
     private void MouseClicked(MouseEvent event){
-        //Get the x and y coordinates when the click occours.
-        x_Previous = event.getX();
-        y_Previous = event.getY();
-        x_Current = x_Previous;
-        y_Current = y_Previous;
+        if(event.getButton() == MouseEvent.BUTTON3){
+            //Cancelling a polygon.
+            polygon_Completed = true;
 
-        if(selected_Tool == shape_Type.POLYGON.ordinal()) {
-            polygon_Completed = false;
-            Double coords = x_Current + 0.0;
-            polygon.add(coords);
-            coords = y_Current + 0.0;
-            polygon.add(coords);
+            //Ensures last line is not drawn of the polygon when cancelled.
+            x_Current = -1;
+            x_Previous = -1;
+            //Clear the polygon
+            polygon = new ArrayList<>();
+            repaint();
+        }else{
 
-            //Ends the polygon if original and latest position is within 10 pixels in any direction.
-            if(polygon_Ending_Check() && polygon.size() > 4){
-                polygon_Complete();
+            //Get the x and y coordinates when the click occours.
+            x_Previous = event.getX();
+            y_Previous = event.getY();
+            x_Current = x_Previous;
+            y_Current = y_Previous;
+
+            if(selected_Tool == shape_Type.POLYGON.ordinal()) {
+                polygon_Completed = false;
+                Double coords = x_Current + 0.0;
+                polygon.add(coords);
+                coords = y_Current + 0.0;
+                polygon.add(coords);
+
+                //Ends the polygon if original and latest position is within 10 pixels in any direction.
+                if (polygon_Ending_Check() && polygon.size() > 4) {
+                    polygon_Complete();
+                }
             }
         }
+
     }
 
     /**
@@ -220,12 +234,16 @@ public class GUI extends JFrame {
                         public void actionPerformed(ActionEvent e) {
                             //If the user selects another tool before polygon is completed make sure it ends
                             polygon_Completed = true;
+
+                            //Ensures last line is not drawn of the polygon when cancelled.
+                            x_Current = -1;
+                            x_Previous = -1;
                             //Clear the polygon
                             polygon = new ArrayList<>();
+                            repaint();
 
                             String x =e.getActionCommand();
                             selected_Tool = Integer.parseInt(x);
-                            //System.out.println(selected_Tool);
                         }
                     });
 
@@ -582,6 +600,7 @@ public class GUI extends JFrame {
             case ELLIPSE:
                 Ellipse ellipse = new Ellipse(Coords);
                 drawn_Shapes.add(ellipse);
+                break;
             case POLYGON:
                 Polygon polygon = new Polygon(Coords);
                 drawn_Shapes.add(polygon);
@@ -589,6 +608,7 @@ public class GUI extends JFrame {
             case PLOT:
                 Plot plot =  new Plot(Coords);
                 drawn_Shapes.add(plot);
+                break;
         }
     }
 
@@ -923,12 +943,12 @@ public class GUI extends JFrame {
                 }
 
                 //Draw the shape according to the colours set
-                g.setColor(pen_col);
-                shape.draw(g,width,height);
                 if(fill_col != null){
                     g.setColor(fill_col);
                     shape.fill(g,width,height);
                 }
+                g.setColor(pen_col);
+                shape.draw(g,width,height);
             }
         }
 

@@ -45,7 +45,7 @@ class GUI_Test {
         //Prevents plot being selected as plot is returned differently
         int randnum = rand.nextInt(4);
         while(randnum == shape_Type.PLOT.ordinal()){
-            randnum = rand.nextInt();
+            randnum = rand.nextInt(4);
         }
         int tool = shape_Type.values()[randnum].ordinal();
         int x1 = rand.nextInt();

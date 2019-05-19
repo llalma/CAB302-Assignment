@@ -30,7 +30,7 @@ public class Rectangle extends Shape{
         int x2_scaled = (int)round(x2 * width);
         int y2_scaled = (int)round(y2 * height);
 
-        g.fillRect(Math.min(x1_scaled, x2_scaled)+1,Math.min(y1_scaled, y2_scaled)+1,Math.abs(x1_scaled - x2_scaled)-1,Math.abs(y1_scaled - y2_scaled)-1);
+        g.fillRect(Math.min(x1_scaled, x2_scaled),Math.min(y1_scaled, y2_scaled),Math.abs(x1_scaled - x2_scaled),Math.abs(y1_scaled - y2_scaled));
     }
 
     public String save_Text(){

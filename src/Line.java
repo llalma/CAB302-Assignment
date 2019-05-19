@@ -56,11 +56,4 @@ public class Line extends Shape{
         return shape_Type.LINE + " " + x1 + " " + y1 + " " +  x2 + " " +  y2;
     }
 
-    /**
-     * Returns the shape type
-     * @return - Returns the shape type, Line.
-     */
-    public shape_Type get_Shape(){
-        return shape_Type.LINE;
-    }
 }

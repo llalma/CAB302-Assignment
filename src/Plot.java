@@ -52,11 +52,4 @@ public class Plot extends Shape{
         return shape_Type.PLOT + " " + x1 + " " + y1 + " " +  x1 + " " +  y1;
     }
 
-    /**
-     * Returns the shape type
-     * @return - Returns the shape type, Plot.
-     */
-    public shape_Type get_Shape(){
-        return shape_Type.PLOT;
-    }
 }

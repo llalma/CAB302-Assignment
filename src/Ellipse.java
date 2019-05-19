@@ -61,11 +61,4 @@ public class Ellipse extends Shape{
         return shape_Type.ELLIPSE + " " + x1 + " " + y1 + " " +  x2 + " " +  y2;
     }
 
-    /**
-     * Returns the shape type
-     * @return - Returns the shape type, Ellipse.
-     */
-    public shape_Type get_Shape(){
-        return shape_Type.ELLIPSE;
-    }
 }

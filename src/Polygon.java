@@ -74,11 +74,4 @@ public class Polygon extends Shape{
         return line.toString();
     }
 
-    /**
-     * Returns the shape type
-     * @return - Returns the shape type, Polygon.
-     */
-    public shape_Type get_Shape(){
-        return shape_Type.POLYGON;
-    }
 }

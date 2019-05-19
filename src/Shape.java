@@ -19,6 +19,8 @@ public abstract class Shape {
     public abstract void draw(Graphics g, double width, double height);
     public abstract void fill(Graphics g,double width, double height);
     public abstract String save_Text();
-    public abstract shape_Type get_Shape();
+    public shape_Type get_Shape() {
+        return shape;
+    }
 
 }

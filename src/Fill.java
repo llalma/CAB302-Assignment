@@ -67,14 +67,6 @@ public class Fill extends Shape{
     }
 
     /**
-     * Returns the shape type
-     * @return - Returns the shape type, Fill.
-     */
-    public shape_Type get_Shape(){
-        return shape_Type.FILL;
-    }
-
-    /**
      * Returns the colour of the Fill.
      * @return - Fill colour.
      */

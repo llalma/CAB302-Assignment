@@ -67,14 +67,6 @@ public class Pen extends Shape{
     }
 
     /**
-     * Returns the shape type
-     * @return - Returns the shape type, Pen.
-     */
-    public shape_Type get_Shape(){
-        return shape_Type.PEN;
-    }
-
-    /**
      * Returns the colour of the pen.
      * @return - pen colour.
      */

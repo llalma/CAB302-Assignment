@@ -280,7 +280,7 @@ public class GUI extends JFrame {
                     button.setAction(new AbstractAction() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            save_File();
+                            save_File(null);
                         }
                     });
                 }else if(file_Buttons[i].contains("Load")){
@@ -464,22 +464,15 @@ public class GUI extends JFrame {
      *             Format = {"POLYGON" "0.2565789473684211" "0.2975609756097561" "0.3355263157894737" "0.7268292682926829" "0.6973684210526315" "0.5902439024390244" "0.7335526315789473" "0.28780487804878047"}
      */
     public void add_Polygon(String data[]){
-        double height = getContentPane().getComponent(3).getHeight();
-        double width = getContentPane().getComponent(3).getWidth();
-
         //Add the coordinates of the polygon to a variable
         for(int i = 1;i<data.length;i++){
-            //If odd will be an x value, else will be y value
-            if(i%2 != 0){
-                polygon.add(Double.parseDouble(data[i]) * width);
-            }else{
-                polygon.add(Double.parseDouble(data[i]) * height);
-            }
+            polygon.add(Double.parseDouble(data[i]));
         }
 
+
         //Reconnecting the last point to the original
-        polygon.add(Double.parseDouble(data[1]) * width);
-        polygon.add(Double.parseDouble(data[2]) * height);
+        polygon.add(Double.parseDouble(data[1]));
+        polygon.add(Double.parseDouble(data[2]));
 
         //Add the polygon read from the VEC file and add to the drawing variable
         Polygon poly = new Polygon(polygon);
@@ -589,26 +582,6 @@ public class GUI extends JFrame {
     }
 
     /**
-     *  Gets the last instance of the inputted shape and return the colour.
-     *
-     * @param shape - shape that the colour is used for. Inputs can only be FILL or PEN.
-     * @return - Last colour of the inputted shape
-     */
-    private Color change_Colour_Backwards(shape_Type shape){
-        Color colour = null;
-        for (Shape shape_Search:drawn_Shapes) {
-            if(shape_Search.get_Shape() == shape){
-                if(shape == shape_Type.PEN){
-                    colour = ((Pen)shape_Search).get_Colour();
-                }else{
-                    colour = ((Fill)shape_Search).get_Colour();
-                }
-            }
-        }
-        return colour;
-    }
-
-    /**
      * Undoes the last action in drawn_Shape, excluding change of fill or pen colours.
      * Undoes by removing the last index from drawn_Shapes, also sets x,y previous and current values to -1
      * so the shape last drawn does not appear.
@@ -661,9 +634,13 @@ public class GUI extends JFrame {
      * Saves all objects in the drawn_Shapes variable. Saves to the location returned by
      * find_Path().
      */
-    private void save_File(){
-        //Saves the file to the path specified by the user
-        File directory_Path = find_Path();
+    public boolean save_File(File directory_Path){
+        //If a path is supplied, it is in testing mode and will save to the given path.
+        if(directory_Path == null){
+            //Saves the file to the path specified by the user
+            directory_Path = find_Path();
+        }
+
         try {
             PrintWriter writer;
             //Create or load a VEC file depending on the path
@@ -683,11 +660,13 @@ public class GUI extends JFrame {
 
             //Popup notifying the save worked.
             JOptionPane.showMessageDialog(getRootFrame(), "Saved successfully.");
+            return true;
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(getRootFrame(), e.getMessage(),"File-Read Error", JOptionPane.WARNING_MESSAGE);
         } catch (UnsupportedEncodingException e) {
             JOptionPane.showMessageDialog(getRootFrame(), e.getMessage(),"Unsupported Encoding Error", JOptionPane.WARNING_MESSAGE);
         }
+        return false;
     }
 
     /**

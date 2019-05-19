@@ -28,9 +28,9 @@ public class Polygon extends Shape{
         for(int i = 0;i<size;i++){
             if(i%2 == 0){
                 //Even
-                x_points[(int)round(floor(i/2))] =  (int)round(coordinates.get(i));
+                x_points[(int)round(floor(i/2))] =  (int)round(coordinates.get(i) * width);
             }else{
-                y_points[(int)round(floor(i/2))] =  (int)round(coordinates.get(i));
+                y_points[(int)round(floor(i/2))] =  (int)round(coordinates.get(i) * height);
             }
         }
 

@@ -191,7 +191,7 @@ public class GUI extends JFrame {
     }
 
     /**
-     * Gets the current x & y coordinates of the mouse when the event occoured.
+     * Gets the current x and y coordinates of the mouse when the event occoured.
      * If any tool besides the polygon tool is selected, the shape is added to drawn_Shapes.
      *
      * This occours as with any shape besides the polygon is drawn with dragging and releasing the mouse,
@@ -670,6 +670,8 @@ public class GUI extends JFrame {
      * Saves all objects in the drawn_Shapes variable. Saves to the location returned by
      * find_Path().
      *
+     * @param directory_Path - Used to specify a path for testing, not used in GUI mode.
+     *
      * @return - Boolean stating if save was successful.
      */
     public boolean save_File(File directory_Path){
@@ -716,6 +718,8 @@ public class GUI extends JFrame {
      *
      * @param sc - Scanner object for the file being read.
      * @param testing - boolean checking if the function is in testing mode.
+     *
+     * @return - Return error message in string format for testing purposes. Not used in GUI mode.
      */
     public String read_Line(Scanner sc,boolean testing){
         //Read each string seperated by space char
@@ -981,7 +985,7 @@ public class GUI extends JFrame {
     /**
      * Main of the GUI class.
      *
-     * @param args
+     * @param args - input arguments
      */
     public static void main(String[] args) {
         JFrame.setDefaultLookAndFeelDecorated(false);

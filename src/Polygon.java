@@ -7,7 +7,12 @@ import static java.lang.Math.round;
 public class Polygon extends Shape{
 
     private ArrayList<Double> coordinates =  new ArrayList<>();
-    //Constructor
+
+    /**
+     * Constructs the Polygon shape.
+     *
+     * @param coords - ArrayList containing doubles which are the x and y coordinates of the shape. In that order
+     */
     public Polygon(ArrayList<Double> coords){
         super(shape_Type.POLYGON,coords);
         for(int i = 0;i<coords.size();i++){
@@ -15,12 +20,26 @@ public class Polygon extends Shape{
         }
     }
 
+    /**
+     * Draw the outline of the shape with the current selected pen colour
+     *
+     * @param g - Graphics of place to draw,
+     * @param width - Current width of drawing area
+     * @param height - Current height of drawing area
+     */
     public void draw(Graphics g,double width, double height){
         for(int i = 3;i<coordinates.size();i+=2){
             g.drawLine((int)round(coordinates.get(i-3)*width),(int)round(coordinates.get(i-2)*height), (int)round(coordinates.get(i-1)*width),(int)round(coordinates.get(i)*height));
         }
     }
 
+    /**
+     * Fill the shape with the current selected fill colour
+     *
+     * @param g - Graphics of place to draw,
+     * @param width - Current width of drawing area
+     * @param height - Current height of drawing area
+     */
     public void fill(Graphics g,double width, double height){
         int size = coordinates.size();
         int[] x_points = new int[size/2];
@@ -37,6 +56,11 @@ public class Polygon extends Shape{
         g.fillPolygon(x_points,y_points,x_points.length);
     }
 
+    /**
+     * Returns the string in the correct format for the VEC file, used for saving.
+     *
+     * @return - String that will be saved in the VEC file
+     */
     public String save_Text(){
         StringBuilder line = new StringBuilder();
 
@@ -50,6 +74,10 @@ public class Polygon extends Shape{
         return line.toString();
     }
 
+    /**
+     * Returns the shape type
+     * @return - Returns the shape type, Polygon.
+     */
     public shape_Type get_Shape(){
         return shape_Type.POLYGON;
     }

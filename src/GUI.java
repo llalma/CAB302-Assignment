@@ -25,6 +25,9 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public class GUI extends JFrame {
 
+    //Set aspect ratio
+    private static int Aspect = 1;
+
     //List of buttons to include, needs to be an images file
     //Path to image files that are displayed on the buttons
     private static final String[] tool_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Plot.png","resources/Ellipse.png","resources/Polygon.png"};
@@ -64,7 +67,7 @@ public class GUI extends JFrame {
     /**
      * Default constructor,
      * creates a window at point 100,100 with a size of 400,400. Uses the computers default window style,
-     * Adds all buttons and the drawing area to the window. Also populates drawn_Shapes with deafult data
+     * Adds all buttons and the drawing area to the window. Also populates drawn_Shapes with default data
      */
     public GUI()  {
         super("Paint");
@@ -75,7 +78,6 @@ public class GUI extends JFrame {
         drawing_area();
 
         // Display the window.
-        setPreferredSize(new Dimension(400, 400));
         setLocation(new Point(100, 100));
 
         //Listen for a screen size change. If one occours repaint the screen with correct sizes.
@@ -85,6 +87,9 @@ public class GUI extends JFrame {
             public void componentResized(ComponentEvent e) {
                 x_Current = -1;
                 x_Previous = -1;
+
+               //Aspect ratio keeping here
+
                 repaint();
             }
         });
@@ -101,6 +106,7 @@ public class GUI extends JFrame {
      */
     private void drawing_area() {
         JPanel panel = new Draw_Panel();
+        panel.setSize(200,200);
 
         panel.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent evt) {
@@ -222,7 +228,6 @@ public class GUI extends JFrame {
 
             if( i < num_Tool_Buttons){
                 //Buttons
-
                 //Load and add image to a button
                 try {
                     Image img = ImageIO.read(getClass().getResource(tool_Buttons[i]));
@@ -252,7 +257,7 @@ public class GUI extends JFrame {
                     button.setIcon(new ImageIcon(scaled_img));
                     button.setToolTipText(tool_Button_Tip[i]);
                 } catch (Exception ex) {
-                    System.out.println(ex);
+                    JOptionPane.showMessageDialog(getRootFrame(), ex.getMessage(),"Error", JOptionPane.WARNING_MESSAGE);
                 }
                 //Add button to panel
                 panel.add(button);
@@ -322,7 +327,7 @@ public class GUI extends JFrame {
 
                 button.setIcon(new ImageIcon(scaled_img));
             } catch (Exception ex) {
-                System.out.println(ex);
+                JOptionPane.showMessageDialog(getRootFrame(), ex.getMessage(),"Error", JOptionPane.WARNING_MESSAGE);
             }
             button.setPreferredSize(new Dimension(40, 40));
             button.setToolTipText(file_Button_Tip[i]);
@@ -403,7 +408,7 @@ public class GUI extends JFrame {
                 button.setIcon(new ImageIcon(scaled_img));
                 colour_panel.add(button);
             } catch (Exception ex) {
-                System.out.println(ex);
+                JOptionPane.showMessageDialog(getRootFrame(), ex.getMessage(),"Error", JOptionPane.WARNING_MESSAGE);
             }
         }
 
@@ -664,6 +669,8 @@ public class GUI extends JFrame {
     /**
      * Saves all objects in the drawn_Shapes variable. Saves to the location returned by
      * find_Path().
+     *
+     * @return - Boolean stating if save was successful.
      */
     public boolean save_File(File directory_Path){
         //If a path is supplied, it is in testing mode and will save to the given path.
@@ -766,7 +773,6 @@ public class GUI extends JFrame {
      * File explorer interface where user selects a VEC file to load.
      * Only VEC files and folders are displayed
      * Selected file is then looped through by line with each line being read by read_Line().
-     *
      *
      */
     private void load_File(){

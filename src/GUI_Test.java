@@ -227,7 +227,4 @@ class GUI_Test {
 
         assert(GUI.save_File(f));
     }
-
-
-
 }

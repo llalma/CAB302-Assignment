@@ -510,14 +510,25 @@ public class GUI extends JFrame {
      * Finally, clears "polygon" ready for the next polygon to being.
      */
     private void polygon_Complete(){
+        double height = getContentPane().getComponent(3).getHeight();
+        double width = getContentPane().getComponent(3).getWidth();
         polygon_Completed = true;
         //Remove last 2 inputs
         polygon.remove(polygon.size()-2);
         polygon.remove(polygon.size()-1);
 
+
         //Add the last 2 indexes as the original coordinates
         polygon.add(polygon.get(0));
         polygon.add(polygon.get(1));
+
+        for(int i = 0;i<polygon.size();i++){
+            if(i%2 != 0) {
+                polygon.set(i, polygon.get(i) / height);
+            }else{
+                polygon.set(i, polygon.get(i) / width);
+            }
+        }
 
         Polygon poly = new Polygon(polygon);
         drawn_Shapes.add(poly);

@@ -42,7 +42,8 @@ public class GUI extends JFrame {
     private int x_Previous,y_Previous,x_Current,y_Current;
 
     //Stores shapes drawn in the drawing area
-    public ArrayList<Drawn_Shapes> drawn_Shapes = new ArrayList<>();
+    //public ArrayList<Drawn_Shapes> drawn_Shapes = new ArrayList<>();
+    public ArrayList<Shape> drawn_Shapes = new ArrayList<>();
 
     //Array list for a single Polygons
     private ArrayList<Double> polygon = new ArrayList<>();
@@ -164,7 +165,7 @@ public class GUI extends JFrame {
 
             //Ends the polygon if original and latest position is within 10 pixels in any direction.
             if(polygon_Ending_Check() && polygon.size() > 4){
-                polygon_End();
+                polygon_Complete();
             }
         }
     }
@@ -416,23 +417,14 @@ public class GUI extends JFrame {
      *             either fill,pen or turn off the fill.
      */
     public void Add_Colour(draw_Type type){
-        //Add colour to list of shapes, same arrayList as shapes as the order matters
-        //and arrayLists keeps the order
 
-        //Create array to store RGB values
-        ArrayList<Double> RGB = new ArrayList<>();
-
-        //Creates a new element to insert into the list of drawn shapes
-        Drawn_Shapes shape;
-        //dosent work for colour selector wheel
         if(type == draw_Type.FILL_COLOUR){
             //0 is a fill command
-            RGB.add(fill_Colour.getRed() + 0.0);
-            RGB.add(fill_Colour.getGreen() + 0.0);
-            RGB.add(fill_Colour.getBlue() + 0.0);
-            shape = new Drawn_Shapes(shape_Type.FILL, RGB);
-            colour_Fill.setBackground(fill_Colour);
+            Fill fill = new Fill(new Color(fill_Colour.getRed(),fill_Colour.getGreen(),fill_Colour.getBlue()));
+            drawn_Shapes.add(fill);
 
+            //Set background of fill display to current selected colour.
+            colour_Fill.setBackground(fill_Colour);
             //Change the colour of text based on the background colour
             if(fill_Colour == Color.WHITE){
                 colour_Fill.setForeground(Color.BLACK);
@@ -441,19 +433,19 @@ public class GUI extends JFrame {
             }
         }else if(type == draw_Type.FILL_NULL){
             //3 is a no fill command
-            RGB.add((double)'O');
-            RGB.add((double)'F');
-            RGB.add((double)'F');
-            shape = new Drawn_Shapes(shape_Type.FILL, RGB);
+            Fill fill = new Fill(null);
+            drawn_Shapes.add(fill);
+
+            //Set background of fill display to current selected colour.
             colour_Fill.setBackground(null);
+            //Change the colour of text based on the background colour
             colour_Fill.setForeground(Color.BLACK);
         }else{
-            //Pen colour command
-            RGB.add(pen_Colour.getRed() + 0.0);
-            RGB.add(pen_Colour.getGreen() + 0.0);
-            RGB.add(pen_Colour.getBlue() + 0.0);
-            shape = new Drawn_Shapes(shape_Type.PEN, RGB);
+            //Set a Pen colour
             colour_Pen.setBackground(pen_Colour);
+
+            Pen pen = new Pen(new Color(pen_Colour.getRed(),pen_Colour.getGreen(),pen_Colour.getBlue()));
+            drawn_Shapes.add(pen);
 
             //Change the colour of text based on the background colour
             if(pen_Colour == Color.WHITE){
@@ -462,7 +454,6 @@ public class GUI extends JFrame {
                 colour_Pen.setForeground(Color.WHITE);
             }
         }
-        drawn_Shapes.add(shape);
     }
 
     /**
@@ -491,8 +482,8 @@ public class GUI extends JFrame {
         polygon.add(Double.parseDouble(data[2]) * height);
 
         //Add the polygon read from the VEC file and add to the drawing variable
-        Drawn_Shapes shape = new Drawn_Shapes(shape_Type.valueOf(data[0]), polygon);
-        drawn_Shapes.add(shape);
+        Polygon poly = new Polygon(polygon);
+        drawn_Shapes.add(poly);
 
         //Clear the polygon coordinate variable
         polygon = new ArrayList<>();
@@ -525,7 +516,7 @@ public class GUI extends JFrame {
      * of the polygon to the starting coordinates, then adds to drawn_Shapes.
      * Finally, clears "polygon" ready for the next polygon to being.
      */
-    private void polygon_End(){
+    private void polygon_Complete(){
         polygon_Completed = true;
         //Remove last 2 inputs
         polygon.remove(polygon.size()-2);
@@ -535,8 +526,8 @@ public class GUI extends JFrame {
         polygon.add(polygon.get(0));
         polygon.add(polygon.get(1));
 
-        Drawn_Shapes shape = new Drawn_Shapes(shape_Type.POLYGON, polygon);
-        drawn_Shapes.add(shape);
+        Polygon poly = new Polygon(polygon);
+        drawn_Shapes.add(poly);
 
         //Clear the polygon
         polygon = new ArrayList<>();
@@ -558,7 +549,7 @@ public class GUI extends JFrame {
         double height = getContentPane().getComponent(3).getHeight();
         double width = getContentPane().getComponent(3).getWidth();
 
-        //Add shape to previously drawn of shapes
+        //Get coordinates of the shape
         ArrayList<Double> Coords = new ArrayList<>();
         if(x1 == x_Previous && x2 == x_Current && y1 == y_Previous && y2 == y_Current){
             //Adding from users inputs
@@ -575,34 +566,79 @@ public class GUI extends JFrame {
         }
 
         //Creates a new element to insert into the list of drawn shapes
-        Drawn_Shapes shape = new Drawn_Shapes(tool, Coords);
-        drawn_Shapes.add(shape);
-    }
-
-    /**
-     * Undoes the last action in drawn_Shape, including change of fill or pen colours and drawing shapes.
-     * Undoes by removing the last index from drawn_Shapes, also sets x,y previous and current values to -1
-     * so the shape last drawn does not appear.
-     * Drawing area is then repainted to remove the latest object from the drawing area.
-     */
-    public void undo(){
-        //Remove the last thing added to draw_shapes.
-        //this will undo the last thing done
-        if(drawn_Shapes.size() > 2){
-            drawn_Shapes.remove(drawn_Shapes.size()-1);
-            x_Current = -1;
-            x_Previous = -1;
-            y_Current = -1;
-            y_Previous = -1;
-            repaint();
-        }else {
-            JOptionPane.showMessageDialog(getRootFrame(),
-                    "Nothing left to undo.",
-                    "Undo Error",
-                    JOptionPane.WARNING_MESSAGE);
+        switch (tool){
+            case RECTANGLE:
+                Rectangle rect = new Rectangle(Coords);
+                drawn_Shapes.add(rect);
+                break;
+            case LINE:
+                Line line = new Line(Coords);
+                drawn_Shapes.add(line);
+                break;
+            case ELLIPSE:
+                Ellipse ellipse = new Ellipse(Coords);
+                drawn_Shapes.add(ellipse);
+            case POLYGON:
+                Polygon polygon = new Polygon(Coords);
+                drawn_Shapes.add(polygon);
+                break;
+            case PLOT:
+                Plot plot =  new Plot(Coords);
+                drawn_Shapes.add(plot);
         }
     }
 
+    /**
+     *  Gets the last instance of the inputted shape and return the colour.
+     *
+     * @param shape - shape that the colour is used for. Inputs can only be FILL or PEN.
+     * @return - Last colour of the inputted shape
+     */
+    private Color change_Colour_Backwards(shape_Type shape){
+        Color colour = null;
+        for (Shape shape_Search:drawn_Shapes) {
+            if(shape_Search.get_Shape() == shape){
+                if(shape == shape_Type.PEN){
+                    colour = ((Pen)shape_Search).get_Colour();
+                }else{
+                    colour = ((Fill)shape_Search).get_Colour();
+                }
+            }
+        }
+        return colour;
+    }
+
+    /**
+     * Undoes the last action in drawn_Shape, excluding change of fill or pen colours.
+     * Undoes by removing the last index from drawn_Shapes, also sets x,y previous and current values to -1
+     * so the shape last drawn does not appear.
+     * Drawing area is then repainted to remove the latest object from the drawing area.
+     *
+     * @return - Boolean returning if undo was successful.
+     */
+    public boolean undo(){
+        //Remove the last thing added to draw_shapes.
+        //this will undo the last thing done, besides colour selections
+        int pos = drawn_Shapes.size()-1;
+        while(drawn_Shapes.get(pos).get_Shape() == shape_Type.PEN || drawn_Shapes.get(pos).get_Shape() == shape_Type.FILL){
+            pos--;
+            //Error catching of less than 2
+            if(pos < 2){
+                JOptionPane.showMessageDialog(getRootFrame(),
+                        "Nothing left to undo.",
+                        "Undo Error",
+                        JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+        }
+        drawn_Shapes.remove(pos);
+
+        //Have to set these values off screen to ensure last object is not drawn
+        x_Current = -1;
+        x_Previous = -1;
+        repaint();
+        return true;
+    }
 
     /**
      * User browses system explorer to place file. Other VEC files can be selected to save over.
@@ -617,57 +653,8 @@ public class GUI extends JFrame {
         chooser.addChoosableFileFilter(filter);
 
         //Show GUI and return the path when the choice is confirmed
-        int choice = chooser.showDialog(null,"Select");
+        chooser.showDialog(null,"Select");
         return chooser.getSelectedFile();
-    }
-
-    /**
-     * Converts a polygon saved in drawn_Shapes to the appropriate format for a VEC file.
-     *
-     * @param shape - The shape being read from. Is a Drawn_Shapes object
-     * @return - The StringBuilder that will be written to VEC file.
-     */
-    private StringBuilder save_Polygon(Drawn_Shapes shape){
-        //Polygon saving is slightly different from other shapes
-        double height = getContentPane().getComponent(3).getHeight();
-        double width = getContentPane().getComponent(3).getWidth();
-        StringBuilder line = new StringBuilder();
-
-        line.append(shape.Type.toString());
-
-        //Minus 2 from size as to not include the last point which just direct back to the starting position
-        for (int i = 0; i < shape.coordinates.size() - 2; i++) {
-            if (i % 2 == 0) {
-                line.append(" " + shape.coordinates.get(i) / width);
-            } else {
-                line.append(" " + shape.coordinates.get(i) / height);
-            }
-        }
-        return line;
-    }
-
-    /**
-     * Converts a colour save in drawn_Shapes to the appropriate format for a VEC file.
-     *
-     * @param shape - The shape being read from. Is a Drawn_Shapes object
-     * @return - The StringBuilder that will be written to VEC file.
-     */
-    private StringBuilder save_Colour(Drawn_Shapes shape){
-        //Colour Saving
-        StringBuilder line = new StringBuilder();
-        Color colour_temp = new Color((int)round(shape.coordinates.get(0)),(int)round(shape.coordinates.get(1)),(int)round(shape.coordinates.get(2)));
-        Color oFF = new Color((int)'O',(int)'F',(int)'F');
-        String hex;
-
-        if(colour_temp.getRGB() == oFF.getRGB()){
-            //Save into the file as OFF instead of an RGB value
-            hex = "OFF";
-        }else{
-            hex = "#"+Integer.toHexString(colour_temp.getRGB()).substring(2);
-        }
-
-        line.append(shape.Type + " " + hex);
-        return line;
     }
 
     /**
@@ -686,24 +673,16 @@ public class GUI extends JFrame {
                 writer = new PrintWriter(directory_Path + ".VEC", "UTF-8");
             }
 
-            //Loop through each object drawn
-            for (Drawn_Shapes shape:drawn_Shapes) {
-                StringBuilder line = new StringBuilder();
-                if(shape.Type == shape_Type.POLYGON) {
-                    //Save polygon
-                    line = save_Polygon(shape);
-                }else if(shape.Type == shape_Type.PEN || shape.Type == shape_Type.FILL){
-                    //Save colours
-                    line = save_Colour(shape);
-                }else{
-                    //All other shapes saving
-                    line.append(shape.Type + " " + shape.coordinates.get(0) + " " + shape.coordinates.get(1) + " " +  shape.coordinates.get(2) + " " +  shape.coordinates.get(3));
-                }
-                writer.println(line);
+            //Loop through each object in drawn_Shapes
+            for(Shape shape:drawn_Shapes){
+                writer.println(shape.save_Text());
             }
 
             //Close connection to the created VEC file
             writer.close();
+
+            //Popup notifying the save worked.
+            JOptionPane.showMessageDialog(getRootFrame(), "Saved successfully.");
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(getRootFrame(), e.getMessage(),"File-Read Error", JOptionPane.WARNING_MESSAGE);
         } catch (UnsupportedEncodingException e) {
@@ -722,7 +701,7 @@ public class GUI extends JFrame {
      * @param testing - boolean checking if the function is in testing mode.
      */
     public String read_Line(Scanner sc,boolean testing){
-        //Reag each string seperated by space char
+        //Read each string seperated by space char
         String data[] = sc.nextLine().split(" ");
 
         try {
@@ -825,19 +804,13 @@ public class GUI extends JFrame {
         drawn_Shapes = new ArrayList<>();
 
         //Default pen colour
-        ArrayList<Double> RGB = new ArrayList<>();
-        RGB.add(0.0);
-        RGB.add(0.0);
-        RGB.add(0.0);
-        drawn_Shapes.add(new Drawn_Shapes(shape_Type.PEN, RGB));
+        Pen pen = new Pen();
+        drawn_Shapes.add(pen);
 
-        RGB = new ArrayList<>();
-        RGB.add((double)'O');
-        RGB.add((double)'F');
-        RGB.add((double)'F');
-        drawn_Shapes.add(new Drawn_Shapes(shape_Type.FILL, RGB));
+        //Defult fill colour
+        Fill fill = new Fill();
+        drawn_Shapes.add(fill);
     }
-
 
     /**
      * Class used when displaying the colour palette to the user, implements an ActionListener interface.
@@ -932,7 +905,7 @@ public class GUI extends JFrame {
                     }
                     break;
                 default:
-                    //Throw Error
+                    JOptionPane.showMessageDialog(getRootFrame(),"Not a shape.","Undefined Shape", JOptionPane.WARNING_MESSAGE);
                     break;
             }
         }
@@ -947,84 +920,24 @@ public class GUI extends JFrame {
             //These are used to convert the percentage into the current screen size coordinates
             double height = getContentPane().getComponent(3).getHeight();
             double width = getContentPane().getComponent(3).getWidth();
-            int x1,x2,y1,y2;
+            Color pen_col = Color.BLACK;
+            Color fill_col = null;
 
-            //Draws shapes that have already been drawn or loaded
-            for (Drawn_Shapes shape:drawn_Shapes) {
-                if(shape.Type == shape_Type.PEN) {
-                    pen_Colour = new Color((int) round(shape.coordinates.get(0)), (int) round(shape.coordinates.get(1)), (int) round(shape.coordinates.get(2)));
-                }else if(shape.Type == shape_Type.FILL){
-                    if(shape.coordinates.get(0) == 79.0 && shape.coordinates.get(2) == 70.0 && shape.coordinates.get(2) == 70.0){
-                        //Need a betetr way to check this. possibly make rgb colours null?
-                        fill = false;
-                    }else{
-                        fill_Colour = new Color((int)round(shape.coordinates.get(0)),(int)round(shape.coordinates.get(1)),(int)round(shape.coordinates.get(2)));
-                        fill = true;
-                    }
-                }else{
-                    x1 = (int) round(shape.coordinates.get(0) * width);
-                    y1 = (int) round(shape.coordinates.get(1) * height);
-                    x2 = (int) round(shape.coordinates.get(2) * width);
-                    y2 = (int) round(shape.coordinates.get(3) * height);
+            for (Shape shape:drawn_Shapes) {
 
-                    switch (shape.Type){
-                        case LINE:
-                            g.setColor(pen_Colour);
-                            g.drawLine(x1,y1,x2,y2);
-                            break;
-                        case RECTANGLE:
-                            //Draw outline
-                            g.setColor(pen_Colour);
-                            g.drawRect(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
-                            //Fill rectangle with colour
-                            if(fill){
-                                g.setColor(fill_Colour);
-                                g.fillRect(Math.min(x1, x2)+1,Math.min(y1, y2)+1,Math.abs(x1 - x2)-1,Math.abs(y1 - y2)-1);
-                            }
-                            break;
-                        case PLOT:
-                            //Draw outline
-                            g.setColor(pen_Colour);
-                            g.drawOval(x1,y1,1,1);
-                            break;
-                        case ELLIPSE:
-                            //Draw outline
-                            g.setColor(pen_Colour);
-                            g.drawOval(Math.min(x1, x2)+1,Math.min(y1, y2)+1,Math.abs(x1 - x2)-2,Math.abs(y1 - y2)-2);
-                            if(fill){
-                                g.setColor(fill_Colour);
-                                g.fillOval(Math.min(x1, x2),Math.min(y1, y2),Math.abs(x1 - x2),Math.abs(y1 - y2));
-                            }
-                            break;
-                        case POLYGON:
-                            int size = shape.coordinates.size();
-                            g.setColor(pen_Colour);
-                            for(int i = 3;i<size;i+=2){
-                                g.drawLine((int)round(shape.coordinates.get(i-3)),(int)round(shape.coordinates.get(i-2)), (int)round(shape.coordinates.get(i-1)),(int)round(shape.coordinates.get(i)));
-                            }
+                //Set colours for the shape
+                if(shape.get_Shape() == shape_Type.PEN){
+                    pen_col = ((Pen)shape).get_Colour();
+                }else if(shape.get_Shape() == shape_Type.FILL){
+                    fill_col = ((Fill)shape).get_Colour();
+                }
 
-                            //Fill Polygon
-                            if(fill){
-                                g.setColor(fill_Colour);
-                                int[] x_points = new int[size/2];
-                                int[] y_points = new int[size/2];
-                                for(int i = 0;i<size;i++){
-                                    if(i%2 == 0){
-                                        //Even
-                                        x_points[(int)round(floor(i/2))] = (int) round(shape.coordinates.get(i));
-                                    }else{
-                                        y_points[(int)round(floor(i/2))] = (int) round(shape.coordinates.get(i));
-                                    }
-                                }
-
-                                g.fillPolygon(x_points,y_points,x_points.length);
-                            }
-
-                            break;
-                        default:
-                            JOptionPane.showMessageDialog(getRootFrame(), "Selected tool is not a shape","Error", JOptionPane.WARNING_MESSAGE);
-                            break;
-                    }
+                //Draw the shape according to the colours set
+                g.setColor(pen_col);
+                shape.draw(g,width,height);
+                if(fill_col != null){
+                    g.setColor(fill_col);
+                    shape.fill(g,width,height);
                 }
             }
         }

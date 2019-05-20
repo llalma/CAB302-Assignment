@@ -71,7 +71,7 @@ public class GUI extends JFrame {
      */
     public GUI()  {
         super("Paint");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         //Create the jpanels for the buttons and the drawing area
         buttons_Create();
@@ -98,6 +98,45 @@ public class GUI extends JFrame {
 
         //Populate drawn_Shapes with default data
        new_Drawn_Shapes();
+    }
+
+    /**
+     * Creates a new instance of the GUI, this has an input as this is called when the load file is called which needs a path.
+     * This will display the VEC file when loaded initially.
+     *
+     * @param file -  File object that is to be loaded
+     */
+    public GUI(File file)  {
+        super("Paint");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        //Create the jpanels for the buttons and the drawing area
+        buttons_Create();
+        drawing_area();
+
+        // Display the window.
+        setLocation(new Point(100, 100));
+
+        //Listen for a screen size change. If one occours repaint the screen with correct sizes.
+        //Set x_current and previous to -1, so the last drawn shape is not drawn.
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                x_Current = -1;
+                x_Previous = -1;
+
+                //Aspect ratio keeping here
+
+                repaint();
+            }
+        });
+        pack();
+        setVisible(true);
+
+        //Populate drawn_Shapes with default data
+        new_Drawn_Shapes();
+
+        new_loaded_file(file);
     }
 
     /**
@@ -784,7 +823,7 @@ public class GUI extends JFrame {
      *
      * File explorer interface where user selects a VEC file to load.
      * Only VEC files and folders are displayed
-     * Selected file is then looped through by line with each line being read by read_Line().
+     * A new instance of the GUI is then created which displays the selected VEC file.
      *
      */
     private void load_File(){
@@ -799,9 +838,16 @@ public class GUI extends JFrame {
         chooser.showOpenDialog(null);
         File chosenFile = chooser.getSelectedFile();
 
-        //Clear the drawing area by emptying drawn_Shapes.
-        new_Drawn_Shapes();
+        //Create a new instance for the loaded shape
+        new GUI(chosenFile);
+    }
 
+    /**
+     * Display the selected VEC file. This function loads the VEC file into the JPanel.
+     *
+     * @param chosenFile -  File object of the selected file.
+     */
+    private void new_loaded_file(File chosenFile){
         //Load the file
         try {
             Scanner sc = new Scanner(chosenFile);
@@ -815,11 +861,8 @@ public class GUI extends JFrame {
             y_Current = -1;
             y_Previous = -1;
         } catch (FileNotFoundException e) {
-             JOptionPane.showMessageDialog(getRootFrame(), e.getMessage(),"File-Read Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(getRootFrame(), e.getMessage(),"File-Read Error", JOptionPane.WARNING_MESSAGE);
         }
-
-        //Repaint screen with new shapes
-        repaint();
     }
 
     /**

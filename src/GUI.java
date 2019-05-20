@@ -31,7 +31,7 @@ public class GUI extends JFrame {
     //List of buttons to include, needs to be an images file
     //Path to image files that are displayed on the buttons
     private static final String[] tool_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Plot.png","resources/Ellipse.png","resources/Polygon.png"};
-    private static final String[] file_Buttons = new String[]{"resources/Save.png", "resources/Load.png", "resources/Undo.png"};
+    private static final String[] file_Buttons = new String[]{"resources/New_File.png", "resources/Save.png", "resources/Load.png", "resources/Undo.png"};
     private static final String[] colour_Special_Buttons = new String[]{"resources/NoFill.jpg","resources/Rainbow.jpg"};
 
     private static final Color[] colour_Buttons = new Color[]{Color.BLACK,Color.RED,Color.GREEN,Color.YELLOW,Color.WHITE,Color.BLUE,Color.ORANGE,Color.MAGENTA};
@@ -39,7 +39,7 @@ public class GUI extends JFrame {
 
     //Button tool tips
     private static final String[] tool_Button_Tip = new String[]{"Drag and release to draw line.","Drag and release to draw rectangle.", "Click to place a point at location", "Drag and release to draw ellipse.", "Click on multiple points to draw a polygon. Finish near the starting point to complete the shape."};
-    private static final String[] file_Button_Tip = new String[]{"Save the current file to the user selected location.", "Load the selected file from the specified user location", "Undo the last action"};
+    private static final String[] file_Button_Tip = new String[]{"Create a new window with a blank drawing", "Save the current file to the user selected location.", "Load the selected file from the specified user location", "Undo the last action"};
 
     //Positions of mouse pointer
     private int x_Previous,y_Previous,x_Current,y_Current;
@@ -315,11 +315,19 @@ public class GUI extends JFrame {
                         }
                     });
                 }else if(file_Buttons[i].contains("Undo")){
-                    //This is the load button, Give load functionality
+                    //This is the Undo button, Give load functionality
                     button.setAction(new AbstractAction() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             undo();
+                        }
+                    });
+                }else if(file_Buttons[i].contains("New_File")){
+                    //This iis the new file button, this will create a new window with a blank drawing area.
+                    button.setAction(new AbstractAction() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            new GUI();
                         }
                     });
                 }

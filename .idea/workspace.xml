@@ -129,8 +129,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="949" column="42" selection-start-line="949" selection-start-column="42" selection-end-line="949" selection-end-column="42" />
+            <state relative-caret-position="186">
+              <caret line="368" column="40" selection-start-line="368" selection-start-column="31" selection-end-line="368" selection-end-column="40" />
               <folding>
                 <element signature="e#2980#4556#0" />
                 <element signature="e#3725#4485#0" expanded="true" />
@@ -144,7 +144,6 @@
                 <element signature="e#10672#13006#0" />
                 <element signature="e#13563#13772#0" expanded="true" />
                 <element signature="e#13771#13772#0" expanded="true" />
-                <element signature="e#13012#16669#0" />
                 <element signature="e#16675#17099#0" />
                 <element signature="e#17143#19165#0" />
                 <element signature="e#19180#20433#0" />
@@ -164,10 +163,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Rectangle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
+            <state relative-caret-position="959">
               <caret line="62" selection-start-line="62" selection-end-line="62" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -177,6 +176,11 @@
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/shape_Type.java">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -210,6 +214,20 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Shape.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="349">
+              <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#632#633#0" expanded="true" />
+                <element signature="e#660#661#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GUI_Test.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="403">
@@ -230,24 +248,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Polygon.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="75" selection-start-line="75" selection-end-line="75" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#fill#0;class#Polygon#0" />
-                <element signature="method#save_Text#0;class#Polygon#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Pen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="262">
-              <caret line="67" column="4" selection-start-line="67" selection-start-column="4" selection-end-line="67" selection-end-column="4" />
+            <state relative-caret-position="215">
+              <caret line="67" selection-start-line="67" selection-end-line="67" />
               <folding>
                 <element signature="method#Pen#0;class#Pen#0" />
                 <element signature="method#Pen#1;class#Pen#0" />
@@ -262,6 +266,11 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/draw_Type.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Line.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="406">
@@ -271,34 +280,6 @@
                 <element signature="method#Line#0;class#Line#0" />
                 <element signature="method#draw#0;class#Line#0" />
                 <element signature="method#fill#0;class#Line#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Plot.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="53" selection-start-line="53" selection-end-line="53" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#Plot#0;class#Plot#0" />
-                <element signature="method#draw#0;class#Plot#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Shape.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#632#633#0" expanded="true" />
-                <element signature="e#659#660#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -317,7 +298,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>System.out</find>
       <find>fill = true</find>
       <find>polygon_</find>
       <find>colour_pen</find>
@@ -347,6 +327,7 @@
       <find>componentRe</find>
       <find>exce</find>
       <find>exception</find>
+      <find>Draw_Type</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -380,10 +361,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
-    <option name="y" value="-10" />
-    <option name="width" value="1940" />
-    <option name="height" value="1060" />
+    <option name="x" value="-7" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -521,9 +501,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="GUI_Test_testAddShape - 2019.05.19 at 20h 28m 45s.xml">
-      <configuration name="GUI_Test.testAddShape" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="GUI_Test_testAddShape - 2019.05.19 at 20h 29m 26s.xml">
       <configuration name="GUI_Test.testAddShape" configurationId="JUnit" />
     </history-entry>
@@ -551,13 +528,16 @@
     <history-entry file="GUI_Test - 2019.05.19 at 20h 35m 43s.xml">
       <configuration name="GUI_Test" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="GUI_Test - 2019.05.19 at 22h 26m 56s.xml">
+      <configuration name="GUI_Test" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77373415" visible="true" weight="0.1076759" />
-      <window_info id="Structure" order="1" sideWeight="0.22626582" side_tool="true" visible="true" weight="0.1076759" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.77384615" visible="true" weight="0.34573305" />
+      <window_info id="Structure" order="1" sideWeight="0.22615385" side_tool="true" visible="true" weight="0.34573305" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
@@ -565,7 +545,7 @@
       <window_info id="Favorites" order="6" sideWeight="0.50284094" side_tool="true" weight="0.13117409" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.15456238" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.26532888" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.268018" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.29431438" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -573,7 +553,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32960895" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50040483" side_tool="true" weight="0.26256984" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Messages" order="10" sideWeight="0.49959514" visible="true" weight="0.2954292" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49959514" weight="0.2954292" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -673,37 +653,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/shape_Type.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/draw_Type.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Shape.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#632#633#0" expanded="true" />
-            <element signature="e#659#660#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Rectangle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="62" selection-start-line="62" selection-end-line="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Rectangle#0;class#Rectangle#0" />
-            <element signature="method#draw#0;class#Rectangle#0" />
-            <element signature="method#fill#0;class#Rectangle#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Polygon.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="406">
@@ -772,10 +721,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Fill.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
+          <folding>
+            <element signature="method#draw#0;class#Fill#0" />
+            <element signature="method#save_Text#0;class#Fill#0" />
+            <element signature="e#1945#1946#0" expanded="true" />
+            <element signature="e#1974#1975#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/draw_Type.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="949" column="42" selection-start-line="949" selection-start-column="42" selection-end-line="949" selection-end-column="42" />
+        <state relative-caret-position="186">
+          <caret line="368" column="40" selection-start-line="368" selection-start-column="31" selection-end-line="368" selection-end-column="40" />
           <folding>
             <element signature="e#2980#4556#0" />
             <element signature="e#3725#4485#0" expanded="true" />
@@ -789,7 +754,6 @@
             <element signature="e#10672#13006#0" />
             <element signature="e#13563#13772#0" expanded="true" />
             <element signature="e#13771#13772#0" expanded="true" />
-            <element signature="e#13012#16669#0" />
             <element signature="e#16675#17099#0" />
             <element signature="e#17143#19165#0" />
             <element signature="e#19180#20433#0" />
@@ -808,23 +772,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Fill.java">
+    <entry file="file://$PROJECT_DIR$/src/shape_Type.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Shape.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
+        <state relative-caret-position="349">
+          <caret line="22" column="21" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="21" />
           <folding>
-            <element signature="method#draw#0;class#Fill#0" />
-            <element signature="method#save_Text#0;class#Fill#0" />
-            <element signature="e#1945#1946#0" expanded="true" />
-            <element signature="e#1974#1975#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#632#633#0" expanded="true" />
+            <element signature="e#660#661#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Pen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="67" column="4" selection-start-line="67" selection-start-column="4" selection-end-line="67" selection-end-column="4" />
+        <state relative-caret-position="215">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
           <folding>
             <element signature="method#Pen#0;class#Pen#0" />
             <element signature="method#Pen#1;class#Pen#0" />
@@ -833,6 +799,19 @@
             <element signature="method#save_Text#0;class#Pen#0" />
             <element signature="e#1942#1943#0" expanded="true" />
             <element signature="e#1971#1972#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Rectangle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="959">
+          <caret line="62" selection-start-line="62" selection-end-line="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#Rectangle#0;class#Rectangle#0" />
+            <element signature="method#draw#0;class#Rectangle#0" />
+            <element signature="method#fill#0;class#Rectangle#0" />
           </folding>
         </state>
       </provider>

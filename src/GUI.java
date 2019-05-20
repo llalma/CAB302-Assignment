@@ -6,6 +6,8 @@
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
 import java.beans.PropertyChangeListener;
 import java.io.*;
 import java.text.DecimalFormat;
@@ -405,6 +407,14 @@ public class GUI extends JFrame {
                             new GUI();
                         }
                     });
+                }else if(file_Buttons[i].contains("Export")){
+                    //This iis the new file button, this will create a new window with a blank drawing area.
+                    button.setAction(new AbstractAction() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            export_BMP();
+                        }
+                    });
                 }
 
 
@@ -511,6 +521,82 @@ public class GUI extends JFrame {
         getContentPane().add(Colour_Buttons(), "South");
     }
 
+    /**
+     * Ensure the users input is a integer but calling itself if it throws a non integer exception.
+     *
+     * @return - Dimension of exported BMP file
+     */
+    private int get_dim(String text){
+        int value;
+        try{
+            String out = JOptionPane.showInputDialog(text);
+            if(out == null){
+                //Exit statement
+                return -1;
+            }
+            value = Integer.parseInt(out);
+            if(value <= 0){
+                return get_dim("Value must be > than 0.");
+            }
+            return value;
+        }catch(Exception e){
+            return get_dim("Must be an integer.");
+        }
+    }
+
+    /**
+     * Exports a bmp format to the user specified location with the specified resolution.
+     * Exports what is currently drawn on the screen.
+     */
+    private void export_BMP(){
+        int x_res,y_res;
+        //Get the user specified path
+        File file = find_Path("BMP");
+        if(file != null)
+        {
+            //Get the dimension values, function ensures values are ints.
+            x_res = get_dim("X Resolution");
+            if(x_res != -1){
+                y_res = get_dim("Y Resolution");
+                if(y_res != -1) {
+                    //Get original dimensions of screen.
+                    int w = getContentPane().getComponent(3).getWidth();
+                    int h = getContentPane().getComponent(3).getHeight();
+
+                    BufferedImage bi = new BufferedImage(x_res, y_res, BufferedImage.TYPE_INT_RGB);
+                    Graphics2D g = bi.createGraphics();
+                    //Set the size of the screen to the user specified size.
+                    getContentPane().getComponent(3).setSize(x_res, y_res);
+                    //Move last drawn object off screen.
+                    x_Current = -1;
+                    x_Previous = -1;
+                    getContentPane().getComponent(3).paint(g);
+                    g.dispose();
+
+                    //Reset screen size, to values before export
+                    getContentPane().getComponent(3).setSize(w, h);
+                    x_Current = -1;
+                    y_Previous = -1;
+                    getContentPane().getComponent(3).repaint();
+
+                    //Save bmp file
+                    File outputfile;
+                    //prevents .bmp stacking when selecting a bmp file but sill forcing a .bmp if the user types in name.
+                    if(file.getPath().contains("bmp")){
+                        outputfile = new File(file.getPath());
+                    }else{
+                        outputfile = new File(file.getPath() + ".bmp");
+                    }
+
+                    try {
+                        ImageIO.write(bi, "bmp", outputfile);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(getRootFrame(), e.getMessage(), "Cannot save bmp file", JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+            }
+        }
+    }
     /**
      * Adds the fill or pen colour change to drawn_shapes. It is added to drawn_Shapes as this will allow
      * undo to simply delete the last member of drawn_Shapes to function. THis also makes saving easier
@@ -733,12 +819,14 @@ public class GUI extends JFrame {
      * User browses system explorer to place file. Other VEC files can be selected to save over.
      * Only Folders and VEC files are shown in the explorer.
      *
+     * @param extension - The file extension that is displayed to the user.
+     *
      * @return - File object to the location the user selected in the popup interface.
      */
-    private File find_Path(){
+    private File find_Path(String extension){
         JFileChooser chooser= new JFileChooser(System.getProperty("user.dir"));
         chooser.setAcceptAllFileFilterUsed(false);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("VEC", "VEC");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(extension, extension);
         chooser.addChoosableFileFilter(filter);
 
         //Show GUI and return the path when the choice is confirmed
@@ -758,7 +846,7 @@ public class GUI extends JFrame {
         //If a path is supplied, it is in testing mode and will save to the given path.
         if(directory_Path == null){
             //Saves the file to the path specified by the user
-            directory_Path = find_Path();
+            directory_Path = find_Path("VEC");
         }
 
         try {
@@ -871,8 +959,10 @@ public class GUI extends JFrame {
         chooser.showOpenDialog(null);
         File chosenFile = chooser.getSelectedFile();
 
-        //Create a new instance for the loaded shape
-        new GUI(chosenFile);
+        if(chosenFile != null){
+            //Create a new instance for the loaded shape
+            new GUI(chosenFile);
+        }
     }
 
     /**

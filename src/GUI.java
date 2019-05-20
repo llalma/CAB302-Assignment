@@ -31,7 +31,7 @@ public class GUI extends JFrame {
     //List of buttons to include, needs to be an images file
     //Path to image files that are displayed on the buttons
     private static final String[] tool_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Plot.png","resources/Ellipse.png","resources/Polygon.png"};
-    private static final String[] file_Buttons = new String[]{"resources/New_File.png", "resources/Save.png", "resources/Load.png", "resources/Undo.png"};
+    private static final String[] file_Buttons = new String[]{"resources/New_File.png", "resources/Save.png", "resources/Load.png", "resources/Undo.png", "resources/Export.png"};
     private static final String[] colour_Special_Buttons = new String[]{"resources/NoFill.jpg","resources/Rainbow.jpg"};
 
     private static final Color[] colour_Buttons = new Color[]{Color.BLACK,Color.RED,Color.GREEN,Color.YELLOW,Color.WHITE,Color.BLUE,Color.ORANGE,Color.MAGENTA};
@@ -39,7 +39,7 @@ public class GUI extends JFrame {
 
     //Button tool tips
     private static final String[] tool_Button_Tip = new String[]{"Drag and release to draw line.","Drag and release to draw rectangle.", "Click to place a point at location", "Drag and release to draw ellipse.", "Click on multiple points to draw a polygon. Finish near the starting point to complete the shape."};
-    private static final String[] file_Button_Tip = new String[]{"Create a new window with a blank drawing", "Save the current file to the user selected location.", "Load the selected file from the specified user location", "Undo the last action"};
+    private static final String[] file_Button_Tip = new String[]{"Create a new window with a blank drawing", "Save the current file to the user selected location.", "Load the selected file from the specified user location", "Undo the last action", "Export the Image as a BMP file"};
 
     //Positions of mouse pointer
     private int x_Previous,y_Previous,x_Current,y_Current;
@@ -63,6 +63,9 @@ public class GUI extends JFrame {
     private boolean fill = false;
     private Color fill_Colour = Color.BLACK;
     private JLabel colour_Fill;
+
+    //Zoom value
+    double zoom_percentage  = 100;
 
     /**
      * Default constructor,
@@ -135,8 +138,9 @@ public class GUI extends JFrame {
 
         //Populate drawn_Shapes with default data
         new_Drawn_Shapes();
-
+        zoom_percentage = 100;
         new_loaded_file(file);
+        repaint();
     }
 
     /**
@@ -178,6 +182,12 @@ public class GUI extends JFrame {
                 }
             }
         });
+        panel.addMouseWheelListener(new MouseWheelListener() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e) {
+                Zoom(e);
+            }
+        });
 
         getContentPane().add(panel,"Center");
     }
@@ -195,7 +205,7 @@ public class GUI extends JFrame {
      * @param event -  The event that triggered the mouse listener.
      */
     private void MouseClicked(MouseEvent event){
-        if(event.getButton() == MouseEvent.BUTTON3){
+        if(event.getButton() == MouseEvent.BUTTON3 && event.getModifiersEx() == 0) {
             //Cancelling a polygon.
             polygon_Completed = true;
 
@@ -249,6 +259,32 @@ public class GUI extends JFrame {
             //Add shape to previously drawn of shapes
             add_Shape(shape_Type.values()[selected_Tool],x_Previous,y_Previous,x_Current,y_Current);
         }
+        repaint();
+    }
+
+    /**
+     * Increase or decreased the zoom depending on which way was scrolled.
+     *
+     * @param e - mouse scroll event.
+     */
+    private void Zoom(MouseWheelEvent e){
+        //gets the current scroll count.
+        int notches = e.getWheelRotation();
+
+        if (notches < 0) {
+            //Zoom in
+            zoom_percentage++;
+        } else {
+            //Zoom out
+            //Prevent from getting below a zoom of 1%
+            if(zoom_percentage > 1){
+                zoom_percentage--;
+            }
+        }
+       //Set these values of screen so last object is not drawn.
+        x_Current = -1;
+        x_Previous = -1;
+
         repaint();
     }
 
@@ -475,9 +511,6 @@ public class GUI extends JFrame {
         getContentPane().add(Colour_Buttons(), "South");
     }
 
-
-    //Adding objects to draw_Shapes
-
     /**
      * Adds the fill or pen colour change to drawn_shapes. It is added to drawn_Shapes as this will allow
      * undo to simply delete the last member of drawn_Shapes to function. THis also makes saving easier
@@ -620,8 +653,8 @@ public class GUI extends JFrame {
      */
     public void add_Shape(shape_Type tool, double x1, double y1, double x2, double y2){
         //Size of drawing area, used convert coordinates to percentage of screen size
-        double height = getContentPane().getComponent(3).getHeight();
-        double width = getContentPane().getComponent(3).getWidth();
+        double height = getContentPane().getComponent(3).getHeight() * (zoom_percentage/100);
+        double width = getContentPane().getComponent(3).getWidth() * (zoom_percentage/100);
 
         //Get coordinates of the shape
         ArrayList<Double> Coords = new ArrayList<>();
@@ -912,7 +945,7 @@ public class GUI extends JFrame {
     class Draw_Panel extends JPanel {
 
         /**
-         * Default constructior for Draw_Panel.
+         * Default constructor for Draw_Panel.
          * Sets background to white, sets the name to "Paint Area", adds a black border.
          *
          * An input and action map are also added to react to listen to the keyboard,
@@ -989,8 +1022,8 @@ public class GUI extends JFrame {
          */
         private void draw_Shapes_in_drawn_Shapes(Graphics g){
             //These are used to convert the percentage into the current screen size coordinates
-            double height = getContentPane().getComponent(3).getHeight();
-            double width = getContentPane().getComponent(3).getWidth();
+            double height = getContentPane().getComponent(3).getHeight() * (zoom_percentage/100);
+            double width = getContentPane().getComponent(3).getWidth() * (zoom_percentage/100);
             Color pen_col = Color.BLACK;
             Color fill_col = null;
 

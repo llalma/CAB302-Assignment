@@ -27,9 +27,6 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public class GUI extends JFrame {
 
-    //Set aspect ratio
-    private static int Aspect = 1;
-
     //List of buttons to include, needs to be an images file
     //Path to image files that are displayed on the buttons
     private static final String[] tool_Buttons = new String[]{"resources/Line.jpg","resources/Rectangle.png","resources/Plot.png","resources/Ellipse.png","resources/Polygon.png"};
@@ -66,9 +63,6 @@ public class GUI extends JFrame {
     private Color fill_Colour = Color.BLACK;
     private JLabel colour_Fill;
 
-    //Zoom value
-    double zoom_percentage  = 100;
-
     /**
      * Default constructor,
      * creates a window at point 100,100 with a size of 400,400. Uses the computers default window style,
@@ -90,12 +84,11 @@ public class GUI extends JFrame {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                keep_aspect(e);
+                keep_aspect();
             }
         });
         pack();
         setVisible(true);
-
         //Populate drawn_Shapes with default data
        new_Drawn_Shapes();
     }
@@ -122,7 +115,7 @@ public class GUI extends JFrame {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-               keep_aspect(e);
+               keep_aspect();
             }
         });
         pack();
@@ -130,7 +123,6 @@ public class GUI extends JFrame {
 
         //Populate drawn_Shapes with default data
         new_Drawn_Shapes();
-        zoom_percentage = 100;
         new_loaded_file(file);
         repaint();
     }
@@ -174,17 +166,16 @@ public class GUI extends JFrame {
                 }
             }
         });
-        panel.addMouseWheelListener(new MouseWheelListener() {
-            @Override
-            public void mouseWheelMoved(MouseWheelEvent e) {
-                Zoom(e);
-            }
-        });
 
         getContentPane().add(panel,"Center");
     }
 
-    private void keep_aspect(ComponentEvent e){
+    /**
+     *  Maintains the aspec ratrio to whatever size is drawn.
+     *  Keeps an aspect ratio of 1:1.
+     *
+     */
+    private void keep_aspect(){
         x_Current = -1;
         x_Previous = -1;
 
@@ -270,32 +261,6 @@ public class GUI extends JFrame {
             //Add shape to previously drawn of shapes
             add_Shape(shape_Type.values()[selected_Tool],x_Previous,y_Previous,x_Current,y_Current);
         }
-        repaint();
-    }
-
-    /**
-     * Increase or decreased the zoom depending on which way was scrolled.
-     *
-     * @param e - mouse scroll event.
-     */
-    private void Zoom(MouseWheelEvent e){
-        //gets the current scroll count.
-        int notches = e.getWheelRotation();
-
-        if (notches < 0) {
-            //Zoom in
-            zoom_percentage++;
-        } else {
-            //Zoom out
-            //Prevent from getting below a zoom of 1%
-            if(zoom_percentage > 1){
-                zoom_percentage--;
-            }
-        }
-       //Set these values of screen so last object is not drawn.
-        x_Current = -1;
-        x_Previous = -1;
-
         repaint();
     }
 
@@ -533,6 +498,8 @@ public class GUI extends JFrame {
     /**
      * Ensure the users input is a integer but calling itself if it throws a non integer exception.
      *
+     * @param text - Message displayed in the dialog box.
+     *
      * @return - Dimension of exported BMP file
      */
     private int get_dim(String text){
@@ -748,8 +715,8 @@ public class GUI extends JFrame {
      */
     public void add_Shape(shape_Type tool, double x1, double y1, double x2, double y2){
         //Size of drawing area, used convert coordinates to percentage of screen size
-        double height = getContentPane().getComponent(3).getHeight() * (zoom_percentage/100);
-        double width = getContentPane().getComponent(3).getWidth() * (zoom_percentage/100);
+        double height = getContentPane().getComponent(3).getHeight();
+        double width = getContentPane().getComponent(3).getWidth();
 
         //Get coordinates of the shape
         ArrayList<Double> Coords = new ArrayList<>();
@@ -798,7 +765,7 @@ public class GUI extends JFrame {
      * so the shape last drawn does not appear.
      * Drawing area is then repainted to remove the latest object from the drawing area.
      *
-     * @return - Boolean returning if undo was successful.
+     * @return - Boolean returning if undo was successful. Only used for testing purposes.
      */
     public boolean undo(){
         //Remove the last thing added to draw_shapes.
@@ -998,7 +965,7 @@ public class GUI extends JFrame {
     }
 
     /**
-     * Emptys drawn_Shapes object and adds the two default values of:
+     * Empties drawn_Shapes object and adds the two default values of:
      * BLACK pen colour
      * Null fill colour
      */
@@ -1121,8 +1088,8 @@ public class GUI extends JFrame {
          */
         private void draw_Shapes_in_drawn_Shapes(Graphics g){
             //These are used to convert the percentage into the current screen size coordinates
-            double height = getContentPane().getComponent(3).getHeight() * (zoom_percentage/100);
-            double width = getContentPane().getComponent(3).getWidth() * (zoom_percentage/100);
+            double height = getContentPane().getComponent(3).getHeight();
+            double width = getContentPane().getComponent(3).getWidth();
             Color pen_col = Color.BLACK;
             Color fill_col = null;
 

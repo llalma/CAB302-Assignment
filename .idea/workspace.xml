@@ -129,8 +129,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
-              <caret line="197" column="9" lean-forward="true" selection-start-line="197" selection-start-column="9" selection-end-line="197" selection-end-column="9" />
+            <state relative-caret-position="113">
+              <caret line="167" column="11" selection-start-line="167" selection-start-column="11" selection-end-line="167" selection-end-column="11" />
               <folding>
                 <element signature="e#3295#4446#0" />
                 <element signature="e#4050#4212#0" expanded="true" />
@@ -140,11 +140,9 @@
                 <element signature="e#5283#5284#0" expanded="true" />
                 <element signature="class#6017:6343" />
                 <element signature="class#6387:7284" />
-                <element signature="e#7431#7432#0" expanded="true" />
-                <element signature="e#7470#7471#0" expanded="true" />
+                <element signature="e#7328#7454#0" />
                 <element signature="e#7562#9276#0" />
                 <element signature="e#9282#10175#0" />
-                <element signature="e#10181#10850#0" />
                 <element signature="e#10878#13869#0" />
                 <element signature="e#13875#17141#0" />
                 <element signature="e#17147#20881#0" />
@@ -165,47 +163,11 @@
                 <element signature="e#39957#40428#0" />
                 <element signature="e#40434#41546#0" />
                 <element signature="e#41552#47018#0" />
+                <element signature="e#41679#42846#0" />
+                <element signature="e#42856#45092#0" />
+                <element signature="e#45102#46436#0" />
+                <element signature="e#46446#47012#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GUI_Test.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1008">
-              <caret line="76" column="35" selection-start-line="76" selection-start-column="35" selection-end-line="76" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#394#395#0" expanded="true" />
-                <element signature="e#425#426#0" expanded="true" />
-                <element signature="method#testConstruction#0;class#GUI_Test#0" />
-                <element signature="method#testAddShape#0;class#GUI_Test#0" />
-                <element signature="method#testAddPenColour#0;class#GUI_Test#0" />
-                <element signature="method#testAddFillColour#0;class#GUI_Test#0" />
-                <element signature="method#testUndo#0;class#GUI_Test#0" />
-                <element signature="method#testUndoMultiple#0;class#GUI_Test#0" />
-                <element signature="method#testFileErrorLoad#0;class#GUI_Test#0" />
-                <element signature="method#testSaveFile#0;class#GUI_Test#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/shape_Type.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="1" column="49" selection-start-line="1" selection-start-column="49" selection-end-line="1" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/draw_Type.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -223,8 +185,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>get_drawn_Shapes</find>
-      <find>num_File_Buttons</find>
       <find>num_Tool_Buttons</find>
       <find>num_Colour_Buttons</find>
       <find>num_Colour_Special_Buttons</find>
@@ -248,11 +208,13 @@
       <find>exce</find>
       <find>exception</find>
       <find>Draw_Type</find>
-      <find>zoom</find>
       <find>not a sh</find>
       <find>find_Path</find>
       <find>ex</find>
       <find>border</find>
+      <find>resiz</find>
+      <find>Zoom</find>
+      <find>zoom</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -363,7 +325,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GUI_Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GUI_Test" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="Assignment" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="GUI_Test" />
@@ -405,7 +367,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.GUI" />
-        <item itemvalue="JUnit.GUI_Test" />
         <item itemvalue="JUnit.GUI_Test.testAddShape" />
         <item itemvalue="JUnit.GUI_Test.testSaveFile" />
         <item itemvalue="JUnit.GUI_Test.testUndoMultiple" />
@@ -426,21 +387,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="GUI_Test_testAddShape - 2019.05.19 at 20h 29m 26s.xml">
-      <configuration name="GUI_Test.testAddShape" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GUI_Test_testAddShape - 2019.05.19 at 20h 29m 57s.xml">
-      <configuration name="GUI_Test.testAddShape" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GUI_Test_testAddShape - 2019.05.19 at 20h 31m 26s.xml">
-      <configuration name="GUI_Test.testAddShape" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GUI_Test_testAddShape - 2019.05.19 at 20h 32m 28s.xml">
-      <configuration name="GUI_Test.testAddShape" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GUI_Test_testAddShape - 2019.05.19 at 20h 32m 35s.xml">
-      <configuration name="GUI_Test.testAddShape" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="GUI_Test - 2019.05.19 at 20h 33m 07s.xml">
       <configuration name="GUI_Test" configurationId="JUnit" />
     </history-entry>
@@ -454,6 +400,21 @@
       <configuration name="GUI_Test" configurationId="JUnit" />
     </history-entry>
     <history-entry file="GUI_Test - 2019.05.19 at 22h 26m 56s.xml">
+      <configuration name="GUI_Test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test - 2019.05.21 at 18h 43m 18s.xml">
+      <configuration name="GUI_Test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test - 2019.05.21 at 18h 46m 34s.xml">
+      <configuration name="GUI_Test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test - 2019.05.21 at 18h 47m 11s.xml">
+      <configuration name="GUI_Test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test - 2019.05.21 at 18h 48m 02s.xml">
+      <configuration name="GUI_Test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GUI_Test - 2019.05.21 at 18h 48m 16s.xml">
       <configuration name="GUI_Test" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -470,7 +431,7 @@
       <window_info id="Favorites" order="6" sideWeight="0.50284094" side_tool="true" weight="0.13117409" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.15456238" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.42028984" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.19843924" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.29431438" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -711,10 +672,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/shape_Type.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="1" column="49" selection-start-line="1" selection-start-column="49" selection-end-line="1" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/draw_Type.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="24">
+          <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI_Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="874">
+          <caret line="219" column="13" selection-start-line="219" selection-start-column="13" selection-end-line="219" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#testConstruction#0;class#GUI_Test#0" />
+            <element signature="method#testAddShape#0;class#GUI_Test#0" />
+            <element signature="method#testAddPenColour#0;class#GUI_Test#0" />
+            <element signature="method#testAddFillColour#0;class#GUI_Test#0" />
+            <element signature="method#testUndo#0;class#GUI_Test#0" />
+            <element signature="method#testUndoMultiple#0;class#GUI_Test#0" />
+            <element signature="method#testFileErrorLoad#0;class#GUI_Test#0" />
+            <element signature="method#testSaveFile#0;class#GUI_Test#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="197" column="9" lean-forward="true" selection-start-line="197" selection-start-column="9" selection-end-line="197" selection-end-column="9" />
+        <state relative-caret-position="113">
+          <caret line="167" column="11" selection-start-line="167" selection-start-column="11" selection-end-line="167" selection-end-column="11" />
           <folding>
             <element signature="e#3295#4446#0" />
             <element signature="e#4050#4212#0" expanded="true" />
@@ -724,11 +717,9 @@
             <element signature="e#5283#5284#0" expanded="true" />
             <element signature="class#6017:6343" />
             <element signature="class#6387:7284" />
-            <element signature="e#7431#7432#0" expanded="true" />
-            <element signature="e#7470#7471#0" expanded="true" />
+            <element signature="e#7328#7454#0" />
             <element signature="e#7562#9276#0" />
             <element signature="e#9282#10175#0" />
-            <element signature="e#10181#10850#0" />
             <element signature="e#10878#13869#0" />
             <element signature="e#13875#17141#0" />
             <element signature="e#17147#20881#0" />
@@ -749,41 +740,11 @@
             <element signature="e#39957#40428#0" />
             <element signature="e#40434#41546#0" />
             <element signature="e#41552#47018#0" />
+            <element signature="e#41679#42846#0" />
+            <element signature="e#42856#45092#0" />
+            <element signature="e#45102#46436#0" />
+            <element signature="e#46446#47012#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI_Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1008">
-          <caret line="76" column="35" selection-start-line="76" selection-start-column="35" selection-end-line="76" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#394#395#0" expanded="true" />
-            <element signature="e#425#426#0" expanded="true" />
-            <element signature="method#testConstruction#0;class#GUI_Test#0" />
-            <element signature="method#testAddShape#0;class#GUI_Test#0" />
-            <element signature="method#testAddPenColour#0;class#GUI_Test#0" />
-            <element signature="method#testAddFillColour#0;class#GUI_Test#0" />
-            <element signature="method#testUndo#0;class#GUI_Test#0" />
-            <element signature="method#testUndoMultiple#0;class#GUI_Test#0" />
-            <element signature="method#testFileErrorLoad#0;class#GUI_Test#0" />
-            <element signature="method#testSaveFile#0;class#GUI_Test#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/shape_Type.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="1" column="49" selection-start-line="1" selection-start-column="49" selection-end-line="1" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/draw_Type.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
         </state>
       </provider>
     </entry>

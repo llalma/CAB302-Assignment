@@ -70,7 +70,7 @@ class GUI_Test {
     }
 
     /*
-     * Test 2: Test add pen colour
+     * Test 3: Test add pen colour
      *
      */
     @Test
@@ -92,7 +92,7 @@ class GUI_Test {
     }
 
     /*
-     * Test 3: Test add fill colour
+     * Test 4: Test add fill colour
      *
      */
     @Test
@@ -114,7 +114,7 @@ class GUI_Test {
     }
 
     /*
-     * Test 4: Testing undo cannot go back further
+     * Test 5: Testing undo cannot go back further
      * than original constructor values
      *
      */
@@ -135,7 +135,7 @@ class GUI_Test {
     }
 
     /*
-     * Test 5: Test undo removes the most recent input
+     * Test 6: Test undo removes the most recent input
      *
      */
     @Test
@@ -170,7 +170,7 @@ class GUI_Test {
     }
 
     /*
-     * Test 6: Test Loading VEC file with error
+     * Test 7: Test Loading VEC file with error
      *
      * Error of a enum that does not exist is placed in a temporary VEC file,
      * to see if the load file method catches the error.
@@ -217,7 +217,7 @@ class GUI_Test {
     }
 
     /*
-     * Test 7: Test Saving VEC file
+     * Test 8: Test Saving VEC file
      *
      * Attempts to save a file normally.
      */

@@ -463,6 +463,7 @@ public class GUI extends JFrame {
 
                             }else{
                                 fill = true;
+                                Add_Colour(draw_Type.FILL_COLOUR);
                             }
                         }
                     });

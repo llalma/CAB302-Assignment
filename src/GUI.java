@@ -90,12 +90,7 @@ public class GUI extends JFrame {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                x_Current = -1;
-                x_Previous = -1;
-
-               //Aspect ratio keeping here
-
-                repaint();
+                keep_aspect(e);
             }
         });
         pack();
@@ -127,12 +122,7 @@ public class GUI extends JFrame {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                x_Current = -1;
-                x_Previous = -1;
-
-                //Aspect ratio keeping here
-
-                repaint();
+               keep_aspect(e);
             }
         });
         pack();
@@ -194,8 +184,27 @@ public class GUI extends JFrame {
         getContentPane().add(panel,"Center");
     }
 
-    //Mouse Events
+    private void keep_aspect(ComponentEvent e){
+        x_Current = -1;
+        x_Previous = -1;
 
+        //Drawing area size
+        int height = getContentPane().getComponent(3).getHeight();
+        int width = getContentPane().getComponent(3).getWidth();
+        if(height <= width){
+            getContentPane().getComponent(3).setSize(height,height);
+        }else{
+            getContentPane().getComponent(3).setSize(width,width);
+        }
+
+//        //Set window size
+//        getRootFrame().setSize(height+100,height+100);
+//
+//        getRootFrame().repaint();
+        repaint();
+    }
+
+    //Mouse Events
     /**
      * Gets the position of the mouse when the click occoured.
      * If the user has the polygon tool selected, the coordinates that were

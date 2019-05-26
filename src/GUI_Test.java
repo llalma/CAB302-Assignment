@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.text.*;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -226,5 +227,101 @@ class GUI_Test {
         File f = new File(System.getProperty("user.dir"));
 
         assert(GUI.save_File(f));
+    }
+
+    /*
+     * Test 9: Test return type of classes
+     *
+     * Test the return shape type of classes. e.g. rectangle returns the correct value.
+     */
+    @Test
+    public void testClassTest() {
+        ArrayList<Double> list = new ArrayList<>();
+        list.add(10.0);
+        list.add(10.0);
+        list.add(10.0);
+        list.add(10.0);
+
+        //Boolean that will only be false if a get_shape returns the wrong value.
+        //This is used to make all the class etsts are in one test.
+        boolean testBool = true;
+
+        //Rectangle
+        Rectangle rect = new Rectangle(list);
+        testBool = rect.get_Shape() == shape_Type.RECTANGLE;
+
+        if(testBool) {
+            //Polygon
+            Polygon poly = new Polygon(list);
+            testBool = poly.get_Shape() == shape_Type.POLYGON;
+        }
+
+        if(testBool) {
+            //Plot
+            Plot plot = new Plot(list);
+            testBool = plot.get_Shape() == shape_Type.PLOT;
+        }
+
+        if(testBool) {
+            //Line
+            Line line = new Line(list);
+            testBool = line.get_Shape() == shape_Type.LINE;
+        }
+
+        if(testBool) {
+            //Ellipse
+            Ellipse ellipse = new Ellipse(list);
+            testBool = ellipse.get_Shape() == shape_Type.ELLIPSE;
+        }
+
+        assertEquals(true,testBool);
+    }
+
+    /*
+     * Test 10: Test save text of classes
+     *
+     * Test the return save text of each class
+     */
+    @Test
+    public void testSaveText() {
+        ArrayList<Double> list = new ArrayList<>();
+        list.add(10.0);
+        list.add(10.0);
+        list.add(10.0);
+        list.add(10.0);
+
+        //Boolean that will only be false if a get_shape returns the wrong value.
+        //This is used to make all the class etsts are in one test.
+        boolean testBool = true;
+
+        //Rectangle
+        Rectangle rect = new Rectangle(list);
+        testBool = rect.save_Text().equals("RECTANGLE 10.0 10.0 10.0 10.0");
+
+        if(testBool) {
+            //Polygon
+            Polygon poly = new Polygon(list);
+            testBool = poly.save_Text().equals("POLYGON 10.0 10.0");
+        }
+
+        if(testBool) {
+            //Plot
+            Plot plot = new Plot(list);
+            testBool = plot.save_Text().equals("PLOT 10.0 10.0 10.0 10.0");
+        }
+
+        if(testBool) {
+            //Line
+            Line line = new Line(list);
+            testBool = line.save_Text().equals("LINE 10.0 10.0 10.0 10.0");
+        }
+
+        if(testBool) {
+            //Ellipse
+            Ellipse ellipse = new Ellipse(list);
+            testBool = ellipse.save_Text().equals("ELLIPSE 10.0 10.0 10.0 10.0");
+        }
+
+        assertEquals(true,testBool);
     }
 }

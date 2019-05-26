@@ -13,7 +13,7 @@ public class Plot extends Shape{
      * @param coords - ArrayList containing doubles which are the x and y coordinates of the shape. In that order
      */
     public Plot(ArrayList<Double> coords){
-        super(shape_Type.ELLIPSE,coords);
+        super(shape_Type.PLOT,coords);
         x1 = coords.get(0);
         y1 = coords.get(1);
     }
